@@ -1,24 +1,26 @@
 
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
+import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
-import { AdLibraryShowcase } from "@/components/AdLibraryShowcase";
-import { TrustSection } from "@/components/TrustSection";
+import { CTASection } from "@/components/CTASection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
-import { PricingPreview } from "@/components/PricingPreview";
+import { BlogCommunitySection } from "@/components/BlogCommunitySection";
+import { FinalCTASection } from "@/components/FinalCTASection";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#fcfdff]">
       <Header />
       <main>
         <HeroSection />
-        <TrustSection />
+        <WhyChooseSection />
         <FeaturesSection />
-        <AdLibraryShowcase />
+        <CTASection />
         <TestimonialsSection />
-        <PricingPreview />
+        <BlogCommunitySection />
+        <FinalCTASection />
       </main>
       <Footer />
     </div>
