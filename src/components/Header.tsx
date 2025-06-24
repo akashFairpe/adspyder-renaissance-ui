@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -117,25 +116,39 @@ export const Header = () => {
                   <div className="w-[800px] p-6">
                     <div className="grid grid-cols-3 gap-8">
                       {featuresItems.map((section) => (
-                        <div key={section.title}>
+                        <div key={section.title} className={section.title === "Ad Library" ? "col-span-2" : ""}>
                           <h4 className="font-semibold text-orange-600 mb-4 flex items-center">
                             {section.title === "Ad Library" && <Search className="h-4 w-4 mr-2" />}
                             {section.title === "Ad Analysis" && <TrendingUp className="h-4 w-4 mr-2" />}
                             {section.title === "Ad Generation" && <PenTool className="h-4 w-4 mr-2" />}
                             {section.title}
                           </h4>
-                          <ul className="space-y-2">
-                            {section.items.map((item) => (
-                              <li key={item.name}>
+                          {section.title === "Ad Library" ? (
+                            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                              {section.items.map((item) => (
                                 <a
+                                  key={item.name}
                                   href={item.href}
                                   className="text-sm text-gray-600 hover:text-orange-600 transition-colors block py-1"
                                 >
                                   {item.name}
                                 </a>
-                              </li>
-                            ))}
-                          </ul>
+                              ))}
+                            </div>
+                          ) : (
+                            <ul className="space-y-2">
+                              {section.items.map((item) => (
+                                <li key={item.name}>
+                                  <a
+                                    href={item.href}
+                                    className="text-sm text-gray-600 hover:text-orange-600 transition-colors block py-1"
+                                  >
+                                    {item.name}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </div>
                       ))}
                     </div>

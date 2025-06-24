@@ -52,7 +52,7 @@ export const TypingAnimation = () => {
   return (
     <div className="text-2xl lg:text-3xl font-semibold min-h-[80px] flex items-center justify-center">
       <span className="text-gray-900">With AdSpyder, you can</span>
-      <span className="text-orange-600">{currentText}</span>
+      <span className="text-orange-600 ml-2">{currentText}</span>
       <span className="animate-pulse ml-1 text-orange-600">|</span>
     </div>
   );
