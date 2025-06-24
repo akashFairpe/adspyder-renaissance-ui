@@ -1,27 +1,37 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Search, Target, Globe, Eye } from "lucide-react";
 
 export const FeaturesSection = () => {
   const features = [
     {
       title: "Ad Library",
       description: "Have a look at any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
-      hasButton: false
+      icon: Search,
+      gradient: "from-blue-500 to-purple-600",
+      bgGradient: "from-blue-50 to-purple-50"
     },
     {
       title: "PPC Keyword",
       description: "Boost your ads with the best keywords. See what's popular and relevant. With Adspyder, make every penny count.",
-      hasButton: false
+      icon: Target,
+      gradient: "from-green-500 to-blue-500",
+      bgGradient: "from-green-50 to-blue-50"
     },
     {
       title: "Domain Overview",
       description: "Check out any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
-      hasButton: false
+      icon: Globe,
+      gradient: "from-purple-500 to-pink-500",
+      bgGradient: "from-purple-50 to-pink-50"
     },
     {
       title: "Landing Page View",
       description: "Have a look at any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
+      icon: Eye,
+      gradient: "from-orange-500 to-red-500",
+      bgGradient: "from-orange-50 to-red-50",
       hasButton: true
     }
   ];
@@ -30,16 +40,24 @@ export const FeaturesSection = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-bold text-[#111827] mb-6">
+          <div className="mb-6">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-full">
+              🎯 Core Features
+            </span>
+          </div>
+          <h2 className="text-3xl lg:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-6">
             Empower Your Ad Campaigns with AdSpyder
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
-            <Card key={index} className="bg-gradient-to-br from-[#fcfdff] to-white border border-gray-200 hover:shadow-lg transition-all duration-300 hover:border-[#e39000]/20">
-              <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#111827]">
+            <Card key={index} className={`bg-gradient-to-br ${feature.bgGradient} border-0 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group`}>
+              <CardHeader className="text-center">
+                <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  <feature.icon className="h-8 w-8 text-white" />
+                </div>
+                <CardTitle className="text-xl font-bold text-gray-800 group-hover:text-gray-900">
                   {feature.title}
                 </CardTitle>
                 {feature.description && (
@@ -49,10 +67,9 @@ export const FeaturesSection = () => {
                 )}
               </CardHeader>
               {feature.hasButton && (
-                <CardContent>
+                <CardContent className="text-center">
                   <Button 
-                    variant="outline" 
-                    className="border-[#e39000] text-[#e39000] hover:bg-[#e39000] hover:text-white"
+                    className={`bg-gradient-to-r ${feature.gradient} text-white hover:shadow-lg transition-all`}
                   >
                     Know more
                   </Button>
