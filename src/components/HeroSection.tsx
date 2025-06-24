@@ -1,12 +1,13 @@
 
 import { Button } from "@/components/ui/button";
+import { TypingAnimation } from "./TypingAnimation";
 
 export const HeroSection = () => {
   return (
-    <section className="relative py-20 lg:py-32 bg-white overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-white overflow-hidden">
       {/* Professional Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(227,144,0,0.1)_25%,rgba(227,144,0,0.1)_50%,transparent_50%,transparent_75%,rgba(227,144,0,0.1)_75%)] bg-[size:20px_20px]"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(255,165,0,0.1)_25%,rgba(255,165,0,0.1)_50%,transparent_50%,transparent_75%,rgba(255,165,0,0.1)_75%)] bg-[size:20px_20px]"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -21,6 +22,11 @@ export const HeroSection = () => {
           <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Ad intelligence redefined
           </h1>
+          
+          {/* Typing Animation */}
+          <div className="mb-6">
+            <TypingAnimation />
+          </div>
           
           <p className="text-xl lg:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             Embark on an unbeatable ad journey with the best ad spy tool. Track competitors, generate compelling ad copies, and achieve your marketing goals faster
