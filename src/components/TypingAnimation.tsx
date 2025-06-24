@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react';
 
 const phrases = [
-  "With AdSpyder, you can track competitor ads",
-  "With AdSpyder, you can analyze landing pages",
-  "With AdSpyder, you can uncover PPC strategies",
-  "With AdSpyder, you can discover top-performing creatives",
-  "With AdSpyder, you can generate ad copies with AI",
-  "With AdSpyder, you can optimize ad performance",
-  "With AdSpyder, you can boost ROI across 15+ platforms"
+  "track competitor ads",
+  "analyze landing pages",
+  "uncover PPC strategies",
+  "discover top-performing creatives",
+  "generate ad copies with AI",
+  "optimize ad performance",
+  "boost ROI across 15+ platforms"
 ];
 
 export const TypingAnimation = () => {
@@ -50,6 +50,7 @@ export const TypingAnimation = () => {
 
   return (
     <div className="text-2xl lg:text-3xl text-orange-600 font-semibold min-h-[80px] flex items-center justify-center">
+      <span>With AdSpyder, you can </span>
       <span>{currentText}</span>
       <span className="animate-pulse ml-1">|</span>
     </div>
