@@ -3,10 +3,10 @@ import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { WhyChooseSection } from "@/components/WhyChooseSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
+import { AdvancedFeaturesSection } from "@/components/AdvancedFeaturesSection";
 import { CTASection } from "@/components/CTASection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { BlogCommunitySection } from "@/components/BlogCommunitySection";
-import { FinalCTASection } from "@/components/FinalCTASection";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -17,10 +17,10 @@ const Index = () => {
         <HeroSection />
         <WhyChooseSection />
         <FeaturesSection />
+        <AdvancedFeaturesSection />
         <CTASection />
         <TestimonialsSection />
         <BlogCommunitySection />
-        <FinalCTASection />
       </main>
       <Footer />
     </div>

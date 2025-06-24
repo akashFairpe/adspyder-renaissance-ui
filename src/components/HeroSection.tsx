@@ -4,11 +4,11 @@ import { Badge } from "@/components/ui/badge";
 
 export const HeroSection = () => {
   return (
-    <section className="relative py-20 lg:py-32 bg-[#fcfdff] overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#fcfdff] via-white to-[#fcfdff] opacity-50"></div>
-      <div className="absolute top-20 right-20 w-64 h-64 bg-[#e39000] rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-[#111827] rounded-full mix-blend-multiply filter blur-xl opacity-5 animate-pulse"></div>
+    <section className="relative py-20 lg:py-32 bg-gradient-to-br from-[#fcfdff] via-white to-[#f8f9ff] overflow-hidden">
+      {/* Subtle Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#fcfdff] via-white to-[#f8f9ff]"></div>
+      <div className="absolute top-20 right-20 w-32 h-32 bg-[#e39000] rounded-full opacity-5"></div>
+      <div className="absolute bottom-20 left-20 w-24 h-24 bg-[#111827] rounded-full opacity-3"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -43,7 +43,7 @@ export const HeroSection = () => {
             {['Google', 'Meta', 'Bing', 'Amazon', 'LinkedIn', 'Reddit', '+ more'].map((platform) => (
               <div 
                 key={platform} 
-                className="bg-white h-12 px-6 rounded-lg shadow-sm flex items-center justify-center text-sm font-medium text-gray-600 hover:shadow-md transition-shadow"
+                className="bg-white h-12 px-6 rounded-lg shadow-sm flex items-center justify-center text-sm font-medium text-gray-600 hover:shadow-md transition-shadow border border-gray-100"
               >
                 {platform}
               </div>
