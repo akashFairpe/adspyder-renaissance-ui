@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
           {/* Brand Section */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <div className="flex items-center justify-center space-x-2 mb-6">
               <Target className="h-8 w-8 text-[#e39000]" />
               <span className="text-2xl font-bold">AdSpyder</span>
@@ -21,42 +21,48 @@ export const Footer = () => {
             </p>
           </div>
 
-          {/* Footer Links - Simple layout for now */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+          {/* Footer Links */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
             <div>
-              <h4 className="font-semibold text-white mb-4">Product</h4>
+              <h4 className="font-semibold text-white mb-4">Company</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/ad-library" className="hover:text-[#e39000] transition-colors">Ad Library</a></li>
-                <li><a href="/ad-analysis" className="hover:text-[#e39000] transition-colors">Ad Analysis</a></li>
-                <li><a href="/ad-generation" className="hover:text-[#e39000] transition-colors">Ad Generation</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-white mb-4">Solutions</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="/agencies" className="hover:text-[#e39000] transition-colors">For Agencies</a></li>
-                <li><a href="/brands" className="hover:text-[#e39000] transition-colors">For Brands</a></li>
-                <li><a href="/freelancers" className="hover:text-[#e39000] transition-colors">For Freelancers</a></li>
+                <li><a href="/free-demo" className="hover:text-[#e39000] transition-colors">Free Demo</a></li>
+                <li><a href="/contact-us" className="hover:text-[#e39000] transition-colors">Contact us</a></li>
+                <li><a href="/terms-condition" className="hover:text-[#e39000] transition-colors">Terms & Condition</a></li>
+                <li><a href="/google-api-disclosure" className="hover:text-[#e39000] transition-colors">Google API Disclosure</a></li>
+                <li><a href="/solutions" className="hover:text-[#e39000] transition-colors">Solutions</a></li>
+                <li><a href="/privacy-policy" className="hover:text-[#e39000] transition-colors">Privacy Policy</a></li>
+                <li><a href="/refund-policy" className="hover:text-[#e39000] transition-colors">Refund Policy</a></li>
+                <li><a href="/online-keyword-ad-checker" className="hover:text-[#e39000] transition-colors">Online Keyword Ad Checker</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold text-white mb-4">Resources</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/blog" className="hover:text-[#e39000] transition-colors">Blog</a></li>
-                <li><a href="/case-studies" className="hover:text-[#e39000] transition-colors">Case Studies</a></li>
-                <li><a href="/help" className="hover:text-[#e39000] transition-colors">Help Center</a></li>
+                <li><a href="/google-ads-spy" className="hover:text-[#e39000] transition-colors">Google Ads Spy</a></li>
+                <li><a href="/facebook-ads-spy" className="hover:text-[#e39000] transition-colors">Facebook Ads Spy</a></li>
+                <li><a href="/youtube-ads-spy" className="hover:text-[#e39000] transition-colors">Youtube Ads Spy</a></li>
+                <li><a href="/bing-ads-spy" className="hover:text-[#e39000] transition-colors">Bing Ads Spy</a></li>
+                <li><a href="/instagram-ads-spy" className="hover:text-[#e39000] transition-colors">Instagram Ads Spy</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold text-white mb-4">Company</h4>
+              <h4 className="font-semibold text-white mb-4">Compare</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/about" className="hover:text-[#e39000] transition-colors">About Us</a></li>
-                <li><a href="/contact" className="hover:text-[#e39000] transition-colors">Contact</a></li>
-                <li><a href="/careers" className="hover:text-[#e39000] transition-colors">Careers</a></li>
+                <li><a href="/vs-poweradspy" className="hover:text-[#e39000] transition-colors">Vs Poweradspy</a></li>
+                <li><a href="/vs-bigspy" className="hover:text-[#e39000] transition-colors">Vs BigSpy</a></li>
+                <li><a href="/vs-adspy" className="hover:text-[#e39000] transition-colors">Vs AdSpy</a></li>
+                <li><a href="/vs-adplexity" className="hover:text-[#e39000] transition-colors">Vs Adplexity</a></li>
               </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-white mb-4">Partner</h4>
+              <div className="text-gray-300">
+                <span className="text-sm">Partner-RGB</span>
+              </div>
             </div>
           </div>
         </div>
@@ -65,18 +71,9 @@ export const Footer = () => {
       {/* Bottom Footer */}
       <div className="border-t border-gray-800">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 AdSpyder. All rights reserved.
-            </div>
-            
-            <div className="flex space-x-6 text-sm">
-              <a href="/privacy" className="text-gray-400 hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-gray-400 hover:text-white transition-colors">
-                Terms of Service
-              </a>
+          <div className="text-center">
+            <div className="text-gray-400 text-sm">
+              © GSTECH TECHNOLOGY PRIVATE LIMITED
             </div>
           </div>
         </div>
