@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { TypingAnimation } from "./TypingAnimation";
 import { TrendingUp, Eye, Target, BarChart3, PieChart, Activity, Brain, Zap, Sparkles, LineChart, Users, MousePointer } from "lucide-react";
@@ -195,7 +194,7 @@ export const HeroSection = () => {
         {/* Additional Floating AI Elements */}
         <div className="absolute top-96 left-16 lg:left-32 opacity-10">
           <div className="bg-gradient-to-r from-yellow-400 to-orange-500 p-2 rounded-full">
-            <ZapClassName="h-4 w-4 text-white" />
+            <Zap className="h-4 w-4 text-white" />
           </div>
         </div>
 
