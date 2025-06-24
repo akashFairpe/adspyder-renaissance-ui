@@ -36,10 +36,11 @@ export const TypingAnimation = () => {
           setIsPaused(true);
         }
       } else {
-        if (currentText.length > 0) {
+        if (currentText.length > 1) { // Keep at least the space character
           setCurrentText(currentText.slice(0, -1));
         } else {
           setIsDeleting(false);
+          setCurrentText(' '); // Start with just the space
           setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
         }
       }
