@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 
 const phrases = [
   "track competitor ads",
-  "analyze landing pages",
+  "analyze landing pages", 
   "uncover PPC strategies",
   "discover top-performing creatives",
   "generate ad copies with AI",
