@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -12,6 +13,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 import { Menu, Target, Search, Settings, Users, BookOpen, DollarSign, Zap, TrendingUp, Globe, Eye, PenTool, Building, User, MapPin, Briefcase } from "lucide-react";
 
 export const Header = () => {
@@ -113,10 +115,10 @@ export const Header = () => {
                   Features
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[800px] p-6">
-                    <div className="grid grid-cols-3 gap-8">
-                      {featuresItems.map((section) => (
-                        <div key={section.title} className={section.title === "Ad Library" ? "col-span-2" : ""}>
+                  <div className="w-[900px] p-6">
+                    <div className="flex divide-x divide-gray-200">
+                      {featuresItems.map((section, index) => (
+                        <div key={section.title} className={`${index === 0 ? 'pr-8' : index === featuresItems.length - 1 ? 'pl-8' : 'px-8'} ${section.title === "Ad Library" ? "flex-[2]" : "flex-1"}`}>
                           <h4 className="font-semibold text-orange-600 mb-4 flex items-center">
                             {section.title === "Ad Library" && <Search className="h-4 w-4 mr-2" />}
                             {section.title === "Ad Analysis" && <TrendingUp className="h-4 w-4 mr-2" />}
@@ -124,7 +126,7 @@ export const Header = () => {
                             {section.title}
                           </h4>
                           {section.title === "Ad Library" ? (
-                            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                            <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                               {section.items.map((item) => (
                                 <a
                                   key={item.name}
