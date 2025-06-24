@@ -9,29 +9,29 @@ export const FeaturesSection = () => {
       title: "Ad Library",
       description: "Have a look at any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
       icon: Search,
-      gradient: "from-blue-500 to-purple-600",
-      bgGradient: "from-blue-50 to-purple-50"
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100"
     },
     {
       title: "PPC Keyword",
       description: "Boost your ads with the best keywords. See what's popular and relevant. With Adspyder, make every penny count.",
       icon: Target,
-      gradient: "from-green-500 to-blue-500",
-      bgGradient: "from-green-50 to-blue-50"
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100"
     },
     {
       title: "Domain Overview",
       description: "Check out any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
       icon: Globe,
-      gradient: "from-purple-500 to-pink-500",
-      bgGradient: "from-purple-50 to-pink-50"
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100"
     },
     {
       title: "Landing Page View",
       description: "Have a look at any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
       icon: Eye,
-      gradient: "from-orange-500 to-red-500",
-      bgGradient: "from-orange-50 to-red-50",
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
       hasButton: true
     }
   ];
@@ -41,11 +41,11 @@ export const FeaturesSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="mb-6">
-            <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-full">
+            <span className="inline-block px-4 py-2 bg-orange-100 text-orange-700 text-sm font-medium rounded-full">
               🎯 Core Features
             </span>
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-6">
             Empower Your Ad Campaigns with AdSpyder
           </h2>
         </div>

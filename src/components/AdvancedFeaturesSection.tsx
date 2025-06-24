@@ -8,38 +8,38 @@ export const AdvancedFeaturesSection = () => {
       title: "Ad Analysis",
       description: "Deep dive into competitor ad performance with advanced analytics. Get insights into CTR, engagement rates, and conversion metrics to optimize your campaigns.",
       icon: TrendingUp,
-      gradient: "from-emerald-500 to-teal-600",
-      bgGradient: "from-emerald-50 to-teal-50",
-      borderColor: "border-emerald-200"
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
+      borderColor: "border-orange-200"
     },
     {
       title: "Ad Generation",
       description: "Create high-converting ad copies using AI-powered tools. Generate multiple variations, test different approaches, and find your winning formula.",
       icon: Zap,
-      gradient: "from-violet-500 to-purple-600",
-      bgGradient: "from-violet-50 to-purple-50",
-      borderColor: "border-violet-200"
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
+      borderColor: "border-orange-200"
     },
     {
       title: "Ad Optimization",
       description: "Continuously improve your ad performance with intelligent optimization suggestions. Automate A/B testing and maximize your advertising ROI.",
       icon: Settings,
-      gradient: "from-rose-500 to-pink-600",
-      bgGradient: "from-rose-50 to-pink-50",
-      borderColor: "border-rose-200"
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
+      borderColor: "border-orange-200"
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50">
+    <section className="py-20 bg-orange-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="mb-6">
-            <span className="inline-block px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm font-medium rounded-full">
+            <span className="inline-block px-4 py-2 bg-orange-600 text-white text-sm font-medium rounded-full">
               🚀 Advanced Tools
             </span>
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 bg-clip-text text-transparent mb-6">
+          <h2 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-6">
             Next-Level Ad Intelligence
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">

@@ -19,19 +19,19 @@ export const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#fcfdff]">
+    <section className="py-20 bg-orange-50">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                <div className="text-[#e39000] text-xl mb-4">
+                <div className="text-orange-500 text-xl mb-4">
                   {testimonial.rating}
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-6">
                   "{testimonial.text}"
                 </p>
-                <div className="font-semibold text-[#111827]">
+                <div className="font-semibold text-gray-900">
                   – {testimonial.author}
                 </div>
               </div>
