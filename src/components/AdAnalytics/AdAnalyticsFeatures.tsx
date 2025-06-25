@@ -49,9 +49,9 @@ export const AdAnalyticsFeatures = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
-            <div key={index} className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all group">
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <feature.icon className="h-7 w-7 text-white" />
+            <div key={index} className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all group border border-gray-100">
+              <div className="bg-orange-100 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-200 transition-colors">
+                <feature.icon className="h-8 w-8 text-orange-600" />
               </div>
               
               <h3 className="text-xl font-bold text-gray-900 mb-3">

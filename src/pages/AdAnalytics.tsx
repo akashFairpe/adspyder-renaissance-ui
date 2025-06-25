@@ -9,6 +9,8 @@ import { AdAnalyticsBenefits } from "@/components/AdAnalytics/AdAnalyticsBenefit
 import { AdAnalyticsTestimonials } from "@/components/AdAnalytics/AdAnalyticsTestimonials";
 import { AdAnalyticsCTA } from "@/components/AdAnalytics/AdAnalyticsCTA";
 import { AdAnalyticsFAQ } from "@/components/AdAnalytics/AdAnalyticsFAQ";
+import { AdAnalyticsSEOContent } from "@/components/AdAnalytics/AdAnalyticsSEOContent";
+import { AdAnalyticsFinalCTA } from "@/components/AdAnalytics/AdAnalyticsFinalCTA";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -93,6 +95,8 @@ const AdAnalytics = () => {
         <AdAnalyticsTestimonials />
         <AdAnalyticsCTA />
         <AdAnalyticsFAQ />
+        <AdAnalyticsSEOContent />
+        <AdAnalyticsFinalCTA />
       </main>
       <Footer />
     </div>
