@@ -11,8 +11,9 @@ export const navigationConfig: NavigationItem[] = [
     items: [
       {
         title: "Ad Library",
+        href: "/ad-library",
         items: [
-          { title: "Google Ad Spy", href: "/ad-library" },
+          { title: "Google Ad Spy", href: "/google-ad-spy" },
           { title: "Facebook Ad Spy", href: "/facebook-ad-spy" },
           { title: "YouTube Ad Spy", href: "/youtube-ad-spy" },
           { title: "LinkedIn Ad Library", href: "/linkedin-ad-library" },
@@ -26,6 +27,7 @@ export const navigationConfig: NavigationItem[] = [
       },
       {
         title: "Ad Analytics",
+        href: "/ad-analytics",
         items: [
           { title: "Domain Analysis", href: "/domain-analysis" },
           { title: "Landing Page Analysis", href: "/landing-page-analysis" },
@@ -33,6 +35,7 @@ export const navigationConfig: NavigationItem[] = [
       },
       {
         title: "Ad Generation",
+        href: "/ad-generation",
         items: [
           { title: "Text Ad Generation", href: "/text-ad-generation" },
           { title: "Image Ad Generation", href: "/image-ad-generation" },
@@ -74,6 +77,7 @@ export const navigationConfig: NavigationItem[] = [
       },
       {
         title: "Case Study",
+        href: "/case-studies",
         items: [],
       },
     ],

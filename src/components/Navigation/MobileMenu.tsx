@@ -23,7 +23,17 @@ export const MobileMenu = ({ items, onLinkClick }: MobileMenuProps) => {
               <CollapsibleContent className="pl-4 space-y-2">
                 {item.items.map((section, sectionIndex) => (
                   <div key={sectionIndex} className="border-l-2 border-gray-200 pl-4 space-y-2 mt-4">
-                    <p className="text-sm font-semibold text-gray-900">{section.title}</p>
+                    {section.href ? (
+                      <Link
+                        to={section.href}
+                        className="text-sm font-semibold text-gray-900 hover:text-orange-600 transition-colors block"
+                        onClick={onLinkClick}
+                      >
+                        {section.title}
+                      </Link>
+                    ) : (
+                      <p className="text-sm font-semibold text-gray-900">{section.title}</p>
+                    )}
                     {section.items?.map((subItem, subIndex) => (
                       <Link
                         key={subIndex}

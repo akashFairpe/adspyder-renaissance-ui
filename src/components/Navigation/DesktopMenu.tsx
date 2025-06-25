@@ -23,7 +23,16 @@ export const DesktopMenu = ({ items }: DesktopMenuProps) => {
                   <div className="grid grid-cols-2 gap-4 p-6">
                     {item.items.map((section, sectionIndex) => (
                       <div key={sectionIndex}>
-                        <h3 className="font-semibold text-gray-900 mb-3">{section.title}</h3>
+                        {section.href ? (
+                          <Link
+                            to={section.href}
+                            className="font-semibold text-gray-900 mb-3 flex items-center hover:text-orange-600 transition-colors"
+                          >
+                            {section.title}
+                          </Link>
+                        ) : (
+                          <h3 className="font-semibold text-gray-900 mb-3">{section.title}</h3>
+                        )}
                         <div className="space-y-2">
                           {section.items?.map((subItem, subIndex) => (
                             <Link
