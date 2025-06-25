@@ -7,16 +7,16 @@ export const FooterLinks = () => {
       title: "Ad Library",
       icon: <Search className="h-4 w-4" />,
       items: [
-        { name: "Google Ad Spy", href: "/ad-library" },
-        { name: "Facebook Ad Spy", href: "/facebook-ads" },
-        { name: "YouTube Ad Spy", href: "/youtube-ads" },
-        { name: "TikTok Ad Library", href: "/tiktok-ads" },
-        { name: "LinkedIn Ad Library", href: "/linkedin-ads" },
-        { name: "Shopping Ad Spy", href: "/shopping-ads" },
-        { name: "Bing Ad Spy", href: "/bing-ads" },
-        { name: "Amazon Ad Library", href: "/amazon-ads" },
-        { name: "Twitter Ad Library", href: "/twitter-ads" },
-        { name: "Display Ad Spy", href: "/display-ads" }
+        { name: "Google Ad Spy", href: "/google-ad-spy" },
+        { name: "Facebook Ad Spy", href: "/facebook-ad-spy" },
+        { name: "YouTube Ad Spy", href: "/youtube-ad-spy" },
+        { name: "TikTok Ad Library", href: "/tiktok-ad-library" },
+        { name: "LinkedIn Ad Library", href: "/linkedin-ad-library" },
+        { name: "Shopping Ad Spy", href: "/shopping-ad-spy" },
+        { name: "Bing Ad Spy", href: "/bing-ad-spy" },
+        { name: "Amazon Ad Library", href: "/amazon-ad-library" },
+        { name: "Twitter Ad Library", href: "/twitter-ad-library" },
+        { name: "Display Ad Spy", href: "/display-ad-spy" }
       ]
     },
     {
@@ -41,6 +41,7 @@ export const FooterLinks = () => {
     {
       title: "Profile",
       icon: <User className="h-4 w-4" />,
+      href: "/profile",
       items: [
         { name: "Ad Agencies", href: "/ad-agencies" },
         { name: "D2C Brands", href: "/d2c-brands" },
@@ -51,11 +52,12 @@ export const FooterLinks = () => {
     {
       title: "Use Case",
       icon: <Briefcase className="h-4 w-4" />,
+      href: "/use-cases",
       items: [
         { name: "Dental Clinic", href: "/dental-clinic" },
         { name: "Real Estate", href: "/real-estate" },
         { name: "Travel Agency", href: "/travel-agency" },
-        { name: "Online Betting Sites", href: "/betting-sites" },
+        { name: "Online Betting Sites", href: "/online-betting-sites" },
         { name: "Restaurants", href: "/restaurants" },
         { name: "Retail", href: "/retail" }
       ]
@@ -63,16 +65,18 @@ export const FooterLinks = () => {
     {
       title: "Platform",
       icon: <Globe className="h-4 w-4" />,
+      href: "/platform",
       items: [
-        { name: "Google Ads", href: "/google-ads-platform" },
-        { name: "Meta Ads", href: "/meta-ads-platform" },
-        { name: "Bing Ads", href: "/bing-ads-platform" },
-        { name: "LinkedIn Ads", href: "/linkedin-ads-platform" }
+        { name: "Google Ads", href: "/google-ads" },
+        { name: "Meta Ads", href: "/meta-ads" },
+        { name: "Bing Ads", href: "/bing-ads" },
+        { name: "LinkedIn Ads", href: "/linkedin-ads" }
       ]
     },
     {
       title: "Case Study",
       icon: <BookOpen className="h-4 w-4" />,
+      href: "/case-studies",
       items: [
         { name: "View All Case Studies", href: "/case-studies" }
       ]
@@ -115,7 +119,12 @@ export const FooterLinks = () => {
         <div key={section.title}>
           <h4 className="font-semibold text-white mb-4 flex items-center">
             {section.icon}
-            <span className="ml-2">{section.title}</span>
+            <a 
+              href={section.href}
+              className="ml-2 hover:text-orange-400 transition-colors"
+            >
+              {section.title}
+            </a>
           </h4>
           <ul className="space-y-2">
             {section.items.map((item) => (

@@ -36,9 +36,6 @@ export const Header = () => {
               <Button variant="ghost" className="text-gray-700 hover:text-orange-600">
                 Sign Up
               </Button>
-              <Button className="bg-orange-600 hover:bg-orange-700 text-white">
-                Start Free Trial
-              </Button>
             </div>
           </div>
 
@@ -65,9 +62,6 @@ export const Header = () => {
               </Button>
               <Button variant="ghost" className="w-full justify-start text-gray-700 hover:text-orange-600">
                 Sign Up
-              </Button>
-              <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white">
-                Start Free Trial
               </Button>
             </div>
           </div>

@@ -48,6 +48,7 @@ export const navigationConfig: NavigationItem[] = [
     items: [
       {
         title: "Profile",
+        href: "/profile",
         items: [
           { title: "Ad Agencies", href: "/ad-agencies" },
           { title: "D2C Brands", href: "/d2c-brands" },
@@ -57,6 +58,7 @@ export const navigationConfig: NavigationItem[] = [
       },
       {
         title: "Use Cases",
+        href: "/use-cases",
         items: [
           { title: "Dental Clinic", href: "/dental-clinic" },
           { title: "Real Estate", href: "/real-estate" },
@@ -68,6 +70,7 @@ export const navigationConfig: NavigationItem[] = [
       },
       {
         title: "Platform",
+        href: "/platform",
         items: [
           { title: "Google Ads", href: "/google-ads" },
           { title: "Meta Ads", href: "/meta-ads" },
