@@ -24,8 +24,7 @@ export const AdLibraryCTA = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-orange-600 px-8 py-4 text-lg font-semibold"
+              className="bg-white text-orange-600 hover:bg-orange-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
             >
               <Calendar className="h-5 w-5 mr-2" />
               Book a Demo

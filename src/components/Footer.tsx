@@ -70,6 +70,12 @@ export const Footer = () => {
             <a href="/cookies" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">
               Cookie Policy
             </a>
+            <a href="/refund" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">
+              Refund Policy
+            </a>
+            <a href="/google-api-disclosure" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">
+              Google API Disclosure
+            </a>
           </div>
         </div>
       </div>

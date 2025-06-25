@@ -7,7 +7,7 @@ export const FooterLinks = () => {
       title: "Ad Library",
       icon: <Search className="h-4 w-4" />,
       items: [
-        { name: "Google Ad Spy", href: "/google-ads" },
+        { name: "Google Ad Spy", href: "/ad-library" },
         { name: "Facebook Ad Spy", href: "/facebook-ads" },
         { name: "YouTube Ad Spy", href: "/youtube-ads" },
         { name: "TikTok Ad Library", href: "/tiktok-ads" },
