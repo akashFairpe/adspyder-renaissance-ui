@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -33,6 +34,43 @@ export const AdLibraryFAQ = () => {
       answer: "Our ad database is updated in real-time. New ads are typically indexed within hours of going live, ensuring you always have access to the latest competitive intelligence."
     }
   ];
+
+  useEffect(() => {
+    // Add FAQ Schema for SEO
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(faqSchema);
+    script.id = 'faq-schema';
+    
+    // Remove existing schema if present
+    const existingScript = document.getElementById('faq-schema');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    document.head.appendChild(script);
+
+    // Cleanup on component unmount
+    return () => {
+      const schemaScript = document.getElementById('faq-schema');
+      if (schemaScript) {
+        schemaScript.remove();
+      }
+    };
+  }, []);
 
   return (
     <section className="py-20 bg-gray-50">

@@ -7,6 +7,7 @@ import { AdLibraryFeatures } from "@/components/AdLibrary/AdLibraryFeatures";
 import { AdLibraryTestimonials } from "@/components/AdLibrary/AdLibraryTestimonials";
 import { AdLibraryCTA } from "@/components/AdLibrary/AdLibraryCTA";
 import { AdLibraryFAQ } from "@/components/AdLibrary/AdLibraryFAQ";
+import { AdLibrarySEOContent } from "@/components/AdLibrary/AdLibrarySEOContent";
 import { AdLibraryFinalCTA } from "@/components/AdLibrary/AdLibraryFinalCTA";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -24,6 +25,7 @@ const AdLibrary = () => {
         <AdLibraryTestimonials />
         <AdLibraryCTA />
         <AdLibraryFAQ />
+        <AdLibrarySEOContent />
         <AdLibraryFinalCTA />
       </main>
       <Footer />
