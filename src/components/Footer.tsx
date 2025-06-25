@@ -1,8 +1,78 @@
 
 import { Button } from "@/components/ui/button";
-import { Target, Award } from "lucide-react";
+import { Target, Award, Search, TrendingUp, PenTool, User, Briefcase, Globe, BookOpen, DollarSign } from "lucide-react";
 
 export const Footer = () => {
+  const featuresItems = [
+    {
+      title: "Ad Library",
+      items: [
+        { name: "Google Ad Spy", href: "/google-ads" },
+        { name: "Facebook Ad Spy", href: "/facebook-ads" },
+        { name: "YouTube Ad Spy", href: "/youtube-ads" },
+        { name: "TikTok Ad Library", href: "/tiktok-ads" },
+        { name: "LinkedIn Ad Library", href: "/linkedin-ads" },
+        { name: "Shopping Ad Spy", href: "/shopping-ads" },
+        { name: "Bing Ad Spy", href: "/bing-ads" },
+        { name: "Amazon Ad Library", href: "/amazon-ads" },
+        { name: "Twitter Ad Library", href: "/twitter-ads" },
+        { name: "Display Ad Spy", href: "/display-ads" }
+      ]
+    },
+    {
+      title: "Ad Analysis",
+      items: [
+        { name: "Domain Analysis", href: "/domain-analysis" },
+        { name: "Landing Page Analysis", href: "/landing-page-analysis" }
+      ]
+    },
+    {
+      title: "Ad Generation",
+      items: [
+        { name: "Text Ad Generation", href: "/text-ad-generation" },
+        { name: "Image Ad Generation", href: "/image-ad-generation" }
+      ]
+    }
+  ];
+
+  const solutionsItems = [
+    {
+      title: "Profile",
+      items: [
+        { name: "Ad Agencies", href: "/ad-agencies" },
+        { name: "D2C Brands", href: "/d2c-brands" },
+        { name: "Freelancers", href: "/freelancers" },
+        { name: "Affiliates", href: "/affiliates" }
+      ]
+    },
+    {
+      title: "Use Case",
+      items: [
+        { name: "Dental Clinic", href: "/dental-clinic" },
+        { name: "Real Estate", href: "/real-estate" },
+        { name: "Travel Agency", href: "/travel-agency" },
+        { name: "Online Betting Sites", href: "/betting-sites" },
+        { name: "Restaurants", href: "/restaurants" },
+        { name: "Retail", href: "/retail" }
+      ]
+    },
+    {
+      title: "Platform",
+      items: [
+        { name: "Google Ads", href: "/google-ads-platform" },
+        { name: "Meta Ads", href: "/meta-ads-platform" },
+        { name: "Bing Ads", href: "/bing-ads-platform" },
+        { name: "LinkedIn Ads", href: "/linkedin-ads-platform" }
+      ]
+    },
+    {
+      title: "Case Study",
+      items: [
+        { name: "View All Case Studies", href: "/case-studies" }
+      ]
+    }
+  ];
+
   return (
     <footer className="bg-[#111827] text-white">
       <div className="container mx-auto px-4 py-16">
@@ -21,45 +91,80 @@ export const Footer = () => {
             </p>
           </div>
 
-          {/* Footer Links */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+          {/* Navigation Links */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            {/* Features Column */}
+            <div>
+              <h4 className="font-semibold text-white mb-4 flex items-center">
+                <Search className="h-4 w-4 mr-2" />
+                Features
+              </h4>
+              <div className="space-y-2">
+                {featuresItems.map((section) => (
+                  <div key={section.title}>
+                    <h5 className="text-sm font-medium text-gray-300 mb-1">{section.title}</h5>
+                    {section.items.slice(0, 3).map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Solutions Column */}
+            <div>
+              <h4 className="font-semibold text-white mb-4 flex items-center">
+                <Globe className="h-4 w-4 mr-2" />
+                Solutions
+              </h4>
+              <div className="space-y-2">
+                {solutionsItems.map((section) => (
+                  <div key={section.title}>
+                    <h5 className="text-sm font-medium text-gray-300 mb-1">{section.title}</h5>
+                    {section.items.slice(0, 2).map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Resources Column */}
+            <div>
+              <h4 className="font-semibold text-white mb-4 flex items-center">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Resources
+              </h4>
+              <ul className="space-y-2 text-gray-300">
+                <li><a href="/pricing" className="hover:text-[#e39000] transition-colors">Pricing</a></li>
+                <li><a href="/blog" className="hover:text-[#e39000] transition-colors">Blog</a></li>
+                <li><a href="/google-ads-spy" className="hover:text-[#e39000] transition-colors">Google Ads Spy</a></li>
+                <li><a href="/facebook-ads-spy" className="hover:text-[#e39000] transition-colors">Facebook Ads Spy</a></li>
+                <li><a href="/youtube-ads-spy" className="hover:text-[#e39000] transition-colors">Youtube Ads Spy</a></li>
+              </ul>
+            </div>
+
+            {/* Company Column */}
             <div>
               <h4 className="font-semibold text-white mb-4">Company</h4>
               <ul className="space-y-2 text-gray-300">
                 <li><a href="/free-demo" className="hover:text-[#e39000] transition-colors">Free Demo</a></li>
                 <li><a href="/contact-us" className="hover:text-[#e39000] transition-colors">Contact us</a></li>
                 <li><a href="/terms-condition" className="hover:text-[#e39000] transition-colors">Terms & Condition</a></li>
-                <li><a href="/google-api-disclosure" className="hover:text-[#e39000] transition-colors">Google API Disclosure</a></li>
                 <li><a href="/privacy-policy" className="hover:text-[#e39000] transition-colors">Privacy Policy</a></li>
                 <li><a href="/refund-policy" className="hover:text-[#e39000] transition-colors">Refund Policy</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-white mb-4">Solutions</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="/online-keyword-ad-checker" className="hover:text-[#e39000] transition-colors">Online Keyword Ad Checker</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-white mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="/google-ads-spy" className="hover:text-[#e39000] transition-colors">Google Ads Spy</a></li>
-                <li><a href="/facebook-ads-spy" className="hover:text-[#e39000] transition-colors">Facebook Ads Spy</a></li>
-                <li><a href="/youtube-ads-spy" className="hover:text-[#e39000] transition-colors">Youtube Ads Spy</a></li>
-                <li><a href="/bing-ads-spy" className="hover:text-[#e39000] transition-colors">Bing Ads Spy</a></li>
-                <li><a href="/instagram-ads-spy" className="hover:text-[#e39000] transition-colors">Instagram Ads Spy</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-white mb-4">Compare</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="/vs-poweradspy" className="hover:text-[#e39000] transition-colors">Vs Poweradspy</a></li>
-                <li><a href="/vs-bigspy" className="hover:text-[#e39000] transition-colors">Vs BigSpy</a></li>
-                <li><a href="/vs-adspy" className="hover:text-[#e39000] transition-colors">Vs AdSpy</a></li>
-                <li><a href="/vs-adplexity" className="hover:text-[#e39000] transition-colors">Vs Adplexity</a></li>
               </ul>
             </div>
           </div>

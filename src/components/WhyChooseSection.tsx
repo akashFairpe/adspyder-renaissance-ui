@@ -6,6 +6,7 @@ export const WhyChooseSection = () => {
     { 
       metric: "20X", 
       description: "ROI", 
+      prefix: "Get upto",
       color: "bg-white border-gray-200 hover:shadow-lg",
       metricColor: "text-orange-600"
     },

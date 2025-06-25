@@ -19,8 +19,8 @@ export const HeroSection = () => {
             </span>
           </div>
           
-          <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Ad intelligence redefined
+          <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            Ad Intelligence Redefined
           </h1>
           
           {/* Typing Animation */}

@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Zap, Settings } from "lucide-react";
+import { TrendingUp, Zap, Settings, Database } from "lucide-react";
 
 export const AdvancedFeaturesSection = () => {
   const features = [
@@ -27,6 +27,14 @@ export const AdvancedFeaturesSection = () => {
       gradient: "from-orange-500 to-orange-600",
       bgGradient: "from-orange-50 to-orange-100",
       borderColor: "border-orange-200"
+    },
+    {
+      title: "Ad Library",
+      description: "Get ad copies as viewed by the target audience. Filter and sort to see pin-point ad copies via text or domain search.",
+      icon: Database,
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
+      borderColor: "border-orange-200"
     }
   ];
 
@@ -47,7 +55,7 @@ export const AdvancedFeaturesSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
             <Card key={index} className={`bg-gradient-to-br ${feature.bgGradient} border-2 ${feature.borderColor} hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group relative overflow-hidden`}>
               {/* Decorative element */}

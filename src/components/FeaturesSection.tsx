@@ -31,8 +31,7 @@ export const FeaturesSection = () => {
       description: "Have a look at any website or domain with a simple click. Learn about its visitors, how it performs, and stay ahead in the online game.",
       icon: Eye,
       gradient: "from-orange-500 to-orange-600",
-      bgGradient: "from-orange-50 to-orange-100",
-      hasButton: true
+      bgGradient: "from-orange-50 to-orange-100"
     }
   ];
 
@@ -66,15 +65,6 @@ export const FeaturesSection = () => {
                   </CardDescription>
                 )}
               </CardHeader>
-              {feature.hasButton && (
-                <CardContent className="text-center">
-                  <Button 
-                    className={`bg-gradient-to-r ${feature.gradient} text-white hover:shadow-lg transition-all`}
-                  >
-                    Know more
-                  </Button>
-                </CardContent>
-              )}
             </Card>
           ))}
         </div>
