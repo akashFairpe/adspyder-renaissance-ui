@@ -13,11 +13,24 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { 
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
-import { Menu, Target, Search, Settings, Users, BookOpen, DollarSign, Zap, TrendingUp, Globe, Eye, PenTool, Building, User, MapPin, Briefcase } from "lucide-react";
+import { Menu, Target, Search, Settings, Users, BookOpen, DollarSign, Zap, TrendingUp, Globe, Eye, PenTool, Building, User, MapPin, Briefcase, ChevronDown } from "lucide-react";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openSections, setOpenSections] = useState<{[key: string]: boolean}>({});
+
+  const toggleSection = (section: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   const featuresItems = [
     {
@@ -219,23 +232,97 @@ export const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Trigger */}
+          {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 bg-white">
+            <SheetContent side="right" className="w-80 bg-white overflow-y-auto">
               <div className="py-6">
-                <div className="space-y-4">
-                  <a href="/" className="block py-2 text-gray-700 font-medium hover:text-orange-600">Home</a>
-                  <a href="/features" className="block py-2 text-gray-700 font-medium hover:text-orange-600">Features</a>
-                  <a href="/solutions" className="block py-2 text-gray-700 font-medium hover:text-orange-600">Solutions</a>
-                  <a href="/pricing" className="block py-2 text-gray-700 font-medium hover:text-orange-600">Pricing</a>
-                  <a href="/blog" className="block py-2 text-gray-700 font-medium hover:text-orange-600">Blog</a>
+                <div className="space-y-2">
+                  <a href="/" className="block py-3 px-2 text-gray-700 font-medium hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors" onClick={() => setIsOpen(false)}>
+                    Home
+                  </a>
+                  
+                  {/* Features Section */}
+                  <Collapsible open={openSections.features} onOpenChange={() => toggleSection('features')}>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full py-3 px-2 text-gray-700 font-medium hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors">
+                      Features
+                      <ChevronDown className={`h-4 w-4 transition-transform ${openSections.features ? 'rotate-180' : ''}`} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-1 mt-2">
+                      {featuresItems.map((section) => (
+                        <div key={section.title} className="ml-4">
+                          <div className="font-semibold text-orange-600 text-sm py-2 px-2 flex items-center">
+                            {section.title === "Ad Library" && <Search className="h-3 w-3 mr-2" />}
+                            {section.title === "Ad Analysis" && <TrendingUp className="h-3 w-3 mr-2" />}
+                            {section.title === "Ad Generation" && <PenTool className="h-3 w-3 mr-2" />}
+                            {section.title}
+                          </div>
+                          {section.items.map((item) => (
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              className="block py-2 px-4 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {item.name}
+                            </a>
+                          ))}
+                          {section !== featuresItems[featuresItems.length - 1] && <Separator className="my-2" />}
+                        </div>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+
+                  {/* Solutions Section */}
+                  <Collapsible open={openSections.solutions} onOpenChange={() => toggleSection('solutions')}>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full py-3 px-2 text-gray-700 font-medium hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors">
+                      Solutions
+                      <ChevronDown className={`h-4 w-4 transition-transform ${openSections.solutions ? 'rotate-180' : ''}`} />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-1 mt-2">
+                      {solutionsItems.map((section) => (
+                        <div key={section.title} className="ml-4">
+                          <div className="font-semibold text-orange-600 text-sm py-2 px-2 flex items-center">
+                            {section.title === "Profile" && <User className="h-3 w-3 mr-2" />}
+                            {section.title === "Use Case" && <Briefcase className="h-3 w-3 mr-2" />}
+                            {section.title === "Platform" && <Globe className="h-3 w-3 mr-2" />}
+                            {section.title === "Case Study" && <BookOpen className="h-3 w-3 mr-2" />}
+                            {section.title}
+                          </div>
+                          {section.items.map((item) => (
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              className="block py-2 px-4 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors"
+                              onClick={() => setIsOpen(false)}
+                            >
+                              {item.name}
+                            </a>
+                          ))}
+                          {section !== solutionsItems[solutionsItems.length - 1] && <Separator className="my-2" />}
+                        </div>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+
+                  <a href="/pricing" className="flex items-center space-x-2 py-3 px-2 text-gray-700 font-medium hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors" onClick={() => setIsOpen(false)}>
+                    <DollarSign className="h-4 w-4" />
+                    <span>Pricing</span>
+                  </a>
+                  
+                  <a href="/blog" className="flex items-center space-x-2 py-3 px-2 text-gray-700 font-medium hover:text-orange-600 hover:bg-orange-50 rounded-md transition-colors" onClick={() => setIsOpen(false)}>
+                    <BookOpen className="h-4 w-4" />
+                    <span>Blog</span>
+                  </a>
                 </div>
-                <div className="mt-8 space-y-3">
+                
+                <Separator className="my-6" />
+                
+                <div className="space-y-3">
                   <Button variant="outline" className="w-full border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white">
                     Login
                   </Button>
