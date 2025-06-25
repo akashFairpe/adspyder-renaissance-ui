@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { Target, Award, Search, TrendingUp, PenTool, User, Briefcase, Globe, BookOpen, DollarSign, Chrome, Download, Star } from "lucide-react";
 
 export const Footer = () => {
@@ -73,6 +74,13 @@ export const Footer = () => {
     }
   ];
 
+  const comparisonItems = [
+    { name: "Vs PowerAdSpy", href: "/vs-poweradspy" },
+    { name: "Vs BigSpy", href: "/vs-bigspy" },
+    { name: "Vs AdSpy", href: "/vs-adspy" },
+    { name: "Vs Adplexity", href: "/vs-adplexity" }
+  ];
+
   return (
     <footer className="bg-[#111827] text-white">
       <div className="container mx-auto px-4 py-16">
@@ -125,24 +133,24 @@ export const Footer = () => {
             </Button>
           </div>
 
-          {/* Navigation Links */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
-            {/* Features Columns */}
-            <div className="lg:col-span-2">
-              <h4 className="font-semibold text-white mb-4 flex items-center">
-                <Search className="h-4 w-4 mr-2" />
+          {/* Navigation Links - Organized with separators */}
+          <div className="space-y-12">
+            {/* Features Section */}
+            <div>
+              <h4 className="font-semibold text-white mb-6 flex items-center text-lg">
+                <Search className="h-5 w-5 mr-3 text-[#e39000]" />
                 Features
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {featuresItems.map((section) => (
                   <div key={section.title}>
-                    <h5 className="text-sm font-medium text-gray-300 mb-2">{section.title}</h5>
-                    <ul className="space-y-1">
+                    <h5 className="text-sm font-medium text-[#e39000] mb-3 uppercase tracking-wide">{section.title}</h5>
+                    <ul className="space-y-2">
                       {section.items.map((item) => (
                         <li key={item.name}>
                           <a
                             href={item.href}
-                            className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
+                            className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform"
                           >
                             {item.name}
                           </a>
@@ -154,22 +162,24 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Solutions Columns */}
-            <div className="lg:col-span-2">
-              <h4 className="font-semibold text-white mb-4 flex items-center">
-                <Globe className="h-4 w-4 mr-2" />
+            <Separator className="bg-gray-700" />
+
+            {/* Solutions Section */}
+            <div>
+              <h4 className="font-semibold text-white mb-6 flex items-center text-lg">
+                <Globe className="h-5 w-5 mr-3 text-[#e39000]" />
                 Solutions
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {solutionsItems.map((section) => (
                   <div key={section.title}>
-                    <h5 className="text-sm font-medium text-gray-300 mb-2">{section.title}</h5>
-                    <ul className="space-y-1">
+                    <h5 className="text-sm font-medium text-[#e39000] mb-3 uppercase tracking-wide">{section.title}</h5>
+                    <ul className="space-y-2">
                       {section.items.map((item) => (
                         <li key={item.name}>
                           <a
                             href={item.href}
-                            className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
+                            className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform"
                           >
                             {item.name}
                           </a>
@@ -181,31 +191,59 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Resources Column */}
-            <div>
-              <h4 className="font-semibold text-white mb-4 flex items-center">
-                <BookOpen className="h-4 w-4 mr-2" />
-                Resources
-              </h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="/pricing" className="hover:text-[#e39000] transition-colors flex items-center"><DollarSign className="h-3 w-3 mr-1" />Pricing</a></li>
-                <li><a href="/blog" className="hover:text-[#e39000] transition-colors">Blog</a></li>
-                <li><a href="/google-ads-spy" className="hover:text-[#e39000] transition-colors">Google Ads Spy</a></li>
-                <li><a href="/facebook-ads-spy" className="hover:text-[#e39000] transition-colors">Facebook Ads Spy</a></li>
-                <li><a href="/youtube-ads-spy" className="hover:text-[#e39000] transition-colors">Youtube Ads Spy</a></li>
-              </ul>
-            </div>
+            <Separator className="bg-gray-700" />
 
-            {/* Company Column */}
-            <div>
-              <h4 className="font-semibold text-white mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li><a href="/free-demo" className="hover:text-[#e39000] transition-colors">Free Demo</a></li>
-                <li><a href="/contact-us" className="hover:text-[#e39000] transition-colors">Contact us</a></li>
-                <li><a href="/terms-condition" className="hover:text-[#e39000] transition-colors">Terms & Condition</a></li>
-                <li><a href="/privacy-policy" className="hover:text-[#e39000] transition-colors">Privacy Policy</a></li>
-                <li><a href="/refund-policy" className="hover:text-[#e39000] transition-colors">Refund Policy</a></li>
-              </ul>
+            {/* Compare and Resources Section */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Compare Section */}
+              <div>
+                <h4 className="font-semibold text-white mb-6 flex items-center text-lg">
+                  <TrendingUp className="h-5 w-5 mr-3 text-[#e39000]" />
+                  Compare
+                </h4>
+                <ul className="space-y-2">
+                  {comparisonItems.map((item) => (
+                    <li key={item.name}>
+                      <a
+                        href={item.href}
+                        className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform"
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Resources Section */}
+              <div>
+                <h4 className="font-semibold text-white mb-6 flex items-center text-lg">
+                  <BookOpen className="h-5 w-5 mr-3 text-[#e39000]" />
+                  Resources
+                </h4>
+                <ul className="space-y-2">
+                  <li><a href="/pricing" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform flex items-center"><DollarSign className="h-3 w-3 mr-2" />Pricing</a></li>
+                  <li><a href="/blog" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Blog</a></li>
+                  <li><a href="/google-ads-spy" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Google Ads Spy</a></li>
+                  <li><a href="/facebook-ads-spy" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Facebook Ads Spy</a></li>
+                  <li><a href="/youtube-ads-spy" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Youtube Ads Spy</a></li>
+                </ul>
+              </div>
+
+              {/* Company Section */}
+              <div>
+                <h4 className="font-semibold text-white mb-6 flex items-center text-lg">
+                  <Briefcase className="h-5 w-5 mr-3 text-[#e39000]" />
+                  Company
+                </h4>
+                <ul className="space-y-2">
+                  <li><a href="/free-demo" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Free Demo</a></li>
+                  <li><a href="/contact-us" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Contact us</a></li>
+                  <li><a href="/terms-condition" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Terms & Condition</a></li>
+                  <li><a href="/privacy-policy" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Privacy Policy</a></li>
+                  <li><a href="/refund-policy" className="block text-sm text-gray-300 hover:text-white transition-colors py-1 hover:translate-x-1 transition-transform">Refund Policy</a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

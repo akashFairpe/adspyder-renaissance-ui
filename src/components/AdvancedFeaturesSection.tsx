@@ -1,37 +1,58 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Zap, Settings, Database } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, Zap, Settings, Database, ArrowRight, CheckCircle } from "lucide-react";
 
 export const AdvancedFeaturesSection = () => {
   const features = [
     {
+      title: "Ad Library",
+      description: "Access a rich archive of real-time ad creatives as seen by actual audiences, across platforms and regions.",
+      icon: Database,
+      popularFeatures: [
+        "Multi-platform ad search",
+        "Text & domain-based filtering",
+        "Competitor ad tracking"
+      ],
+      gradient: "from-orange-500 to-orange-600",
+      bgGradient: "from-orange-50 to-orange-100",
+      borderColor: "border-orange-200"
+    },
+    {
       title: "Ad Analysis",
-      description: "Deep dive into competitor ad performance with advanced analytics. Get insights into CTR, engagement rates, and conversion metrics to optimize your campaigns.",
+      description: "Unlock detailed performance metrics for competitor ads to guide data-driven campaign strategies.",
       icon: TrendingUp,
+      popularFeatures: [
+        "CTR & engagement insights",
+        "Conversion tracking",
+        "Ad spend breakdowns"
+      ],
       gradient: "from-orange-500 to-orange-600",
       bgGradient: "from-orange-50 to-orange-100",
       borderColor: "border-orange-200"
     },
     {
       title: "Ad Generation",
-      description: "Create high-converting ad copies using AI-powered tools. Generate multiple variations, test different approaches, and find your winning formula.",
+      description: "Use AI-powered tools to craft compelling ad creatives that resonate and convert.",
       icon: Zap,
+      popularFeatures: [
+        "AI copywriting assistant",
+        "Multiple copy variations",
+        "Instant ad previews"
+      ],
       gradient: "from-orange-500 to-orange-600",
       bgGradient: "from-orange-50 to-orange-100",
       borderColor: "border-orange-200"
     },
     {
       title: "Ad Optimization",
-      description: "Continuously improve your ad performance with intelligent optimization suggestions. Automate A/B testing and maximize your advertising ROI.",
+      description: "Boost campaign results with smart A/B testing and automated performance recommendations.",
       icon: Settings,
-      gradient: "from-orange-500 to-orange-600",
-      bgGradient: "from-orange-50 to-orange-100",
-      borderColor: "border-orange-200"
-    },
-    {
-      title: "Ad Library",
-      description: "Get ad copies as viewed by the target audience. Filter and sort to see pin-point ad copies via text or domain search.",
-      icon: Database,
+      popularFeatures: [
+        "Intelligent A/B testing",
+        "Performance alerts",
+        "ROI optimization suggestions"
+      ],
       gradient: "from-orange-500 to-orange-600",
       bgGradient: "from-orange-50 to-orange-100",
       borderColor: "border-orange-200"
@@ -57,21 +78,40 @@ export const AdvancedFeaturesSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => (
-            <Card key={index} className={`bg-gradient-to-br ${feature.bgGradient} border-2 ${feature.borderColor} hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group relative overflow-hidden`}>
-              {/* Decorative element */}
-              <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${feature.gradient} opacity-10 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500`}></div>
-              
-              <CardHeader className="relative z-10">
-                <div className={`w-20 h-20 mb-6 bg-gradient-to-r ${feature.gradient} rounded-3xl flex items-center justify-center group-hover:rotate-12 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
-                  <feature.icon className="h-10 w-10 text-white" />
+            <Card key={index} className={`bg-white border-2 ${feature.borderColor} hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden`}>
+              <CardHeader className="relative z-10 pb-4">
+                <div className={`w-16 h-16 mb-4 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center group-hover:rotate-6 group-hover:scale-110 transition-all duration-300 shadow-lg`}>
+                  <feature.icon className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-800 group-hover:text-gray-900 mb-4">
+                <CardTitle className="text-2xl font-bold text-gray-800 group-hover:text-gray-900 mb-3">
                   {feature.title}
                 </CardTitle>
-                <CardDescription className="text-gray-600 leading-relaxed text-base">
+                <CardDescription className="text-gray-600 leading-relaxed text-base mb-6">
                   {feature.description}
                 </CardDescription>
               </CardHeader>
+              
+              <CardContent className="pt-0">
+                <div className="mb-6">
+                  <h4 className="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">Popular Features</h4>
+                  <ul className="space-y-2">
+                    {feature.popularFeatures.map((featureName, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center text-sm text-gray-600">
+                        <CheckCircle className="h-4 w-4 text-orange-500 mr-2 flex-shrink-0" />
+                        {featureName}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <Button 
+                  variant="outline" 
+                  className="w-full group/btn border-orange-200 text-orange-600 hover:bg-orange-600 hover:text-white transition-all duration-300"
+                >
+                  Learn More
+                  <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                </Button>
+              </CardContent>
             </Card>
           ))}
         </div>
