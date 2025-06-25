@@ -23,6 +23,7 @@ export const FooterLinks = () => {
       title: "Ad Analysis",
       icon: <TrendingUp className="h-4 w-4" />,
       items: [
+        { name: "Ad Analytics", href: "/ad-analytics" },
         { name: "Domain Analysis", href: "/domain-analysis" },
         { name: "Landing Page Analysis", href: "/landing-page-analysis" }
       ]
