@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Target, Award, Search, TrendingUp, PenTool, User, Briefcase, Globe, BookOpen, DollarSign } from "lucide-react";
+import { Target, Award, Search, TrendingUp, PenTool, User, Briefcase, Globe, BookOpen, DollarSign, Chrome, Download, Star } from "lucide-react";
 
 export const Footer = () => {
   const featuresItems = [
@@ -76,7 +76,7 @@ export const Footer = () => {
   return (
     <footer className="bg-[#111827] text-white">
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Brand Section */}
           <div className="text-center mb-12">
             <div className="flex items-center justify-center space-x-2 mb-6">
@@ -91,51 +91,91 @@ export const Footer = () => {
             </p>
           </div>
 
+          {/* Chrome Extension Promotion */}
+          <div className="bg-gradient-to-r from-[#e39000] to-orange-600 rounded-xl p-8 mb-12 text-center">
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <Chrome className="h-8 w-8 text-white" />
+              <h3 className="text-2xl font-bold text-white">AdSpyder Chrome Extension</h3>
+            </div>
+            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+              Get instant domain ad analysis and competitor insights right in your browser. 
+              Access powerful ad intelligence tools with just one click while browsing any website.
+            </p>
+            <div className="flex items-center justify-center space-x-2 mb-6">
+              <div className="flex items-center space-x-1">
+                {[1,2,3,4,5].map((star) => (
+                  <Star key={star} className="h-4 w-4 text-yellow-300 fill-current" />
+                ))}
+              </div>
+              <span className="text-white/90 text-sm">Rated 4.8/5 by 10,000+ users</span>
+            </div>
+            <Button 
+              asChild
+              className="bg-white text-orange-600 hover:bg-gray-100 font-semibold px-8 py-3 shadow-lg hover:shadow-xl transition-all"
+            >
+              <a 
+                href="https://chromewebstore.google.com/detail/adspyder-get-domain-ad-an/dpfdbgmgkemmfbmmjgikggnljphokpij" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2"
+              >
+                <Download className="h-5 w-5" />
+                <span>Add to Chrome - Free</span>
+              </a>
+            </Button>
+          </div>
+
           {/* Navigation Links */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {/* Features Column */}
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
+            {/* Features Columns */}
+            <div className="lg:col-span-2">
               <h4 className="font-semibold text-white mb-4 flex items-center">
                 <Search className="h-4 w-4 mr-2" />
                 Features
               </h4>
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {featuresItems.map((section) => (
                   <div key={section.title}>
-                    <h5 className="text-sm font-medium text-gray-300 mb-1">{section.title}</h5>
-                    {section.items.slice(0, 3).map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    <h5 className="text-sm font-medium text-gray-300 mb-2">{section.title}</h5>
+                    <ul className="space-y-1">
+                      {section.items.map((item) => (
+                        <li key={item.name}>
+                          <a
+                            href={item.href}
+                            className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
+                          >
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Solutions Column */}
-            <div>
+            {/* Solutions Columns */}
+            <div className="lg:col-span-2">
               <h4 className="font-semibold text-white mb-4 flex items-center">
                 <Globe className="h-4 w-4 mr-2" />
                 Solutions
               </h4>
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {solutionsItems.map((section) => (
                   <div key={section.title}>
-                    <h5 className="text-sm font-medium text-gray-300 mb-1">{section.title}</h5>
-                    {section.items.slice(0, 2).map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    <h5 className="text-sm font-medium text-gray-300 mb-2">{section.title}</h5>
+                    <ul className="space-y-1">
+                      {section.items.map((item) => (
+                        <li key={item.name}>
+                          <a
+                            href={item.href}
+                            className="block text-sm text-gray-400 hover:text-[#e39000] transition-colors py-1"
+                          >
+                            {item.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
@@ -148,7 +188,7 @@ export const Footer = () => {
                 Resources
               </h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/pricing" className="hover:text-[#e39000] transition-colors">Pricing</a></li>
+                <li><a href="/pricing" className="hover:text-[#e39000] transition-colors flex items-center"><DollarSign className="h-3 w-3 mr-1" />Pricing</a></li>
                 <li><a href="/blog" className="hover:text-[#e39000] transition-colors">Blog</a></li>
                 <li><a href="/google-ads-spy" className="hover:text-[#e39000] transition-colors">Google Ads Spy</a></li>
                 <li><a href="/facebook-ads-spy" className="hover:text-[#e39000] transition-colors">Facebook Ads Spy</a></li>
