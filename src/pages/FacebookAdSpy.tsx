@@ -6,13 +6,13 @@ import { FacebookAdSpyStats } from "@/components/FacebookAdSpy/FacebookAdSpyStat
 import { FacebookAdSpyFeatures } from "@/components/FacebookAdSpy/FacebookAdSpyFeatures";
 import { FacebookAdSpyUseCases } from "@/components/FacebookAdSpy/FacebookAdSpyUseCases";
 import { FacebookAdSpyBlogs } from "@/components/FacebookAdSpy/FacebookAdSpyBlogs";
-import { FacebookAdSpyEducation } from "@/components/FacebookAdSpy/FacebookAdSpyEducation";
 import { FacebookAdSpyComparison } from "@/components/FacebookAdSpy/FacebookAdSpyComparison";
 import { FacebookAdSpyBenefits } from "@/components/FacebookAdSpy/FacebookAdSpyBenefits";
 import { FacebookAdSpyQuickStart } from "@/components/FacebookAdSpy/FacebookAdSpyQuickStart";
 import { FacebookAdSpyTestimonials } from "@/components/FacebookAdSpy/FacebookAdSpyTestimonials";
 import { FacebookAdSpyCTA } from "@/components/FacebookAdSpy/FacebookAdSpyCTA";
 import { FacebookAdSpyFAQ } from "@/components/FacebookAdSpy/FacebookAdSpyFAQ";
+import { FacebookAdSpyEducation } from "@/components/FacebookAdSpy/FacebookAdSpyEducation";
 
 const FacebookAdSpy = () => {
   return (
@@ -24,13 +24,13 @@ const FacebookAdSpy = () => {
         <FacebookAdSpyFeatures />
         <FacebookAdSpyUseCases />
         <FacebookAdSpyBlogs />
-        <FacebookAdSpyEducation />
         <FacebookAdSpyComparison />
         <FacebookAdSpyBenefits />
         <FacebookAdSpyQuickStart />
         <FacebookAdSpyTestimonials />
         <FacebookAdSpyCTA />
         <FacebookAdSpyFAQ />
+        <FacebookAdSpyEducation />
       </main>
       <Footer />
     </div>
