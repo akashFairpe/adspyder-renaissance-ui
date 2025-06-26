@@ -53,8 +53,8 @@ export const FacebookAdSpyFeatures = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <div key={index} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all">
-              <div className="bg-blue-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                <feature.icon className="h-8 w-8 text-blue-600" />
+              <div className="bg-orange-100 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                <feature.icon className="h-8 w-8 text-orange-600" />
               </div>
               
               <h3 className="text-xl font-bold text-gray-900 mb-3">
@@ -65,7 +65,7 @@ export const FacebookAdSpyFeatures = () => {
                 {feature.description}
               </p>
               
-              <blockquote className="text-sm text-blue-600 italic border-l-4 border-blue-200 pl-4">
+              <blockquote className="text-sm text-orange-600 italic border-l-4 border-orange-200 pl-4">
                 "{feature.quote}"
               </blockquote>
             </div>

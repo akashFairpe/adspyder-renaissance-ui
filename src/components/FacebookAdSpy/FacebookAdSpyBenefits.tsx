@@ -17,7 +17,7 @@ export const FacebookAdSpyBenefits = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => (
               <div key={index} className="text-center bg-gray-50 rounded-xl p-6">
-                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
+                <div className="w-12 h-12 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">
                   {index + 1}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">

@@ -20,7 +20,7 @@ export const FacebookAdSpyComparison = () => {
   ];
 
   return (
-    <section className="py-20 bg-blue-600">
+    <section className="py-20 bg-orange-600">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-12">
@@ -33,7 +33,7 @@ export const FacebookAdSpyComparison = () => {
                 <h3 className="text-xl font-bold text-white mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-blue-100 leading-relaxed">
+                <p className="text-orange-100 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
