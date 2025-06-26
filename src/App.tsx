@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import AdLibrary from "./pages/AdLibrary";
 import AdAnalytics from "./pages/AdAnalytics";
+import GoogleAdSpy from "./pages/GoogleAdSpy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/ad-library" element={<AdLibrary />} />
           <Route path="/ad-analytics" element={<AdAnalytics />} />
+          <Route path="/google-ad-spy" element={<GoogleAdSpy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
