@@ -1,4 +1,5 @@
-
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { AdShowcasePage } from "@/components/AdShowcase/AdShowcasePage";
 
 const TestPage = () => {
@@ -94,7 +95,15 @@ const TestPage = () => {
     ]
   };
 
-  return <AdShowcasePage {...pageData} />;
+  return (
+    <div className="min-h-screen bg-[#fcfdff]">
+      <Header />
+      <main>
+        <AdShowcasePage {...pageData} />
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
 export default TestPage;
