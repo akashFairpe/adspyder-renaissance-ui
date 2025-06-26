@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import AdLibrary from "./pages/AdLibrary";
 import AdAnalytics from "./pages/AdAnalytics";
 import GoogleAdSpy from "./pages/GoogleAdSpy";
+import FacebookAdSpy from "./pages/FacebookAdSpy";
 import TestPage from "./pages/TestPage";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/ad-library" element={<AdLibrary />} />
           <Route path="/ad-analytics" element={<AdAnalytics />} />
           <Route path="/google-ad-spy" element={<GoogleAdSpy />} />
+          <Route path="/facebook-ad-spy" element={<FacebookAdSpy />} />
           <Route path="/test-page" element={<TestPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
