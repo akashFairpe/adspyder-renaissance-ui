@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import AdLibrary from "./pages/AdLibrary";
 import AdAnalytics from "./pages/AdAnalytics";
 import GoogleAdSpy from "./pages/GoogleAdSpy";
+import TestPage from "./pages/TestPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/ad-library" element={<AdLibrary />} />
           <Route path="/ad-analytics" element={<AdAnalytics />} />
           <Route path="/google-ad-spy" element={<GoogleAdSpy />} />
+          <Route path="/test-page" element={<TestPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
