@@ -23,7 +23,7 @@ export const GoogleAdSpyStrategy = () => {
             {strategies.map((strategy, index) => (
               <div key={index} className="bg-gray-50 rounded-xl p-6 border border-gray-100">
                 <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                  <div className="flex-shrink-0 w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                     {index + 1}
                   </div>
                   <p className="text-gray-700 leading-relaxed font-medium">{strategy}</p>

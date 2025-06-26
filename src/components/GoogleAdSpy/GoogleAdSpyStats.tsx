@@ -24,7 +24,7 @@ export const GoogleAdSpyStats = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-sm font-medium text-blue-600 mb-2 uppercase tracking-wider">
+              <div className="text-sm font-medium text-orange-600 mb-2 uppercase tracking-wider">
                 {stat.description}
               </div>
               <div className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">

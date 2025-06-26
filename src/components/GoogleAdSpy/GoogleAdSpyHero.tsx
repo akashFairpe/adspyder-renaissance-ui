@@ -9,13 +9,13 @@ export const GoogleAdSpyHero = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
-            <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Target className="h-4 w-4" />
               <span>Google Ad Spy Tool</span>
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Unveil Every Google Ad Detail <br />
-              <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent">
                 with Google Ad Spy
               </span>
             </h1>
@@ -31,12 +31,12 @@ export const GoogleAdSpyHero = () => {
                 <Input 
                   type="email" 
                   placeholder="Enter email address..."
-                  className="pl-10 h-12 text-base border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  className="pl-10 h-12 text-base border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                 />
               </div>
               <Button 
                 size="lg" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-12 font-semibold shadow-lg hover:shadow-xl transition-all"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-8 h-12 font-semibold shadow-lg hover:shadow-xl transition-all"
               >
                 Get Started – It's Free
               </Button>

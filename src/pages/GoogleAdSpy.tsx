@@ -6,13 +6,13 @@ import { GoogleAdSpyStats } from "@/components/GoogleAdSpy/GoogleAdSpyStats";
 import { GoogleAdSpyBenefits } from "@/components/GoogleAdSpy/GoogleAdSpyBenefits";
 import { GoogleAdSpyLibrary } from "@/components/GoogleAdSpy/GoogleAdSpyLibrary";
 import { GoogleAdSpyBlogs } from "@/components/GoogleAdSpy/GoogleAdSpyBlogs";
-import { GoogleAdSpyEducation } from "@/components/GoogleAdSpy/GoogleAdSpyEducation";
 import { GoogleAdSpyTools } from "@/components/GoogleAdSpy/GoogleAdSpyTools";
 import { GoogleAdSpyStrategy } from "@/components/GoogleAdSpy/GoogleAdSpyStrategy";
 import { GoogleAdSpyGettingStarted } from "@/components/GoogleAdSpy/GoogleAdSpyGettingStarted";
 import { GoogleAdSpyTestimonials } from "@/components/GoogleAdSpy/GoogleAdSpyTestimonials";
 import { GoogleAdSpyCTA } from "@/components/GoogleAdSpy/GoogleAdSpyCTA";
 import { GoogleAdSpyFAQ } from "@/components/GoogleAdSpy/GoogleAdSpyFAQ";
+import { GoogleAdSpySEOContent } from "@/components/GoogleAdSpy/GoogleAdSpySEOContent";
 
 const GoogleAdSpy = () => {
   return (
@@ -24,13 +24,13 @@ const GoogleAdSpy = () => {
         <GoogleAdSpyBenefits />
         <GoogleAdSpyLibrary />
         <GoogleAdSpyBlogs />
-        <GoogleAdSpyEducation />
         <GoogleAdSpyTools />
         <GoogleAdSpyStrategy />
         <GoogleAdSpyGettingStarted />
         <GoogleAdSpyTestimonials />
         <GoogleAdSpyCTA />
         <GoogleAdSpyFAQ />
+        <GoogleAdSpySEOContent />
       </main>
       <Footer />
     </div>

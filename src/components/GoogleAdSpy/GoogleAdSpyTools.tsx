@@ -40,8 +40,8 @@ export const GoogleAdSpyTools = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {tools.map((tool, index) => (
             <div key={index} className="text-center">
-              <div className="bg-blue-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 hover:bg-blue-200 transition-colors">
-                <tool.icon className="h-10 w-10 text-blue-600" />
+              <div className="bg-orange-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 hover:bg-orange-200 transition-colors">
+                <tool.icon className="h-10 w-10 text-orange-600" />
               </div>
               
               <h3 className="text-xl font-bold text-gray-900 mb-4">
