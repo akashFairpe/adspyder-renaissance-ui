@@ -50,9 +50,9 @@ export const GoogleAdSpyLibrary = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
             <div key={index} className="group">
-              <div className="bg-gray-50 rounded-2xl p-8 hover:bg-blue-50 transition-all group-hover:shadow-lg border border-gray-100">
-                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors shadow-sm">
-                  <feature.icon className="h-8 w-8 text-blue-600" />
+              <div className="bg-gray-50 rounded-2xl p-8 hover:bg-orange-50 transition-all group-hover:shadow-lg border border-gray-100">
+                <div className="bg-white w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-100 transition-colors shadow-sm">
+                  <feature.icon className="h-8 w-8 text-orange-600" />
                 </div>
                 
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
