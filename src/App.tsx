@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +11,7 @@ import GoogleAdSpy from "./pages/GoogleAdSpy";
 import FacebookAdSpy from "./pages/FacebookAdSpy";
 import TestPage from "./pages/TestPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import VsPowerAdSpy from "./pages/VsPowerAdSpy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +31,7 @@ const App = () => (
           <Route path="/facebook-ad-spy" element={<FacebookAdSpy />} />
           <Route path="/test-page" element={<TestPage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/vs-poweradspy" element={<VsPowerAdSpy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
