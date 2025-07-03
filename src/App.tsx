@@ -11,6 +11,7 @@ import AdAnalytics from "./pages/AdAnalytics";
 import GoogleAdSpy from "./pages/GoogleAdSpy";
 import FacebookAdSpy from "./pages/FacebookAdSpy";
 import TestPage from "./pages/TestPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/google-ad-spy" element={<GoogleAdSpy />} />
           <Route path="/facebook-ad-spy" element={<FacebookAdSpy />} />
           <Route path="/test-page" element={<TestPage />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
