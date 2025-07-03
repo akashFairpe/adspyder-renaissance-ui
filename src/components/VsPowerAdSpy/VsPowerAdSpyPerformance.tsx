@@ -24,7 +24,7 @@ export const VsPowerAdSpyPerformance = () => {
   ];
 
   return (
-    <section className="py-20 bg-orange-600">
+    <section className="py-20 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -38,7 +38,7 @@ export const VsPowerAdSpyPerformance = () => {
               <div className="text-3xl lg:text-4xl font-bold text-white mb-2">
                 {stat.number}
               </div>
-              <div className="text-orange-100 font-medium">
+              <div className="text-gray-300 font-medium">
                 {stat.label}
               </div>
             </div>
