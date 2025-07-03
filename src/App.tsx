@@ -14,6 +14,7 @@ import TestPage from "./pages/TestPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import VsPowerAdSpy from "./pages/VsPowerAdSpy";
 import VsBigSpy from "./pages/VsBigSpy";
+import VsAdSpy from "./pages/VsAdSpy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/vs-poweradspy" element={<VsPowerAdSpy />} />
           <Route path="/vs-bigspy" element={<VsBigSpy />} />
+          <Route path="/vs-adspy" element={<VsAdSpy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

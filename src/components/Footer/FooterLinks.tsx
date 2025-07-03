@@ -1,3 +1,4 @@
+
 import { Search, TrendingUp, PenTool, User, Briefcase, Globe, BookOpen } from "lucide-react";
 
 export const FooterLinks = () => {
