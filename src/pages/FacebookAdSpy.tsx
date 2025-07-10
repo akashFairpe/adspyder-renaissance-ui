@@ -13,8 +13,12 @@ import { FacebookAdSpyTestimonials } from "@/components/FacebookAdSpy/FacebookAd
 import { FacebookAdSpyCTA } from "@/components/FacebookAdSpy/FacebookAdSpyCTA";
 import { FacebookAdSpyFAQ } from "@/components/FacebookAdSpy/FacebookAdSpyFAQ";
 import { FacebookAdSpyEducation } from "@/components/FacebookAdSpy/FacebookAdSpyEducation";
+import { useSEO } from "@/hooks/useSEO";
+import { pageConfigs } from "@/config/seoConfig";
 
 const FacebookAdSpy = () => {
+  useSEO(pageConfigs.facebookAdSpy);
+
   return (
     <div className="min-h-screen">
       <Header />

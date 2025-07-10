@@ -3,8 +3,12 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/Contact/ContactForm";
 import { ContactDetails } from "@/components/Contact/ContactDetails";
+import { useSEO } from "@/hooks/useSEO";
+import { pageConfigs } from "@/config/seoConfig";
 
 const ContactUs = () => {
+  useSEO(pageConfigs.contact);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />

@@ -9,8 +9,12 @@ import { CTASection } from "@/components/CTASection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { BlogCommunitySection } from "@/components/BlogCommunitySection";
 import { Footer } from "@/components/Footer";
+import { useSEO } from "@/hooks/useSEO";
+import { pageConfigs } from "@/config/seoConfig";
 
 const Index = () => {
+  useSEO(pageConfigs.home);
+
   return (
     <div className="min-h-screen bg-[#fcfdff]">
       <Header />

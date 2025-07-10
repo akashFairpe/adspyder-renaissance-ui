@@ -1,8 +1,12 @@
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { useSEO } from "@/hooks/useSEO";
+import { pageConfigs } from "@/config/seoConfig";
 
 const PrivacyPolicy = () => {
+  useSEO(pageConfigs.privacy);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />

@@ -13,8 +13,12 @@ import { GoogleAdSpyTestimonials } from "@/components/GoogleAdSpy/GoogleAdSpyTes
 import { GoogleAdSpyCTA } from "@/components/GoogleAdSpy/GoogleAdSpyCTA";
 import { GoogleAdSpyFAQ } from "@/components/GoogleAdSpy/GoogleAdSpyFAQ";
 import { GoogleAdSpySEOContent } from "@/components/GoogleAdSpy/GoogleAdSpySEOContent";
+import { useSEO } from "@/hooks/useSEO";
+import { pageConfigs } from "@/config/seoConfig";
 
 const GoogleAdSpy = () => {
+  useSEO(pageConfigs.googleAdSpy);
+
   return (
     <div className="min-h-screen">
       <Header />

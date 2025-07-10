@@ -4,20 +4,24 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import ScrollToTop from "./components/ScrollToTop";
-import Index from "./pages/Index";
-import AdLibrary from "./pages/AdLibrary";
-import AdAnalytics from "./pages/AdAnalytics";
-import GoogleAdSpy from "./pages/GoogleAdSpy";
-import FacebookAdSpy from "./pages/FacebookAdSpy";
-import TestPage from "./pages/TestPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import VsPowerAdSpy from "./pages/VsPowerAdSpy";
-import VsBigSpy from "./pages/VsBigSpy";
-import VsAdSpy from "./pages/VsAdSpy";
-import VsAdplexity from "./pages/VsAdplexity";
-import ContactUs from "./pages/ContactUs";
-import NotFound from "./pages/NotFound";
+import { PageLoader } from "./components/PageLoader";
+
+// Lazy load pages for better performance
+const Index = lazy(() => import("./pages/Index"));
+const AdLibrary = lazy(() => import("./pages/AdLibrary"));
+const AdAnalytics = lazy(() => import("./pages/AdAnalytics"));
+const GoogleAdSpy = lazy(() => import("./pages/GoogleAdSpy"));
+const FacebookAdSpy = lazy(() => import("./pages/FacebookAdSpy"));
+const TestPage = lazy(() => import("./pages/TestPage"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const VsPowerAdSpy = lazy(() => import("./pages/VsPowerAdSpy"));
+const VsBigSpy = lazy(() => import("./pages/VsBigSpy"));
+const VsAdSpy = lazy(() => import("./pages/VsAdSpy"));
+const VsAdplexity = lazy(() => import("./pages/VsAdplexity"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -28,22 +32,24 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/ad-library" element={<AdLibrary />} />
-          <Route path="/ad-analytics" element={<AdAnalytics />} />
-          <Route path="/google-ad-spy" element={<GoogleAdSpy />} />
-          <Route path="/facebook-ad-spy" element={<FacebookAdSpy />} />
-          <Route path="/test-page" element={<TestPage />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/vs-poweradspy" element={<VsPowerAdSpy />} />
-          <Route path="/vs-bigspy" element={<VsBigSpy />} />
-          <Route path="/vs-adspy" element={<VsAdSpy />} />
-          <Route path="/vs-adplexity" element={<VsAdplexity />} />
-          <Route path="/contact" element={<ContactUs />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/ad-library" element={<AdLibrary />} />
+            <Route path="/ad-analytics" element={<AdAnalytics />} />
+            <Route path="/google-ad-spy" element={<GoogleAdSpy />} />
+            <Route path="/facebook-ad-spy" element={<FacebookAdSpy />} />
+            <Route path="/test-page" element={<TestPage />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/vs-poweradspy" element={<VsPowerAdSpy />} />
+            <Route path="/vs-bigspy" element={<VsBigSpy />} />
+            <Route path="/vs-adspy" element={<VsAdSpy />} />
+            <Route path="/vs-adplexity" element={<VsAdplexity />} />
+            <Route path="/contact" element={<ContactUs />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
