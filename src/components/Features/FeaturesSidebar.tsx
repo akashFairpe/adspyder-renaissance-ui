@@ -3,17 +3,17 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { 
+  Globe2, 
+  Image, 
+  MessageSquare, 
   BarChart3, 
-  Target, 
-  TrendingUp, 
-  Globe, 
-  Calendar,
+  MousePointer,
+  Target,
+  Search,
   Users,
-  MessageSquare,
-  Eye,
-  DollarSign,
-  Zap,
-  Shield,
+  TrendingUp,
+  Cpu,
+  Monitor,
   Settings
 } from "lucide-react";
 
@@ -26,76 +26,76 @@ interface Category {
 
 const categories: Category[] = [
   {
-    id: "analytics",
-    name: "Ad Analytics",
+    id: "domain-overview",
+    name: "Domain Overview",
+    icon: Globe2,
+    features: ["Domain URL", "Brand Information", "Industry Classification", "Countries Active"]
+  },
+  {
+    id: "ad-creatives",
+    name: "Ad Creatives",
+    icon: Image,
+    features: ["Text Ads", "Image Ads", "Video Ads", "Creative Formats"]
+  },
+  {
+    id: "messaging",
+    name: "Messaging",
+    icon: MessageSquare,
+    features: ["Top CTAs", "Headlines", "Ad Titles", "Message Analysis"]
+  },
+  {
+    id: "performance-timeline",
+    name: "Performance Timeline",
     icon: BarChart3,
-    features: ["Performance Metrics", "Click Rates", "Conversion Tracking", "ROI Analysis"]
+    features: ["Ad Activity Over Time", "Estimated Spend", "Campaign Duration", "Peak Periods"]
   },
   {
-    id: "targeting",
-    name: "Audience Targeting",
+    id: "landing-experience",
+    name: "Landing Experience",
+    icon: MousePointer,
+    features: ["Funnel Stages", "Top Landing Pages", "User Journey", "Conversion Path"]
+  },
+  {
+    id: "targeting-insights",
+    name: "Targeting Insights",
     icon: Target,
-    features: ["Demographics", "Geographic Targeting", "Interest Segments", "Behavioral Data"]
+    features: ["Age Demographics", "Gender Split", "Interest Targeting", "Location Heatmap"]
   },
   {
-    id: "trends",
-    name: "Trend Analysis",
-    icon: TrendingUp,
-    features: ["Seasonal Trends", "Growth Patterns", "Market Share", "Competitive Trends"]
+    id: "keywords-search",
+    name: "Keywords & Search",
+    icon: Search,
+    features: ["Top Keywords", "CPC Data", "Search Volume", "Position Tracking"]
   },
   {
-    id: "networks",
-    name: "Ad Networks",
-    icon: Globe,
-    features: ["Platform Coverage", "Network Performance", "Cross-Platform Analytics", "Channel Mix"]
-  },
-  {
-    id: "timeline",
-    name: "Campaign Timeline",
-    icon: Calendar,
-    features: ["Campaign Duration", "Launch Dates", "Seasonality", "Schedule Optimization"]
-  },
-  {
-    id: "engagement",
+    id: "engagement-metrics",
     name: "Engagement Metrics",
     icon: Users,
-    features: ["Social Shares", "Comments", "Likes", "Engagement Rate"]
+    features: ["Likes & Shares", "Comments", "Engagement Rate", "Social Performance"]
   },
   {
-    id: "creatives",
-    name: "Creative Analysis",
-    icon: MessageSquare,
-    features: ["Ad Formats", "Creative Variations", "Message Testing", "Design Trends"]
+    id: "competitive-analysis",
+    name: "Competitive Analysis",
+    icon: TrendingUp,
+    features: ["Top Competitors", "Share of Voice", "Market Position", "Competitive Benchmarks"]
   },
   {
-    id: "monitoring",
-    name: "Competitive Monitoring",
-    icon: Eye,
-    features: ["Competitor Tracking", "Market Position", "Share of Voice", "Benchmark Analysis"]
+    id: "trends-reach",
+    name: "Trends & Reach",
+    icon: BarChart3,
+    features: ["Week over Week", "Month over Month", "Frequency Stats", "Reach Analysis"]
   },
   {
-    id: "spend",
-    name: "Ad Spend Intelligence",
-    icon: DollarSign,
-    features: ["Budget Allocation", "Spend Trends", "Cost Analysis", "Investment Patterns"]
+    id: "technical-tracking",
+    name: "Technical Tracking",
+    icon: Cpu,
+    features: ["A/B Testing", "UTM Parameters", "Tracking Pixels", "Technical Implementation"]
   },
   {
-    id: "performance",
-    name: "Performance Insights",
-    icon: Zap,
-    features: ["Top Performers", "Success Metrics", "Optimization Tips", "Best Practices"]
-  },
-  {
-    id: "compliance",
-    name: "Compliance & Safety",
-    icon: Shield,
-    features: ["Policy Adherence", "Brand Safety", "Content Moderation", "Risk Assessment"]
-  },
-  {
-    id: "tools",
-    name: "Advanced Tools",
-    icon: Settings,
-    features: ["API Access", "Custom Reports", "Data Export", "Integration Options"]
+    id: "distribution-devices",
+    name: "Distribution & Devices",
+    icon: Monitor,
+    features: ["World Map Coverage", "Device Breakdown", "Ad Schedule", "Publisher Presence"]
   }
 ];
 

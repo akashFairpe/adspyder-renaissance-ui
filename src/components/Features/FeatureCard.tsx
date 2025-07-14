@@ -37,9 +37,9 @@ export const FeatureCard = ({ feature, isHovered }: FeatureCardProps) => {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
                 <Lock className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
-                <Button size="sm" className="text-xs">
-                  Unlock Feature
-                </Button>
+              <Button size="sm" className="bg-orange-600 hover:bg-orange-700 text-white text-xs">
+                Unlock to View More
+              </Button>
               </div>
             </div>
           </div>
@@ -64,8 +64,8 @@ export const FeatureCard = ({ feature, isHovered }: FeatureCardProps) => {
               </div>
             )}
             <div className="text-center pt-2 border-t">
-              <Button size="sm" variant="outline" className="text-xs">
-                View All Data
+              <Button size="sm" variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white text-xs">
+                View All
               </Button>
             </div>
           </div>
@@ -78,12 +78,12 @@ export const FeatureCard = ({ feature, isHovered }: FeatureCardProps) => {
               <div className="space-y-2">
                 {feature.chartData.map((item, index) => (
                   <div key={index} className="flex justify-between items-center text-sm">
-                    <span className="text-muted-foreground">{item.name || item.month}</span>
+                    <span className="text-muted-foreground">{item.name || item.month || item.week}</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-medium">{item.value || item.campaigns}</span>
-                      {item.change && (
+                      <span className="font-medium">{item.value || item.campaigns || item.growth}</span>
+                      {(item.change || item.growth) && (
                         <span className="text-xs text-green-600 bg-green-100 px-1.5 py-0.5 rounded">
-                          {item.change}
+                          {item.change || item.growth}
                         </span>
                       )}
                     </div>

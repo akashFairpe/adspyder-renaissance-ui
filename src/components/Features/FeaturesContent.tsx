@@ -14,48 +14,290 @@ interface Feature {
 }
 
 const mockFeatures: Feature[] = [
+  // Domain Overview
   {
-    id: "performance-metrics",
-    title: "Performance Metrics",
-    description: "Comprehensive ad performance analytics including CTR, conversion rates, and engagement metrics",
+    id: "domain-url-info",
+    title: "Domain Information",
+    description: "Basic domain details including URL, brand name, and platform presence",
     accessLevel: "normal",
     icon: BarChart,
-    category: "analytics",
+    category: "domain-overview",
     chartData: [
-      { name: "CTR", value: 2.3, change: "+12%" },
-      { name: "CVR", value: 4.1, change: "+8%" },
-      { name: "ROAS", value: 3.2, change: "+15%" }
+      { name: "Domain", value: "nike.com" },
+      { name: "Brand", value: "Nike Inc." },
+      { name: "Platforms", value: "5 Active" }
     ]
   },
   {
-    id: "audience-insights",
-    title: "Audience Demographics",
-    description: "Detailed audience breakdown by age, gender, location, and interests",
-    accessLevel: "samples",
-    icon: Users,
-    category: "targeting",
-    preview: ["Ages 25-34 (35%)", "Ages 35-44 (28%)", "• • • • •"]
-  },
-  {
-    id: "trend-analysis",
-    title: "Seasonal Trends",
-    description: "Track ad performance across different seasons and identify peak periods",
+    id: "industry-classification",
+    title: "Industry Classification",
+    description: "Detailed industry categorization and market segment analysis",
     accessLevel: "locked",
     icon: TrendingUp,
-    category: "trends"
+    category: "domain-overview"
   },
   {
-    id: "campaign-timeline",
-    title: "Campaign Duration Analysis",
-    description: "Monitor campaign lifecycles and optimize timing strategies",
+    id: "countries-active",
+    title: "Active Countries",
+    description: "Geographic presence and country-wise ad distribution",
+    accessLevel: "samples",
+    icon: Users,
+    category: "domain-overview",
+    preview: ["United States", "United Kingdom", "• • • • •"]
+  },
+
+  // Ad Creatives
+  {
+    id: "text-ads",
+    title: "Text Advertisements",
+    description: "Collection of text-based ad copies and messaging",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "ad-creatives",
+    chartData: [
+      { name: "Total Ads", value: "1,247" },
+      { name: "Active", value: "89" },
+      { name: "This Month", value: "+23" }
+    ]
+  },
+  {
+    id: "image-video-ads",
+    title: "Visual Creatives",
+    description: "Image and video advertisements with format analysis",
+    accessLevel: "samples",
+    icon: Users,
+    category: "ad-creatives",
+    preview: ["Display Ads (45%)", "Video Ads (32%)", "• • • • •"]
+  },
+
+  // Messaging
+  {
+    id: "top-ctas",
+    title: "Top Call-to-Actions",
+    description: "Most frequently used CTAs and their performance metrics",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "messaging",
+    chartData: [
+      { name: "Shop Now", value: "34%" },
+      { name: "Learn More", value: "28%" },
+      { name: "Get Started", value: "19%" }
+    ]
+  },
+  {
+    id: "headlines-analysis",
+    title: "Headlines & Titles",
+    description: "Ad headline patterns and messaging strategies",
+    accessLevel: "locked",
+    icon: TrendingUp,
+    category: "messaging"
+  },
+
+  // Performance Timeline
+  {
+    id: "ad-activity",
+    title: "Ad Activity Over Time",
+    description: "Timeline showing ad launch patterns and campaign activity",
     accessLevel: "normal",
     icon: Calendar,
-    category: "timeline",
+    category: "performance-timeline",
     chartData: [
-      { month: "Jan", campaigns: 45 },
-      { month: "Feb", campaigns: 52 },
-      { month: "Mar", campaigns: 38 }
+      { month: "Oct", campaigns: 45 },
+      { month: "Nov", campaigns: 52 },
+      { month: "Dec", campaigns: 67 }
     ]
+  },
+  {
+    id: "estimated-spend",
+    title: "Estimated Ad Spend",
+    description: "Projected advertising budget and spending patterns",
+    accessLevel: "locked",
+    icon: TrendingUp,
+    category: "performance-timeline"
+  },
+
+  // Landing Experience
+  {
+    id: "funnel-stages",
+    title: "Conversion Funnel",
+    description: "User journey stages from ad click to conversion",
+    accessLevel: "samples",
+    icon: Users,
+    category: "landing-experience",
+    preview: ["Awareness Stage", "Consideration Stage", "• • • • •"]
+  },
+  {
+    id: "top-landing-pages",
+    title: "Top Landing Pages",
+    description: "Most frequently used landing pages and their performance",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "landing-experience",
+    chartData: [
+      { name: "/products", value: "42%" },
+      { name: "/sale", value: "31%" },
+      { name: "/new-arrivals", value: "27%" }
+    ]
+  },
+
+  // Targeting Insights
+  {
+    id: "demographics",
+    title: "Age & Gender Demographics",
+    description: "Detailed breakdown of target audience demographics",
+    accessLevel: "normal",
+    icon: Users,
+    category: "targeting-insights",
+    chartData: [
+      { name: "25-34", value: "35%" },
+      { name: "35-44", value: "28%" },
+      { name: "18-24", value: "22%" }
+    ]
+  },
+  {
+    id: "interest-targeting",
+    title: "Interest Segments",
+    description: "Target audience interests and behavioral patterns",
+    accessLevel: "locked",
+    icon: TrendingUp,
+    category: "targeting-insights"
+  },
+
+  // Keywords & Search
+  {
+    id: "top-keywords",
+    title: "Top Performing Keywords",
+    description: "Highest performing keywords with CPC and volume data",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "keywords-search",
+    chartData: [
+      { name: "running shoes", value: "$2.34 CPC" },
+      { name: "nike sneakers", value: "$3.12 CPC" },
+      { name: "athletic wear", value: "$1.89 CPC" }
+    ]
+  },
+  {
+    id: "search-volume",
+    title: "Search Volume Analysis",
+    description: "Monthly search volumes and trend analysis",
+    accessLevel: "samples",
+    icon: Users,
+    category: "keywords-search",
+    preview: ["45K monthly searches", "12% increase MoM", "• • • • •"]
+  },
+
+  // Engagement Metrics
+  {
+    id: "social-engagement",
+    title: "Social Media Engagement",
+    description: "Likes, shares, comments, and overall engagement rates",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "engagement-metrics",
+    chartData: [
+      { name: "Likes", value: "12.4K" },
+      { name: "Shares", value: "2.1K" },
+      { name: "Comments", value: "847" }
+    ]
+  },
+  {
+    id: "engagement-rate",
+    title: "Engagement Rate Analysis",
+    description: "Detailed engagement performance across platforms",
+    accessLevel: "locked",
+    icon: TrendingUp,
+    category: "engagement-metrics"
+  },
+
+  // Competitive Analysis
+  {
+    id: "top-competitors",
+    title: "Top Competitors",
+    description: "Main competitive landscape and market positioning",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "competitive-analysis",
+    chartData: [
+      { name: "Adidas", value: "23% SOV" },
+      { name: "Puma", value: "18% SOV" },
+      { name: "Under Armour", value: "15% SOV" }
+    ]
+  },
+  {
+    id: "share-of-voice",
+    title: "Share of Voice",
+    description: "Market share analysis across advertising channels",
+    accessLevel: "samples",
+    icon: Users,
+    category: "competitive-analysis",
+    preview: ["Nike: 28%", "Adidas: 23%", "• • • • •"]
+  },
+
+  // Trends & Reach
+  {
+    id: "weekly-trends",
+    title: "Week over Week Trends",
+    description: "Short-term performance trends and weekly comparisons",
+    accessLevel: "normal",
+    icon: Calendar,
+    category: "trends-reach",
+    chartData: [
+      { week: "W1", growth: "+12%" },
+      { week: "W2", growth: "+8%" },
+      { week: "W3", growth: "+15%" }
+    ]
+  },
+  {
+    id: "frequency-stats",
+    title: "Frequency & Reach",
+    description: "Ad frequency and audience reach metrics",
+    accessLevel: "locked",
+    icon: TrendingUp,
+    category: "trends-reach"
+  },
+
+  // Technical Tracking
+  {
+    id: "ab-testing",
+    title: "A/B Testing Implementation",
+    description: "Testing strategies and experimental approaches",
+    accessLevel: "samples",
+    icon: Users,
+    category: "technical-tracking",
+    preview: ["5 Active Tests", "Conversion Focus", "• • • • •"]
+  },
+  {
+    id: "utm-tracking",
+    title: "UTM Parameters",
+    description: "Campaign tracking and attribution analysis",
+    accessLevel: "locked",
+    icon: TrendingUp,
+    category: "technical-tracking"
+  },
+
+  // Distribution & Devices
+  {
+    id: "world-coverage",
+    title: "Global Distribution",
+    description: "Worldwide advertising presence and geographic coverage",
+    accessLevel: "normal",
+    icon: BarChart,
+    category: "distribution-devices",
+    chartData: [
+      { name: "North America", value: "45%" },
+      { name: "Europe", value: "32%" },
+      { name: "Asia", value: "23%" }
+    ]
+  },
+  {
+    id: "device-breakdown",
+    title: "Device & Platform Analysis",
+    description: "Device targeting and platform performance breakdown",
+    accessLevel: "samples",
+    icon: Users,
+    category: "distribution-devices",
+    preview: ["Mobile: 68%", "Desktop: 32%", "• • • • •"]
   }
 ];
 
@@ -85,7 +327,7 @@ export const FeaturesContent = ({ selectedCategory, searchQuery }: FeaturesConte
             Select a Category
           </h3>
           <p className="text-muted-foreground">
-            Choose a feature category from the sidebar to explore AdSpyder's powerful domain-level insights and analytics.
+            Choose a category from the sidebar to explore AdSpyder's 12 domain-level intelligence categories with detailed visualizations and competitive insights.
           </p>
         </div>
       </div>
@@ -114,11 +356,10 @@ export const FeaturesContent = ({ selectedCategory, searchQuery }: FeaturesConte
         {selectedCategory && (
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-foreground mb-2">
-              {mockFeatures.find(f => f.category === selectedCategory)?.category.charAt(0).toUpperCase() + 
-               mockFeatures.find(f => f.category === selectedCategory)?.category.slice(1) || "Features"}
+              {selectedCategory.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
             </h1>
             <p className="text-muted-foreground text-lg">
-              Explore advanced analytics and insights for this category
+              Explore domain-level ad intelligence and competitive insights
             </p>
           </div>
         )}
