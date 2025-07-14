@@ -17,15 +17,11 @@ export const ExtensionFinalCTA = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Button 
                 size="lg" 
-                className="px-8 py-4 text-lg font-semibold"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
                 onClick={() => window.open('https://chromewebstore.google.com/detail/adspyder-get-domain-ad-an/dpfdbgmgkemmfbmmjgikggnljphokpij?hl=en', '_blank')}
               >
                 <Chrome className="w-5 h-5 mr-2" />
                 Install Free Chrome Extension
-              </Button>
-              <Button variant="outline" size="lg" className="px-8 py-4 text-lg">
-                Learn More
-                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
             
