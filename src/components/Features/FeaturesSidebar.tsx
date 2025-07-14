@@ -107,22 +107,33 @@ interface FeaturesSidebarProps {
 export const FeaturesSidebar = ({ selectedCategory, onCategorySelect }: FeaturesSidebarProps) => {
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
 
+  const scrollToCategory = (categoryId: string) => {
+    const element = document.getElementById(categoryId);
+    if (element) {
+      const headerOffset = 120; // Account for sticky header and padding
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const toggleCategory = (categoryId: string) => {
     const newExpanded = new Set(expandedCategories);
     if (newExpanded.has(categoryId)) {
       newExpanded.delete(categoryId);
-      if (selectedCategory === categoryId) {
-        onCategorySelect(null);
-      }
     } else {
       newExpanded.add(categoryId);
-      onCategorySelect(categoryId);
+      scrollToCategory(categoryId);
     }
     setExpandedCategories(newExpanded);
   };
 
   return (
-    <div className="w-80 border-r bg-background/50 backdrop-blur-sm p-6 overflow-y-auto">
+    <div className="w-80 border-r bg-background/50 backdrop-blur-sm p-6 overflow-y-auto sticky top-16 h-[calc(100vh-4rem)]">
       <div className="space-y-2">
         <h2 className="text-lg font-semibold text-foreground mb-4">Feature Categories</h2>
         
@@ -137,17 +148,17 @@ export const FeaturesSidebar = ({ selectedCategory, onCategorySelect }: Features
                 onClick={() => toggleCategory(category.id)}
                 className={cn(
                   "w-full p-4 flex items-center justify-between text-left transition-colors hover:bg-muted/50",
-                  isSelected && "bg-primary/10 border-primary/20"
+                  selectedCategory === category.id && "bg-primary/10 border-primary/20"
                 )}
               >
                 <div className="flex items-center gap-3">
                   <Icon className={cn(
                     "h-5 w-5 transition-colors",
-                    isSelected ? "text-primary" : "text-muted-foreground"
+                    selectedCategory === category.id ? "text-primary" : "text-muted-foreground"
                   )} />
                   <span className={cn(
                     "font-medium transition-colors",
-                    isSelected ? "text-primary" : "text-foreground"
+                    selectedCategory === category.id ? "text-primary" : "text-foreground"
                   )}>
                     {category.name}
                   </span>

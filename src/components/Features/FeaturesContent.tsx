@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FeatureCard } from "./FeatureCard";
 import { Lock, Eye, BarChart, TrendingUp, Users, Calendar } from "lucide-react";
 
@@ -301,40 +301,77 @@ const mockFeatures: Feature[] = [
   }
 ];
 
+const categoryOrder = [
+  "domain-overview",
+  "ad-creatives", 
+  "messaging",
+  "performance-timeline",
+  "landing-experience",
+  "targeting-insights",
+  "keywords-search",
+  "engagement-metrics",
+  "competitive-analysis",
+  "trends-reach",
+  "technical-tracking",
+  "distribution-devices"
+];
+
 interface FeaturesContentProps {
   selectedCategory: string | null;
   searchQuery: string;
+  onCategoryChange: (categoryId: string) => void;
 }
 
-export const FeaturesContent = ({ selectedCategory, searchQuery }: FeaturesContentProps) => {
+export const FeaturesContent = ({ selectedCategory, searchQuery, onCategoryChange }: FeaturesContentProps) => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
-  const filteredFeatures = mockFeatures.filter(feature => {
-    const matchesCategory = !selectedCategory || feature.category === selectedCategory;
-    const matchesSearch = !searchQuery || 
-      feature.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      feature.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    return matchesCategory && matchesSearch;
-  });
+  // Group features by category
+  const featuresByCategory = categoryOrder.reduce((acc, categoryId) => {
+    acc[categoryId] = mockFeatures.filter(feature => feature.category === categoryId);
+    return acc;
+  }, {} as { [key: string]: Feature[] });
 
-  if (!selectedCategory && !searchQuery) {
-    return (
-      <div className="flex-1 flex items-center justify-center p-12">
-        <div className="text-center max-w-md">
-          <Eye className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-foreground mb-2">
-            Select a Category
-          </h3>
-          <p className="text-muted-foreground">
-            Choose a category from the sidebar to explore AdSpyder's 12 domain-level intelligence categories with detailed visualizations and competitive insights.
-          </p>
-        </div>
-      </div>
-    );
-  }
+  // Filter by search if provided
+  const filteredCategories = searchQuery 
+    ? Object.entries(featuresByCategory).reduce((acc, [categoryId, features]) => {
+        const filteredFeatures = features.filter(feature =>
+          feature.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          feature.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        if (filteredFeatures.length > 0) {
+          acc[categoryId] = filteredFeatures;
+        }
+        return acc;
+      }, {} as { [key: string]: Feature[] })
+    : featuresByCategory;
 
-  if (filteredFeatures.length === 0) {
+  // Scroll spy effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200; // Offset for header
+      
+      for (const categoryId of categoryOrder) {
+        const element = sectionRefs.current[categoryId];
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            onCategoryChange(categoryId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [onCategoryChange]);
+
+  const getCategoryTitle = (categoryId: string) => {
+    return categoryId.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
+
+  if (searchQuery && Object.keys(filteredCategories).length === 0) {
     return (
       <div className="flex-1 flex items-center justify-center p-12">
         <div className="text-center max-w-md">
@@ -343,7 +380,7 @@ export const FeaturesContent = ({ selectedCategory, searchQuery }: FeaturesConte
             No Features Found
           </h3>
           <p className="text-muted-foreground">
-            Try adjusting your search or selecting a different category.
+            Try adjusting your search or browse all categories below.
           </p>
         </div>
       </div>
@@ -353,37 +390,55 @@ export const FeaturesContent = ({ selectedCategory, searchQuery }: FeaturesConte
   return (
     <div className="flex-1 p-8">
       <div className="max-w-6xl mx-auto">
-        {selectedCategory && (
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">
-              {selectedCategory.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Explore domain-level ad intelligence and competitive insights
-            </p>
-          </div>
-        )}
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
+            AdSpyder Domain Intelligence
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+            Explore comprehensive domain-level ad intelligence across 12 categories. Discover your competitors' strategies, creatives, and performance insights.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredFeatures.map((feature, index) => (
-            <div
-              key={feature.id}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
-              onMouseEnter={() => setHoveredCard(feature.id)}
-              onMouseLeave={() => setHoveredCard(null)}
+        <div className="space-y-16">
+          {Object.entries(filteredCategories).map(([categoryId, features]) => (
+            <section
+              key={categoryId}
+              id={categoryId}
+              ref={el => sectionRefs.current[categoryId] = el}
+              className="scroll-mt-32"
             >
-              <FeatureCard
-                feature={feature}
-                isHovered={hoveredCard === feature.id}
-              />
-            </div>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-foreground mb-3">
+                  {getCategoryTitle(categoryId)}
+                </h2>
+                <p className="text-muted-foreground text-lg">
+                  Discover insights and intelligence for {getCategoryTitle(categoryId).toLowerCase()}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {features.map((feature, index) => (
+                  <div
+                    key={feature.id}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                    onMouseEnter={() => setHoveredCard(feature.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                  >
+                    <FeatureCard
+                      feature={feature}
+                      isHovered={hoveredCard === feature.id}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
 
         {searchQuery && (
-          <div className="mt-8 text-center text-muted-foreground">
-            Found {filteredFeatures.length} feature{filteredFeatures.length !== 1 ? 's' : ''} matching "{searchQuery}"
+          <div className="mt-12 text-center text-muted-foreground">
+            Found features in {Object.keys(filteredCategories).length} categor{Object.keys(filteredCategories).length !== 1 ? 'ies' : 'y'} matching "{searchQuery}"
           </div>
         )}
       </div>

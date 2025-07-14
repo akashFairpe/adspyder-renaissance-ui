@@ -38,6 +38,7 @@ const Features = () => {
         <FeaturesContent 
           selectedCategory={selectedCategory}
           searchQuery={searchQuery}
+          onCategoryChange={setSelectedCategory}
         />
       </div>
 
