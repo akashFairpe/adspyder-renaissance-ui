@@ -72,5 +72,11 @@ export const pageConfigs = {
     description: "Read AdSpyder's privacy policy to understand how we collect, use, and protect your personal data. Learn about our commitment to user privacy and data security.",
     keywords: "privacy policy, data protection, privacy rights, data security, gdpr compliance",
     canonical: "https://adspyder.io/privacy"
+  },
+  browserExtension: {
+    title: "AdSpyder Chrome Extension - Instantly Discover Ads on Any Website",
+    description: "Install the AdSpyder Chrome extension to spy on competitor ads directly in your browser. Analyze ad creatives, placements, and networks from Google, Facebook, YouTube & more in one click.",
+    keywords: "AdSpyder chrome extension, ad spy extension, competitor ads browser, ad analysis tool, facebook ads spy, google ads spy",
+    canonical: "https://adspyder.io/browser-extension"
   }
 };
