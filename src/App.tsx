@@ -22,6 +22,7 @@ const VsAdSpy = lazy(() => import("./pages/VsAdSpy"));
 const VsAdplexity = lazy(() => import("./pages/VsAdplexity"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BrowserExtension = lazy(() => import("./pages/BrowserExtension"));
+const Features = lazy(() => import("./pages/Features"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/vs-adplexity" element={<VsAdplexity />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browser-extension" element={<BrowserExtension />} />
+            <Route path="/features" element={<Features />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
