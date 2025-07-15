@@ -70,9 +70,12 @@ export const PricingFAQ = () => {
             Still have questions? We're here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all">
+            <a 
+              href="mailto:sales@adspyder.io"
+              className="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all inline-flex items-center justify-center gap-2"
+            >
               Contact Sales
-            </button>
+            </a>
             <button className="px-6 py-3 border border-border text-foreground font-semibold rounded-lg hover:bg-muted transition-all">
               Schedule Demo
             </button>
