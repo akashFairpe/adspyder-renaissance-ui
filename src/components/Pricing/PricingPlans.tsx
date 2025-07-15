@@ -1,98 +1,69 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Star, CreditCard, Zap, Calendar } from "lucide-react";
+import { Check, Star, CreditCard, Calendar, Mail } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
-const features = {
-  core: [
-    "Full access to all AdSpyder features",
-    "Ad Intelligence for all platforms",
-    "Domain & keyword analysis",
-    "Ad generation and optimisation tools"
-  ],
-  adSpy: [
-    "Google Ads Intelligence",
-    "Meta Ads Intelligence", 
-    "LinkedIn Ads Intelligence",
-    "YouTube Ads Intelligence",
-    "Shopping Ads Intelligence",
-    "Bing Ads Intelligence",
-    "Amazon Ads Intelligence",
-    "Twitter (X) Ads Intelligence",
-    "TikTok Ads Intelligence"
-  ],
-  analysis: [
-    "Domain Analysis",
-    "Keyword Research",
-    "Landing Page Analysis"
-  ],
-  generation: [
-    "Text Ad Generation",
-    "Image Ad Generation", 
-    "Video Ad Generation"
-  ],
-  optimization: [
-    "Ad Account Integration",
-    "KPI Tracking",
-    "Report Generation",
-    "AI-Assisted Ad Optimisation"
-  ]
-};
+const allFeatures = [
+  "Google Ads",
+  "Meta (Facebook/Instagram) Ads", 
+  "LinkedIn Ads",
+  "YouTube Ads",
+  "Shopping Ads",
+  "Bing Ads",
+  "Amazon Ads",
+  "Twitter (X) Ads",
+  "TikTok Ads",
+  "Domain Analysis",
+  "Keyword Research",
+  "Landing Page Analysis", 
+  "Text Ad Generation",
+  "Image Ad Generation",
+  "Video Ad Generation",
+  "Ad Account Integration",
+  "KPI Tracking",
+  "Report Generation",
+  "AI-Assisted Ad Optimisation"
+];
 
 export const PricingPlans = () => {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
-
   const plans = [
     {
       id: "free-trial",
       name: "Free Trial",
       price: "$0",
-      duration: "7 Days",
-      description: "Try all features for 7 days at no cost",
+      duration: "for 7 Days",
+      description: "Try AdSpyder's complete feature set with full access",
       activation: "Activated via Credit Card",
-      features: features.core,
+      features: [...allFeatures, "Pay As You Use Option (Available after trial ends)"],
       cta: "Start Free Trial",
       icon: <Star className="w-6 h-6" />,
       popular: false,
       color: "border-green-200 bg-green-50/50"
     },
     {
-      id: "pay-as-use",
-      name: "Pay As You Use",
-      price: "Based on Usage",
-      duration: "Flexible",
-      description: "Perfect for low-volume or testing users",
-      features: [
-        ...features.core,
-        ...features.adSpy,
-        ...features.analysis,
-        ...features.generation,
-        ...features.optimization
-      ],
-      cta: "Get Started",
-      icon: <Zap className="w-6 h-6" />,
+      id: "monthly",
+      name: "Monthly Plan", 
+      price: "$49",
+      duration: "/month",
+      description: "Ideal for ongoing advertisers and marketers",
+      features: [...allFeatures, "Includes Pay As You Use flexibility for scaling"],
+      cta: "Subscribe Monthly",
+      icon: <Calendar className="w-6 h-6" />,
       popular: false,
       color: "border-blue-200 bg-blue-50/50"
     },
     {
-      id: "subscription",
-      name: billingCycle === "monthly" ? "Monthly Plan" : "Annual Plan",
-      price: billingCycle === "monthly" ? "$49" : "$499",
-      duration: billingCycle === "monthly" ? "per month" : "per year",
-      description: billingCycle === "annual" ? "Save 15% with annual billing" : "Full access with monthly flexibility",
-      features: [
-        ...features.core,
-        ...features.adSpy,
-        ...features.analysis,
-        ...features.generation,
-        ...features.optimization
-      ],
-      cta: billingCycle === "monthly" ? "Subscribe Monthly" : "Subscribe Annually",
+      id: "annual",
+      name: "Annual Plan",
+      price: "$499",
+      duration: "/year",
+      description: "Recommended for agencies and power users",
+      features: [...allFeatures, "Pay As You Use included"],
+      cta: "Subscribe Annually – Save 15%",
       icon: <Calendar className="w-6 h-6" />,
-      popular: billingCycle === "annual",
+      popular: true,
       color: "border-orange-200 bg-orange-50/50",
-      savings: billingCycle === "annual" ? "Save 15%" : null
+      savings: "Save 15%"
     }
   ];
 
@@ -100,36 +71,6 @@ export const PricingPlans = () => {
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Billing Toggle */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-muted p-1 rounded-lg">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
-                billingCycle === "monthly"
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle("annual")}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-all relative ${
-                billingCycle === "annual"
-                  ? "bg-background text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Annual
-              {billingCycle === "annual" && (
-                <Badge className="absolute -top-2 -right-2 bg-green-500 text-white text-xs">
-                  Save 15%
-                </Badge>
-              )}
-            </button>
-          </div>
-        </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -201,13 +142,24 @@ export const PricingPlans = () => {
           ))}
         </div>
 
-        {/* Feature Comparison Note */}
-        <div className="mt-16 text-center">
-          <p className="text-sm text-muted-foreground mb-4">
-            All plans include the same comprehensive feature set. Choose based on your usage and billing preference.
+        {/* Contact Sales Section */}
+        <div className="mt-20 text-center">
+          <h3 className="text-2xl font-bold text-foreground mb-4">
+            Need a Custom Plan or Enterprise Access?
+          </h3>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Looking for volume discounts, custom integrations, or enterprise features? 
+            Our sales team is here to help you find the perfect solution.
           </p>
-          <Button variant="link" className="text-orange-600 hover:text-orange-700">
-            View detailed feature comparison →
+          <Button 
+            asChild
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-3"
+            size="lg"
+          >
+            <a href="mailto:sales@adspyder.io" className="inline-flex items-center gap-2">
+              <Mail className="w-5 h-5" />
+              Contact Sales
+            </a>
           </Button>
         </div>
       </div>
