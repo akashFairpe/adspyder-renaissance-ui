@@ -119,11 +119,11 @@ export const DomainSidebar = ({ activeSection, onSectionChange }: DomainSidebarP
   };
 
   return (
-    <div className="w-full lg:w-80 bg-white rounded-lg shadow-sm border border-gray-200 lg:h-full lg:overflow-hidden lg:flex lg:flex-col">
-      <div className="p-6 border-b border-gray-200 hidden lg:block lg:flex-shrink-0">
+    <div className="w-full lg:w-80 bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="p-6 border-b border-gray-200 hidden lg:block">
         <h3 className="text-lg font-semibold text-gray-900">Analysis Categories</h3>
       </div>
-      <ScrollArea className="lg:flex-1 max-h-96 lg:max-h-none">
+      <ScrollArea className="max-h-96 lg:max-h-[calc(100vh-200px)]">
         <nav className="p-4 space-y-2">
           {categories.map((category) => {
             const Icon = category.icon;
