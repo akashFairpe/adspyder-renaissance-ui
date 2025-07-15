@@ -23,6 +23,7 @@ const VsAdplexity = lazy(() => import("./pages/VsAdplexity"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BrowserExtension = lazy(() => import("./pages/BrowserExtension"));
 const DomainPaidAdAnalysis = lazy(() => import("./pages/DomainPaidAdAnalysis"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browser-extension" element={<BrowserExtension />} />
             <Route path="/domain-paid-ad-analysis" element={<DomainPaidAdAnalysis />} />
+            <Route path="/pricing" element={<Pricing />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
