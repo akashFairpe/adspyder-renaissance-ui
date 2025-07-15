@@ -49,6 +49,13 @@ export const TypingAnimation = () => {
     return () => clearTimeout(timer);
   }, [currentText, isDeleting, currentPhraseIndex, isPaused]);
 
+  // Initialize the component with the first character
+  useEffect(() => {
+    if (currentText === '') {
+      setCurrentText(' ');
+    }
+  }, []);
+
   return (
     <div className="text-2xl lg:text-3xl font-semibold min-h-[80px] flex items-center justify-center">
       <span className="text-gray-900">With AdSpyder, you can</span>
