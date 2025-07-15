@@ -43,14 +43,14 @@ const DomainPaidAdAnalysis = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#fcfdff]">
       <Header />
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Domain Paid Ad Analysis
           </h1>
-          <p className="text-lg text-muted-foreground mb-6">
+          <p className="text-lg text-gray-600 mb-6">
             Comprehensive ad intelligence insights for any domain
           </p>
           <DomainSearchBar 
@@ -59,12 +59,32 @@ const DomainPaidAdAnalysis = () => {
           />
         </div>
 
-        <div className="flex gap-8">
-          <DomainSidebar 
-            activeSection={activeSection}
-            onSectionChange={setActiveSection}
-          />
-          <DomainContent selectedDomain={selectedDomain} />
+        <div className="flex flex-col lg:flex-row gap-8 relative">
+          <div className="lg:hidden mb-4">
+            {/* Mobile sidebar - collapsible */}
+            <details className="bg-white rounded-lg border border-gray-200 shadow-sm">
+              <summary className="px-6 py-4 cursor-pointer font-semibold text-gray-900 hover:bg-gray-50">
+                Analysis Categories
+              </summary>
+              <div className="px-6 pb-4">
+                <DomainSidebar 
+                  activeSection={activeSection}
+                  onSectionChange={setActiveSection}
+                />
+              </div>
+            </details>
+          </div>
+          
+          <div className="hidden lg:block">
+            <DomainSidebar 
+              activeSection={activeSection}
+              onSectionChange={setActiveSection}
+            />
+          </div>
+          
+          <div className="flex-1 min-w-0 w-full">
+            <DomainContent selectedDomain={selectedDomain} />
+          </div>
         </div>
       </div>
       <Footer />

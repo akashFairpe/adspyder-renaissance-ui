@@ -17,7 +17,7 @@ interface DomainContentProps {
 
 export const DomainContent = ({ selectedDomain }: DomainContentProps) => {
   return (
-    <div className="flex-1 space-y-8">
+    <div className="space-y-8 w-full min-w-0">
       <div id="domain-overview">
         <DomainOverview domain={selectedDomain} />
       </div>
