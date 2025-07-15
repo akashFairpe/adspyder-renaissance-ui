@@ -119,11 +119,11 @@ export const DomainSidebar = ({ activeSection, onSectionChange }: DomainSidebarP
   };
 
   return (
-    <div className="w-full lg:w-80 bg-white rounded-lg shadow-sm border border-gray-200 lg:sticky lg:top-8 lg:h-[calc(100vh-120px)]">
-      <div className="p-6 border-b border-gray-200 hidden lg:block">
+    <div className="w-full lg:w-80 bg-white rounded-lg shadow-sm border border-gray-200 lg:h-full lg:overflow-hidden lg:flex lg:flex-col">
+      <div className="p-6 border-b border-gray-200 hidden lg:block lg:flex-shrink-0">
         <h3 className="text-lg font-semibold text-gray-900">Analysis Categories</h3>
       </div>
-      <ScrollArea className="lg:h-[calc(100%-80px)] max-h-96 lg:max-h-none">
+      <ScrollArea className="lg:flex-1 max-h-96 lg:max-h-none">
         <nav className="p-4 space-y-2">
           {categories.map((category) => {
             const Icon = category.icon;
@@ -141,7 +141,7 @@ export const DomainSidebar = ({ activeSection, onSectionChange }: DomainSidebarP
                     className={cn(
                       "w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 hover:bg-gray-50",
                       isActive 
-                        ? "bg-orange-50 text-orange-600 border border-orange-200" 
+                        ? "bg-primary/10 text-primary border border-primary/20" 
                         : "text-gray-700 hover:text-gray-900"
                     )}
                   >
@@ -162,7 +162,7 @@ export const DomainSidebar = ({ activeSection, onSectionChange }: DomainSidebarP
                       <button
                         key={index}
                         onClick={() => scrollToSection(category.id)}
-                        className="block w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                        className="block w-full text-left px-3 py-2 text-sm text-gray-600 hover:text-primary hover:bg-primary/10 rounded transition-colors"
                       >
                         {feature}
                       </button>

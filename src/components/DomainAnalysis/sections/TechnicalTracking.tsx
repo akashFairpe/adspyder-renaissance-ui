@@ -118,9 +118,13 @@ export const TechnicalTracking = ({ domain }: TechnicalTrackingProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-        <Code className="w-6 h-6" />
+        <Code className="w-6 h-6 text-primary" />
         Technical Tracking
       </h2>
+      
+      <p className="text-muted-foreground">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
 
       {/* Tracking Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

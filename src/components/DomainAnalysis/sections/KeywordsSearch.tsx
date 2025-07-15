@@ -66,9 +66,13 @@ export const KeywordsSearch = ({ domain }: KeywordsSearchProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-        <Search className="w-6 h-6" />
+        <Search className="w-6 h-6 text-primary" />
         Keywords & Search
       </h2>
+      
+      <p className="text-muted-foreground">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
 
       {/* Summary Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

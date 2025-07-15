@@ -26,9 +26,13 @@ export const Messaging = ({ domain }: MessagingProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-        <MessageSquare className="w-6 h-6" />
+        <MessageSquare className="w-6 h-6 text-primary" />
         Messaging
       </h2>
+      
+      <p className="text-muted-foreground">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top CTAs */}

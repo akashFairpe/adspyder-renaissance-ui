@@ -46,17 +46,19 @@ const DomainPaidAdAnalysis = () => {
     <div className="min-h-screen bg-[#fcfdff]">
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
+        <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Domain Paid Ad Analysis
           </h1>
           <p className="text-lg text-gray-600 mb-6">
             Comprehensive ad intelligence insights for any domain
           </p>
-          <DomainSearchBar 
-            selectedDomain={selectedDomain}
-            onDomainChange={setSelectedDomain}
-          />
+          <div className="flex justify-center">
+            <DomainSearchBar 
+              selectedDomain={selectedDomain}
+              onDomainChange={setSelectedDomain}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 relative">
@@ -75,14 +77,14 @@ const DomainPaidAdAnalysis = () => {
             </details>
           </div>
           
-          <div className="hidden lg:block">
+          <div className="hidden lg:block lg:fixed lg:left-4 lg:top-32 lg:bottom-4 lg:w-80 lg:z-10">
             <DomainSidebar 
               activeSection={activeSection}
               onSectionChange={setActiveSection}
             />
           </div>
           
-          <div className="flex-1 min-w-0 w-full">
+          <div className="flex-1 min-w-0 w-full lg:ml-96">
             <DomainContent selectedDomain={selectedDomain} />
           </div>
         </div>

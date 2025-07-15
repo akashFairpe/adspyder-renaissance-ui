@@ -24,10 +24,10 @@ export const DomainSearchBar = ({ selectedDomain, onDomainChange }: DomainSearch
   };
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 max-w-2xl w-full">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex items-center gap-2 text-gray-700">
-          <Globe className="w-5 h-5" />
+          <Globe className="w-5 h-5 text-primary" />
           <span className="font-medium">Analyze Domain:</span>
         </div>
         <div className="flex-1 w-full sm:max-w-md flex flex-col sm:flex-row gap-3">
@@ -36,11 +36,11 @@ export const DomainSearchBar = ({ selectedDomain, onDomainChange }: DomainSearch
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="flex-1 border-gray-300 focus:ring-orange-500 focus:border-orange-500"
+            className="flex-1 border-gray-300 focus:ring-primary focus:border-primary"
           />
           <Button 
             onClick={handleSearch} 
-            className="w-full sm:w-auto px-6 bg-orange-600 hover:bg-orange-700 text-white font-semibold"
+            className="w-full sm:w-auto px-6 bg-primary hover:bg-primary/90 text-white font-semibold"
           >
             <Search className="w-4 h-4 mr-2" />
             Analyze

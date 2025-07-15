@@ -36,9 +36,13 @@ export const TargetingInsights = ({ domain }: TargetingInsightsProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-        <Target className="w-6 h-6" />
+        <Target className="w-6 h-6 text-primary" />
         Targeting Insights
       </h2>
+      
+      <p className="text-muted-foreground">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Gender Distribution */}

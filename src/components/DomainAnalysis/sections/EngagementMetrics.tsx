@@ -26,9 +26,13 @@ export const EngagementMetrics = ({ domain }: EngagementMetricsProps) => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-        <Heart className="w-6 h-6" />
+        <Heart className="w-6 h-6 text-primary" />
         Engagement Metrics
       </h2>
+      
+      <p className="text-muted-foreground">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
 
       {/* Total Engagement */}
       <Card>
