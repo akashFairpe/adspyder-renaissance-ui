@@ -1,10 +1,17 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Target } from 'lucide-react';
 
 export const SemrushHero = () => {
   return (
     <section className="relative bg-gradient-to-b from-background to-accent/30 py-20 lg:py-32">
       <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Target className="h-4 w-4" />
+            <span>Better Alternative to SEMrush</span>
+          </div>
+        </div>
+        
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
@@ -19,7 +26,7 @@ export const SemrushHero = () => {
             <div className="space-y-4">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto text-lg px-8 py-4"
+                className="bg-orange-600 hover:bg-orange-700 text-white w-full sm:w-auto text-lg px-8 py-4"
                 onClick={() => window.open('https://app.adspyder.com/register', '_blank')}
               >
                 Start Free Trial
@@ -29,6 +36,31 @@ export const SemrushHero = () => {
               <p className="text-sm text-muted-foreground">
                 No credit card required
               </p>
+              
+              {/* Platform Support */}
+              <p className="text-gray-600 mt-8 mb-6">
+                Supports 15+ digital ads Platforms, 100+ countries
+              </p>
+
+              {/* Platform Logos */}
+              <div className="flex flex-wrap justify-center lg:justify-start items-center gap-6">
+                {[
+                  { name: 'Google' },
+                  { name: 'Meta' },
+                  { name: 'Bing' },
+                  { name: 'Amazon' },
+                  { name: 'LinkedIn' },
+                  { name: 'Reddit' },
+                  { name: '+ more' }
+                ].map((platform) => (
+                  <div 
+                    key={platform.name} 
+                    className="bg-gray-100 h-10 px-4 rounded-lg flex items-center justify-center text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors shadow-sm"
+                  >
+                    {platform.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           

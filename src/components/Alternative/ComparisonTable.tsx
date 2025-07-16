@@ -103,7 +103,7 @@ export const ComparisonTable = () => {
             <p className="text-lg text-muted-foreground mb-6">Ready to make the switch?</p>
             <Button 
               size="lg" 
-              className="text-lg px-8 py-4"
+              className="bg-orange-600 hover:bg-orange-700 text-white text-lg px-8 py-4"
               onClick={() => window.open('https://app.adspyder.com/register', '_blank')}
             >
               Start your free trial now

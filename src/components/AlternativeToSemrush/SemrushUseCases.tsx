@@ -40,8 +40,8 @@ export const SemrushUseCases = () => {
           {useCases.map((useCase, index) => (
             <div key={index} className="text-center group">
               <div className="flex justify-center mb-4">
-                <div className="p-4 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
-                  <useCase.icon className="h-10 w-10 text-primary" />
+                <div className="p-4 bg-orange-100 rounded-full group-hover:bg-orange-200 transition-colors">
+                  <useCase.icon className="h-10 w-10 text-orange-600" />
                 </div>
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2">

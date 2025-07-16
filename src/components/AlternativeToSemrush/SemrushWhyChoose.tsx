@@ -37,8 +37,8 @@ export const SemrushWhyChoose = () => {
           {features.map((feature, index) => (
             <div key={index} className="bg-card border rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
               <div className="flex justify-center mb-4">
-                <div className="p-3 bg-primary/10 rounded-full">
-                  <feature.icon className="h-8 w-8 text-primary" />
+                <div className="p-3 bg-orange-100 rounded-full">
+                  <feature.icon className="h-8 w-8 text-orange-600" />
                 </div>
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-3">

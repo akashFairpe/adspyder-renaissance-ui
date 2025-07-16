@@ -11,8 +11,7 @@ export const SemrushFinalCTA = () => {
         
         <Button 
           size="lg" 
-          variant="secondary"
-          className="text-lg px-8 py-4 mb-4"
+          className="bg-white hover:bg-gray-100 text-primary text-lg px-8 py-4 mb-4"
           onClick={() => window.open('https://app.adspyder.com/register', '_blank')}
         >
           Start Free Trial Now

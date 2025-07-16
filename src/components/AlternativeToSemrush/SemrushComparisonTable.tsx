@@ -101,12 +101,12 @@ export const SemrushComparisonTable = () => {
 
           <div className="text-center mt-12">
             <div className="flex items-center justify-center gap-2 mb-6">
-              <Target className="h-6 w-6 text-primary" />
+              <Target className="h-6 w-6 text-orange-600" />
               <p className="text-lg text-muted-foreground">Want better insights with less effort?</p>
             </div>
             <Button 
               size="lg" 
-              className="text-lg px-8 py-4"
+              className="bg-orange-600 hover:bg-orange-700 text-white text-lg px-8 py-4"
               onClick={() => window.open('https://app.adspyder.com/register', '_blank')}
             >
               Start your free trial now →
