@@ -3,7 +3,7 @@ import { ArrowRight, Target } from 'lucide-react';
 
 export const AlternativeHero = () => {
   return (
-    <section className="relative bg-gradient-to-b from-background to-accent/30 py-20 lg:py-32">
+    <section className="relative bg-gradient-to-b from-background to-accent/30 py-12 lg:py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
