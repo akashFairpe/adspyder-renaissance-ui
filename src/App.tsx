@@ -20,6 +20,7 @@ const VsPowerAdSpy = lazy(() => import("./pages/VsPowerAdSpy"));
 const VsBigSpy = lazy(() => import("./pages/VsBigSpy"));
 const VsAdSpy = lazy(() => import("./pages/VsAdSpy"));
 const VsAdplexity = lazy(() => import("./pages/VsAdplexity"));
+const AlternativeToSimilarWeb = lazy(() => import("./pages/AlternativeToSimilarWeb"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BrowserExtension = lazy(() => import("./pages/BrowserExtension"));
 const DomainPaidAdAnalysis = lazy(() => import("./pages/DomainPaidAdAnalysis"));
@@ -48,6 +49,7 @@ const App = () => (
             <Route path="/vs-bigspy" element={<VsBigSpy />} />
             <Route path="/vs-adspy" element={<VsAdSpy />} />
             <Route path="/vs-adplexity" element={<VsAdplexity />} />
+            <Route path="/alternate-to-similarweb" element={<AlternativeToSimilarWeb />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browser-extension" element={<BrowserExtension />} />
             <Route path="/domain-paid-ad-analysis" element={<DomainPaidAdAnalysis />} />
