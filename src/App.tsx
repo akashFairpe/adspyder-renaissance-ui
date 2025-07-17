@@ -22,6 +22,7 @@ const VsAdSpy = lazy(() => import("./pages/VsAdSpy"));
 const VsAdplexity = lazy(() => import("./pages/VsAdplexity"));
 const AlternativeToSimilarWeb = lazy(() => import("./pages/AlternativeToSimilarWeb"));
 const AlternativeToSemrush = lazy(() => import("./pages/AlternativeToSemrush"));
+const Community = lazy(() => import("./pages/Community"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 const BrowserExtension = lazy(() => import("./pages/BrowserExtension"));
 const DomainPaidAdAnalysis = lazy(() => import("./pages/DomainPaidAdAnalysis"));
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/vs-adplexity" element={<VsAdplexity />} />
             <Route path="/alternate-to-similarweb" element={<AlternativeToSimilarWeb />} />
             <Route path="/alternate-to-semrush" element={<AlternativeToSemrush />} />
+            <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/browser-extension" element={<BrowserExtension />} />
             <Route path="/domain-paid-ad-analysis" element={<DomainPaidAdAnalysis />} />
