@@ -14,20 +14,20 @@ export const AIAgentRealEstateHero = () => {
               Grow your listings, capture leads, and run hyper-targeted ads—all powered by AdSpyder AI. Turn properties into profits with intelligent automation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
                 Start Free Trial
               </Button>
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-50">
                 Watch Demo
               </Button>
             </div>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <Home className="h-4 w-4 text-primary" />
+                <Home className="h-4 w-4 text-orange-600" />
                 <span>Real estate focused</span>
               </div>
               <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-primary" />
+                <Users className="h-4 w-4 text-orange-600" />
                 <span>Lead generation</span>
               </div>
             </div>
@@ -41,12 +41,12 @@ export const AIAgentRealEstateHero = () => {
                   <span className="text-sm font-medium">Real Estate AI Active</span>
                 </div>
                 <div className="space-y-3">
-                  <div className="bg-primary/10 p-4 rounded-lg">
+                  <div className="bg-orange-50 p-4 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
-                      <TrendingUp className="h-4 w-4 text-primary" />
+                      <TrendingUp className="h-4 w-4 text-orange-600" />
                       <span className="text-sm font-medium">Lead Generation</span>
                     </div>
-                    <div className="text-2xl font-bold text-primary">+185%</div>
+                    <div className="text-2xl font-bold text-orange-600">+185%</div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="bg-secondary/50 p-3 rounded-lg text-center">

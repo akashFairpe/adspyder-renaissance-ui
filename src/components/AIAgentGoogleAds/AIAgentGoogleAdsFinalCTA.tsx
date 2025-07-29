@@ -17,10 +17,10 @@ export const AIAgentGoogleAdsFinalCTA = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
+            <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8">
               Try It Free - No Credit Card
             </Button>
-            <Button size="lg" variant="outline" className="px-8">
+            <Button size="lg" variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8">
               See Demo
             </Button>
           </div>
@@ -56,7 +56,7 @@ export const AIAgentGoogleAdsFinalCTA = () => {
             
             <Card className="border-none bg-card/50">
               <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-primary mb-3">5min</div>
+                <div className="text-2xl font-bold text-orange-600 mb-3">5min</div>
                 <p className="text-sm text-muted-foreground">
                   Setup time
                 </p>

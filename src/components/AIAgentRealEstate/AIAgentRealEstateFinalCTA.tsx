@@ -17,10 +17,10 @@ export const AIAgentRealEstateFinalCTA = () => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
+            <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white px-8">
               Start Free Trial - 14 Days
             </Button>
-            <Button size="lg" variant="outline" className="px-8">
+            <Button size="lg" variant="outline" className="border-orange-600 text-orange-600 hover:bg-orange-50 px-8">
               Watch Demo
             </Button>
           </div>
@@ -56,7 +56,7 @@ export const AIAgentRealEstateFinalCTA = () => {
             
             <Card className="border-none bg-card/50">
               <CardContent className="p-6 text-center">
-                <Home className="h-8 w-8 text-primary mx-auto mb-3" />
+                <Home className="h-8 w-8 text-orange-600 mx-auto mb-3" />
                 <p className="text-sm text-muted-foreground">
                   200+ agencies using AdSpyder
                 </p>
