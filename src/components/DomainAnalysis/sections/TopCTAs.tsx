@@ -70,10 +70,10 @@ export const TopCTAs = ({ domain }: TopCTAsProps) => {
               
               return (
                 <div key={index} className="flex items-center justify-between p-4 bg-secondary/20 rounded-lg hover:bg-secondary/30 transition-colors">
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0 mr-4">
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="text-sm font-medium text-muted-foreground">#{index + 1}</span>
-                      <p className="font-semibold text-foreground">{cta.text}</p>
+                      <span className="text-sm font-medium text-muted-foreground shrink-0">#{index + 1}</span>
+                      <p className="font-semibold text-foreground truncate">{cta.text}</p>
                     </div>
                     <div className="flex items-center gap-4">
                       <div className="flex-1 bg-secondary rounded-full h-3">
@@ -82,11 +82,11 @@ export const TopCTAs = ({ domain }: TopCTAsProps) => {
                           style={{ width: `${(cta.count / maxCount) * 100}%` }}
                         />
                       </div>
-                      <span className="text-sm text-muted-foreground min-w-0">{cta.count} uses</span>
+                      <span className="text-sm text-muted-foreground shrink-0">{cta.count} uses</span>
                     </div>
                   </div>
                   
-                  <div className="ml-4">
+                  <div className="shrink-0">
                     <Badge 
                       variant={isPositiveTrend ? 'default' : 'destructive'} 
                       className="flex items-center gap-1"

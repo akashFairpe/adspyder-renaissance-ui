@@ -74,8 +74,8 @@ const DomainPaidAdAnalysis = () => {
             </details>
           </div>
           
-          <div className="hidden lg:block lg:absolute lg:left-4 lg:top-0 lg:w-80 lg:z-10">
-            <div className="sticky top-8">
+          <div className="hidden lg:block lg:fixed lg:left-4 lg:top-24 lg:w-80 lg:z-10 lg:h-[calc(100vh-120px)]">
+            <div className="h-full overflow-y-auto">
               <DomainSidebar 
                 activeSection={activeSection}
                 onSectionChange={setActiveSection}

@@ -153,20 +153,20 @@ export const KeywordStrategy = ({ domain }: KeywordStrategyProps) => {
           <div className="space-y-4">
             {data.keywords.map((keyword, index) => (
               <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-accent/50 transition-colors">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-medium text-muted-foreground">#{index + 1}</span>
-                    <p className="font-semibold text-foreground">{keyword.term}</p>
-                    <Badge className={getCategoryColor(keyword.category)}>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
+                    <span className="text-sm font-medium text-muted-foreground shrink-0">#{index + 1}</span>
+                    <p className="font-semibold text-foreground truncate">{keyword.term}</p>
+                    <Badge className={`${getCategoryColor(keyword.category)} shrink-0`}>
                       {keyword.category}
                     </Badge>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 flex-wrap">
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">Volume:</span>
                       <span className="text-sm font-medium">{keyword.volume.toLocaleString()}</span>
                     </div>
-                    <Badge className={getCompetitionColor(keyword.competition)}>
+                    <Badge className={`${getCompetitionColor(keyword.competition)} shrink-0`}>
                       {keyword.competition} Competition
                     </Badge>
                   </div>

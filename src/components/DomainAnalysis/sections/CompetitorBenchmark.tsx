@@ -138,18 +138,18 @@ export const CompetitorBenchmark = ({ domain }: CompetitorBenchmarkProps) => {
           <div className="space-y-4">
             {data.competitors.map((competitor, index) => (
               <div key={index} className="flex items-center justify-between p-4 border rounded-lg hover:bg-accent/50 transition-colors">
-                <div className="flex-1">
+                <div className="flex-1 min-w-0 mr-4">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-medium text-muted-foreground">#{index + 1}</span>
-                    <div>
-                      <p className="font-semibold text-foreground">{competitor.brandName}</p>
-                      <p className="text-sm text-muted-foreground">{competitor.domain}</p>
+                    <span className="text-sm font-medium text-muted-foreground shrink-0">#{index + 1}</span>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold text-foreground truncate">{competitor.brandName}</p>
+                      <p className="text-sm text-muted-foreground truncate">{competitor.domain}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 flex-wrap">
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">Similarity:</span>
-                      <Badge className={getSimilarityColor(competitor.similarity)}>
+                      <Badge className={`${getSimilarityColor(competitor.similarity)} shrink-0`}>
                         {getSimilarityLabel(competitor.similarity)} ({competitor.similarity}%)
                       </Badge>
                     </div>
@@ -159,7 +159,7 @@ export const CompetitorBenchmark = ({ domain }: CompetitorBenchmarkProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="ml-4">
+                <div className="shrink-0">
                   <Button variant="outline" size="sm">
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Analyze
