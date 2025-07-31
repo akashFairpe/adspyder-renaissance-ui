@@ -24,73 +24,43 @@ const categories = [
     id: "domain-overview", 
     label: "Domain Overview", 
     icon: Globe,
-    features: ["Basic Info", "Platform Analysis", "Geographic Data"]
+    features: ["Basic Info", "Key Metrics", "Geographic Data", "Industry Analysis"]
   },
   { 
-    id: "ad-creatives", 
-    label: "Ad Creatives", 
-    icon: Image,
-    features: ["Text Ads", "Display Ads", "Video Ads", "Creative Analysis"]
-  },
-  { 
-    id: "messaging", 
-    label: "Messaging", 
-    icon: MessageSquare,
-    features: ["Headlines", "CTAs", "Ad Copy", "Sentiment Analysis"]
-  },
-  { 
-    id: "performance-timeline", 
-    label: "Performance Timeline", 
-    icon: TrendingUp,
-    features: ["Activity Timeline", "Spend Estimation", "Campaign Duration"]
-  },
-  { 
-    id: "landing-experience", 
-    label: "Landing Experience", 
-    icon: MousePointer,
-    features: ["Landing Pages", "Conversion Funnels", "User Journey"]
-  },
-  { 
-    id: "targeting-insights", 
-    label: "Targeting Insights", 
-    icon: Target,
-    features: ["Demographics", "Interests", "Behaviors", "Locations"]
-  },
-  { 
-    id: "keywords-search", 
-    label: "Keywords & Search", 
-    icon: Search,
-    features: ["Keyword Analysis", "Search Terms", "CPC Data", "Position Tracking"]
-  },
-  { 
-    id: "engagement-metrics", 
-    label: "Engagement Metrics", 
-    icon: Heart,
-    features: ["Social Engagement", "Interaction Rates", "Viral Potential"]
-  },
-  { 
-    id: "competitive-analysis", 
-    label: "Competitive Analysis", 
-    icon: Users,
-    features: ["Competitor Insights", "Market Share", "Benchmarking"]
-  },
-  { 
-    id: "trends-reach", 
-    label: "Trends & Reach", 
-    icon: BarChart3,
-    features: ["Reach Analysis", "Frequency Data", "Trend Patterns"]
-  },
-  { 
-    id: "technical-tracking", 
-    label: "Technical Tracking", 
-    icon: Code,
-    features: ["Tracking Pixels", "UTM Parameters", "Analytics Setup"]
-  },
-  { 
-    id: "distribution-devices", 
-    label: "Distribution & Devices", 
+    id: "platform-summary", 
+    label: "Platform & Format Summary", 
     icon: Smartphone,
-    features: ["Device Breakdown", "Publisher Networks", "Geographic Distribution"]
+    features: ["Google Ads", "Facebook", "Instagram", "YouTube", "Ad Formats"]
+  },
+  { 
+    id: "top-ctas", 
+    label: "Top Call-to-Actions", 
+    icon: MousePointer,
+    features: ["CTA Rankings", "Performance Trends", "Message Themes"]
+  },
+  { 
+    id: "campaign-timeline", 
+    label: "Campaign Timeline", 
+    icon: BarChart3,
+    features: ["Campaign Durations", "Activity Timeline", "Active vs Ended"]
+  },
+  { 
+    id: "keyword-strategy", 
+    label: "Keyword Strategy", 
+    icon: Search,
+    features: ["Search Keywords", "PPC Terms", "Competition Analysis", "Volume Data"]
+  },
+  { 
+    id: "competitor-benchmark", 
+    label: "Competitor Benchmark", 
+    icon: Users,
+    features: ["Direct Competitors", "Similarity Analysis", "Market Position"]
+  },
+  { 
+    id: "performance-summary", 
+    label: "Performance Summary", 
+    icon: TrendingUp,
+    features: ["Total Ads", "Unique Creatives", "Estimated Reach", "Key Metrics"]
   },
 ];
 

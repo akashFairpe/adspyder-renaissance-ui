@@ -13,17 +13,12 @@ const DomainPaidAdAnalysis = () => {
     const handleScroll = () => {
       const sections = [
         "domain-overview",
-        "ad-creatives", 
-        "messaging",
-        "performance-timeline",
-        "landing-experience",
-        "targeting-insights",
-        "keywords-search",
-        "engagement-metrics",
-        "competitive-analysis",
-        "trends-reach",
-        "technical-tracking",
-        "distribution-devices"
+        "platform-summary",
+        "top-ctas",
+        "campaign-timeline",
+        "keyword-strategy",
+        "competitor-benchmark",
+        "performance-summary"
       ];
 
       for (const section of sections) {

@@ -1,4 +1,10 @@
 import { DomainOverview } from "./sections/DomainOverview";
+import { PlatformSummary } from "./sections/PlatformSummary";
+import { TopCTAs } from "./sections/TopCTAs";
+import { CampaignTimeline } from "./sections/CampaignTimeline";
+import { KeywordStrategy } from "./sections/KeywordStrategy";
+import { CompetitorBenchmark } from "./sections/CompetitorBenchmark";
+import { PerformanceSummary } from "./sections/PerformanceSummary";
 import { AdCreatives } from "./sections/AdCreatives";
 import { Messaging } from "./sections/Messaging";
 import { PerformanceTimeline } from "./sections/PerformanceTimeline";
@@ -22,47 +28,72 @@ export const DomainContent = ({ selectedDomain }: DomainContentProps) => {
         <DomainOverview domain={selectedDomain} />
       </div>
       
-      <div id="ad-creatives">
+      <div id="platform-summary">
+        <PlatformSummary domain={selectedDomain} />
+      </div>
+      
+      <div id="top-ctas">
+        <TopCTAs domain={selectedDomain} />
+      </div>
+      
+      <div id="campaign-timeline">
+        <CampaignTimeline domain={selectedDomain} />
+      </div>
+      
+      <div id="keyword-strategy">
+        <KeywordStrategy domain={selectedDomain} />
+      </div>
+      
+      <div id="competitor-benchmark">
+        <CompetitorBenchmark domain={selectedDomain} />
+      </div>
+      
+      <div id="performance-summary">
+        <PerformanceSummary domain={selectedDomain} />
+      </div>
+
+      {/* Legacy sections - keeping for potential future use */}
+      <div id="ad-creatives" className="hidden">
         <AdCreatives domain={selectedDomain} />
       </div>
       
-      <div id="messaging">
+      <div id="messaging" className="hidden">
         <Messaging domain={selectedDomain} />
       </div>
       
-      <div id="performance-timeline">
+      <div id="performance-timeline" className="hidden">
         <PerformanceTimeline domain={selectedDomain} />
       </div>
       
-      <div id="landing-experience">
+      <div id="landing-experience" className="hidden">
         <LandingExperience domain={selectedDomain} />
       </div>
       
-      <div id="targeting-insights">
+      <div id="targeting-insights" className="hidden">
         <TargetingInsights domain={selectedDomain} />
       </div>
       
-      <div id="keywords-search">
+      <div id="keywords-search" className="hidden">
         <KeywordsSearch domain={selectedDomain} />
       </div>
       
-      <div id="engagement-metrics">
+      <div id="engagement-metrics" className="hidden">
         <EngagementMetrics domain={selectedDomain} />
       </div>
       
-      <div id="competitive-analysis">
+      <div id="competitive-analysis" className="hidden">
         <CompetitiveAnalysis domain={selectedDomain} />
       </div>
       
-      <div id="trends-reach">
+      <div id="trends-reach" className="hidden">
         <TrendsReach domain={selectedDomain} />
       </div>
       
-      <div id="technical-tracking">
+      <div id="technical-tracking" className="hidden">
         <TechnicalTracking domain={selectedDomain} />
       </div>
       
-      <div id="distribution-devices">
+      <div id="distribution-devices" className="hidden">
         <DistributionDevices domain={selectedDomain} />
       </div>
     </div>
