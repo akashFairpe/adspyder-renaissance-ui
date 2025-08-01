@@ -78,6 +78,10 @@ const mockAdData: AdData[] = [
 ];
 
 export const TopAds = ({ domain }: TopAdsProps) => {
+  const visibleAds = 2;
+  const visibleAdData = mockAdData.slice(0, visibleAds);
+  const hiddenAdData = mockAdData.slice(visibleAds);
+
   const formatNumber = (num: number) => {
     if (num >= 1000000) {
       return (num / 1000000).toFixed(1) + 'M';
@@ -133,7 +137,8 @@ export const TopAds = ({ domain }: TopAdsProps) => {
       </div>
 
       <div className="grid gap-6">
-        {mockAdData.map((ad, index) => (
+        {/* Visible ads */}
+        {visibleAdData.map((ad, index) => (
           <Card key={ad.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
             <CardHeader className="pb-4">
               <div className="flex items-start justify-between">
@@ -147,10 +152,10 @@ export const TopAds = ({ domain }: TopAdsProps) => {
                     </Badge>
                     <Badge variant="outline">{ad.adFormat}</Badge>
                   </div>
-                  <CardTitle className="text-lg font-semibold text-gray-900 mb-2">
+                  <CardTitle className="text-lg font-semibold text-foreground mb-2">
                     {ad.title}
                   </CardTitle>
-                  <CardDescription className="text-gray-600">
+                  <CardDescription className="text-muted-foreground">
                     {ad.description}
                   </CardDescription>
                 </div>
@@ -158,7 +163,7 @@ export const TopAds = ({ domain }: TopAdsProps) => {
                   <img 
                     src={ad.imageUrl} 
                     alt={ad.title}
-                    className="w-20 h-20 object-cover rounded-lg border border-gray-200"
+                    className="w-20 h-20 object-cover rounded-lg border border-border"
                   />
                 </div>
               </div>
@@ -168,40 +173,40 @@ export const TopAds = ({ domain }: TopAdsProps) => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Eye className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-500">Impressions</span>
+                    <Eye className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Impressions</span>
                   </div>
-                  <div className="text-xl font-semibold text-gray-900">
+                  <div className="text-xl font-semibold text-foreground">
                     {formatNumber(ad.impressions)}
                   </div>
                 </div>
                 
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <TrendingUp className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-500">Engagement</span>
+                    <TrendingUp className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Engagement</span>
                   </div>
-                  <div className="text-xl font-semibold text-gray-900">
+                  <div className="text-xl font-semibold text-foreground">
                     {ad.engagementRate}%
                   </div>
                 </div>
                 
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-500">First Seen</span>
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">First Seen</span>
                   </div>
-                  <div className="text-sm font-medium text-gray-900">
+                  <div className="text-sm font-medium text-foreground">
                     {formatDate(ad.firstSeen)}
                   </div>
                 </div>
                 
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm text-gray-500">Last Seen</span>
+                    <Calendar className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm text-muted-foreground">Last Seen</span>
                   </div>
-                  <div className="text-sm font-medium text-gray-900">
+                  <div className="text-sm font-medium text-foreground">
                     {formatDate(ad.lastSeen)}
                   </div>
                 </div>
@@ -210,7 +215,7 @@ export const TopAds = ({ domain }: TopAdsProps) => {
               <Separator className="my-4" />
 
               <div className="flex items-center justify-between">
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-muted-foreground">
                   Ad #{index + 1} • Running for {Math.ceil((new Date(ad.lastSeen).getTime() - new Date(ad.firstSeen).getTime()) / (1000 * 60 * 60 * 24))} days
                 </div>
                 <Button variant="outline" size="sm" className="gap-2">
@@ -221,13 +226,126 @@ export const TopAds = ({ domain }: TopAdsProps) => {
             </CardContent>
           </Card>
         ))}
-      </div>
 
-      <div className="mt-6 text-center">
-        <Button variant="outline" className="gap-2">
-          Load More Ads
-          <TrendingUp className="w-4 h-4" />
-        </Button>
+        {/* Blurred hidden ads with login gate */}
+        {hiddenAdData.length > 0 && (
+          <div className="relative">
+            <div className="blur-sm pointer-events-none">
+              {hiddenAdData.map((ad, index) => (
+                <Card key={ad.id} className="overflow-hidden mb-6 opacity-60">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Badge variant="secondary" className={getPlatformColor(ad.platform)}>
+                            {ad.platform}
+                          </Badge>
+                          <Badge variant="secondary" className={getStatusColor(ad.status)}>
+                            {ad.status}
+                          </Badge>
+                          <Badge variant="outline">{ad.adFormat}</Badge>
+                        </div>
+                        <CardTitle className="text-lg font-semibold text-foreground mb-2">
+                          {ad.title}
+                        </CardTitle>
+                        <CardDescription className="text-muted-foreground">
+                          {ad.description}
+                        </CardDescription>
+                      </div>
+                      <div className="ml-4 flex-shrink-0">
+                        <img 
+                          src={ad.imageUrl} 
+                          alt={ad.title}
+                          className="w-20 h-20 object-cover rounded-lg border border-border"
+                        />
+                      </div>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                      <div className="text-center">
+                        <div className="flex items-center justify-center gap-1 mb-1">
+                          <Eye className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">Impressions</span>
+                        </div>
+                        <div className="text-xl font-semibold text-foreground">
+                          {formatNumber(ad.impressions)}
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="flex items-center justify-center gap-1 mb-1">
+                          <TrendingUp className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">Engagement</span>
+                        </div>
+                        <div className="text-xl font-semibold text-foreground">
+                          {ad.engagementRate}%
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="flex items-center justify-center gap-1 mb-1">
+                          <Calendar className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">First Seen</span>
+                        </div>
+                        <div className="text-sm font-medium text-foreground">
+                          {formatDate(ad.firstSeen)}
+                        </div>
+                      </div>
+                      
+                      <div className="text-center">
+                        <div className="flex items-center justify-center gap-1 mb-1">
+                          <Calendar className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">Last Seen</span>
+                        </div>
+                        <div className="text-sm font-medium text-foreground">
+                          {formatDate(ad.lastSeen)}
+                        </div>
+                      </div>
+                    </div>
+
+                    <Separator className="my-4" />
+
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm text-muted-foreground">
+                        Ad #{visibleAds + index + 1} • Running for {Math.ceil((new Date(ad.lastSeen).getTime() - new Date(ad.firstSeen).getTime()) / (1000 * 60 * 60 * 24))} days
+                      </div>
+                      <Button variant="outline" size="sm" className="gap-2">
+                        <ExternalLink className="w-4 h-4" />
+                        View Details
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Login CTA Overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+              <Card className="p-8 text-center max-w-md mx-4 shadow-lg">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-xl font-bold text-foreground">
+                    Unlock Full Access
+                  </CardTitle>
+                  <CardDescription className="text-muted-foreground">
+                    Sign in to view {hiddenAdData.length} more top-performing ads and get detailed insights
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-2">
+                  <div className="space-y-3">
+                    <Button className="w-full" size="lg">
+                      Sign In to Continue
+                    </Button>
+                    <p className="text-sm text-muted-foreground">
+                      Free account • Access all ad data
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
