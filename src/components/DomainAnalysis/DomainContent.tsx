@@ -16,6 +16,7 @@ import { CompetitiveAnalysis } from "./sections/CompetitiveAnalysis";
 import { TrendsReach } from "./sections/TrendsReach";
 import { TechnicalTracking } from "./sections/TechnicalTracking";
 import { DistributionDevices } from "./sections/DistributionDevices";
+import { TopAds } from "./sections/TopAds";
 
 interface DomainContentProps {
   selectedDomain: string;
@@ -50,6 +51,10 @@ export const DomainContent = ({ selectedDomain }: DomainContentProps) => {
       
       <div id="performance-summary">
         <PerformanceSummary domain={selectedDomain} />
+      </div>
+      
+      <div id="top-ads">
+        <TopAds domain={selectedDomain} />
       </div>
 
       {/* Legacy sections - keeping for potential future use */}

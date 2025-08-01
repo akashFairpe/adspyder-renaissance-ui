@@ -18,7 +18,8 @@ const DomainPaidAdAnalysis = () => {
         "campaign-timeline",
         "keyword-strategy",
         "competitor-benchmark",
-        "performance-summary"
+        "performance-summary",
+        "top-ads"
       ];
 
       for (const section of sections) {

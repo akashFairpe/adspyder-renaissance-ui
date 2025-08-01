@@ -62,6 +62,12 @@ const categories = [
     icon: TrendingUp,
     features: ["Total Ads", "Unique Creatives", "Estimated Reach", "Key Metrics"]
   },
+  { 
+    id: "top-ads", 
+    label: "Top Performing Ads", 
+    icon: Image,
+    features: ["Best Performing Ads", "Ad Creatives", "Engagement Metrics", "Platform Distribution"]
+  },
 ];
 
 interface DomainSidebarProps {
