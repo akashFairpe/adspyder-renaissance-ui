@@ -79,8 +79,10 @@ const mockAdData: AdData[] = [
 
 export const TopAds = ({ domain }: TopAdsProps) => {
   const visibleAds = 2;
+  const partiallyVisibleAds = 1;
   const visibleAdData = mockAdData.slice(0, visibleAds);
-  const hiddenAdData = mockAdData.slice(visibleAds);
+  const partialAdData = mockAdData.slice(visibleAds, visibleAds + partiallyVisibleAds);
+  const hiddenAdData = mockAdData.slice(visibleAds + partiallyVisibleAds);
 
   const formatNumber = (num: number) => {
     if (num >= 1000000) {
@@ -227,8 +229,45 @@ export const TopAds = ({ domain }: TopAdsProps) => {
           </Card>
         ))}
 
+        {/* Partially visible ad */}
+        {partialAdData.map((ad, index) => (
+          <div key={ad.id} className="relative overflow-hidden h-32">
+            <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
+              <CardHeader className="pb-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="secondary" className={getPlatformColor(ad.platform)}>
+                        {ad.platform}
+                      </Badge>
+                      <Badge variant="secondary" className={getStatusColor(ad.status)}>
+                        {ad.status}
+                      </Badge>
+                      <Badge variant="outline">{ad.adFormat}</Badge>
+                    </div>
+                    <CardTitle className="text-lg font-semibold text-foreground mb-2">
+                      {ad.title}
+                    </CardTitle>
+                    <CardDescription className="text-muted-foreground">
+                      {ad.description}
+                    </CardDescription>
+                  </div>
+                  <div className="ml-4 flex-shrink-0">
+                    <img 
+                      src={ad.imageUrl} 
+                      alt={ad.title}
+                      className="w-20 h-20 object-cover rounded-lg border border-border"
+                    />
+                  </div>
+                </div>
+              </CardHeader>
+            </Card>
+            <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+          </div>
+        ))}
+
         {/* Blurred hidden ads with login gate */}
-        {hiddenAdData.length > 0 && (
+        {(hiddenAdData.length > 0 || partialAdData.length > 0) && (
           <div className="relative">
             <div className="blur-sm pointer-events-none">
               {hiddenAdData.map((ad, index) => (
