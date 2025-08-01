@@ -232,7 +232,7 @@ export const TopAds = ({ domain }: TopAdsProps) => {
           <div className="relative">
             <div className="blur-sm pointer-events-none">
               {hiddenAdData.map((ad, index) => (
-                <Card key={ad.id} className="overflow-hidden mb-6 opacity-60">
+                <Card key={ad.id} className="overflow-hidden mb-6 opacity-60 animate-pulse">
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
