@@ -444,7 +444,10 @@ const GoogleAdExtensions = () => {
 
   const getAvailableExtensions = () => {
     const config = adExtensionConfig[adInfo.adGoal as keyof typeof adExtensionConfig];
-    if (!config) return {};
+    if (!config || !config.extensions) {
+      console.log('No config found for adGoal:', adInfo.adGoal);
+      return {};
+    }
 
     const availableExtensions: Record<string, any> = {};
     
