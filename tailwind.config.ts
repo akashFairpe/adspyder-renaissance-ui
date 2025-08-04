@@ -61,7 +61,10 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'accent-blue': 'hsl(var(--accent-blue))',
+				'accent-green': 'hsl(var(--accent-green))',
+				'accent-purple': 'hsl(var(--accent-purple))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -89,6 +92,10 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-secondary': 'var(--gradient-secondary)'
 			}
 		}
 	},
