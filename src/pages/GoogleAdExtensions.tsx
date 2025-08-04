@@ -3,38 +3,140 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 const GoogleAdExtensions = () => {
-  const [adInfo, setAdInfo] = useState({ adGoal: '', adId: '' });
+  const [adInfo, setAdInfo] = useState({ adGoal: 'Google Text Ad', adId: '' });
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [extensions, setExtensions] = useState({
-    sitelinks: [{ title: '', url: '' }],
-    callout: [''],
-    price: '',
-    promotion: '',
-    phone: ''
-  });
+  const [extensions, setExtensions] = useState<Record<string, any>>({});
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Ad goal to extensions mapping
-  const extensionMapping = {
-    'leads': ['phone', 'callout', 'sitelinks', 'location'],
-    'sales': ['price', 'promotion', 'sitelinks', 'callout'],
-    'traffic': ['sitelinks', 'callout'],
-    'awareness': ['callout', 'sitelinks'],
-    'app': ['sitelinks', 'callout']
+  // Ad extension configurations
+  const adExtensionConfig = {
+    "Google Text Ad": {
+      "supported_extensions": {
+        "sitelink": {
+          "label": "Sitelink",
+          "description": "Displays additional links to content on your site.",
+          "fields": [
+            { "name": "title", "type": "text", "maxLength": 25, "required": true },
+            { "name": "url", "type": "url", "required": true }
+          ],
+          "multiple": true
+        },
+        "enhanced_sitelink": {
+          "label": "Enhanced Sitelink",
+          "description": "Adds descriptions under sitelinks for more context.",
+          "fields": [
+            { "name": "title", "type": "text", "maxLength": 25, "required": true },
+            { "name": "description", "type": "text", "maxLength": 90, "required": true },
+            { "name": "url", "type": "url", "required": true }
+          ],
+          "multiple": true
+        },
+        "rating": {
+          "label": "Seller Rating",
+          "description": "Displays user-submitted ratings for your business.",
+          "fields": [
+            { "name": "rating", "type": "number", "min": 0, "max": 5, "step": 0.1, "required": true },
+            { "name": "total_reviews", "type": "number", "min": 1, "required": true },
+            { "name": "source_url", "type": "url", "required": false }
+          ],
+          "multiple": false
+        },
+        "app": {
+          "label": "App Download (Mobile Only)",
+          "description": "Promotes app installs from Google Play or Apple Store.",
+          "fields": [
+            { "name": "app_name", "type": "text", "required": true },
+            { "name": "store_url", "type": "url", "required": true },
+            { "name": "platform", "type": "select", "options": ["Android", "iOS"], "required": true }
+          ],
+          "mobile_only": true,
+          "multiple": false
+        },
+        "price": {
+          "label": "Price Extension",
+          "description": "Shows prices for specific services or products.",
+          "fields": [
+            { "name": "label", "type": "text", "required": true },
+            { "name": "price", "type": "text", "pattern": "^\\$\\d+(\\.\\d{2})?$", "required": true },
+            { "name": "url", "type": "url", "required": true }
+          ],
+          "multiple": true
+        },
+        "promotion": {
+          "label": "Promotion Extension",
+          "description": "Displays discounts, promo codes or offers.",
+          "fields": [
+            { "name": "promotion_text", "type": "text", "maxLength": 60, "required": true },
+            { "name": "discount", "type": "text", "example": "20% Off", "required": true },
+            { "name": "final_url", "type": "url", "required": true }
+          ],
+          "multiple": true
+        },
+        "click_to_call": {
+          "label": "Click-to-Call (Mobile Only)",
+          "description": "Lets users tap to call you directly.",
+          "fields": [
+            { "name": "phone_number", "type": "tel", "pattern": "^\\+?[0-9\\-\\s]{10,20}$", "required": true },
+            { "name": "call_hours", "type": "text", "example": "9AM–6PM EST", "required": false }
+          ],
+          "mobile_only": true,
+          "multiple": false
+        },
+        "location": {
+          "label": "Location Extension",
+          "description": "Displays your business address and distance.",
+          "fields": [
+            { "name": "business_name", "type": "text", "required": true },
+            { "name": "address", "type": "text", "required": true },
+            { "name": "city", "type": "text", "required": true },
+            { "name": "zip_code", "type": "text", "pattern": "^[0-9]{4,10}$", "required": true }
+          ],
+          "multiple": false
+        },
+        "phone_number": {
+          "label": "Phone Number (Desktop Only)",
+          "description": "Displays a static phone number (non-clickable).",
+          "fields": [
+            { "name": "phone_number", "type": "tel", "pattern": "^\\+?[0-9\\-\\s]{10,20}$", "required": true }
+          ],
+          "desktop_only": true,
+          "multiple": false
+        },
+        "call_to_action": {
+          "label": "Call-to-Action",
+          "description": "Adds a button with a strong call-to-action.",
+          "fields": [
+            { "name": "cta_text", "type": "text", "maxLength": 20, "required": true }
+          ],
+          "multiple": false
+        },
+        "ad_disclosure": {
+          "label": "Ad Disclosure",
+          "description": "Displays required disclosure statements (e.g. political ads).",
+          "fields": [
+            { "name": "disclosure_text", "type": "text", "required": true },
+            { "name": "disclosure_url", "type": "url", "required": false }
+          ],
+          "multiple": false
+        }
+      }
+    }
   };
 
   useEffect(() => {
+    // Detect if mobile
+    setIsMobile(window.innerWidth <= 768);
+    
+    // Initialize extensions based on ad type
+    initializeExtensions();
+    
     // Simulate API call to fetch ad info
     const fetchAdInfo = async () => {
       try {
-        // In real implementation, this would be: 
-        // const response = await fetch(`/api/ad-info/${adId}`);
-        // const data = await response.json();
-        
-        // Mock data for demonstration
         setTimeout(() => {
-          setAdInfo({ adGoal: 'leads', adId: 'ad_123456' });
+          setAdInfo({ adGoal: 'Google Text Ad', adId: 'ad_123456' });
           setLoading(false);
         }, 1000);
       } catch (error) {
@@ -46,86 +148,137 @@ const GoogleAdExtensions = () => {
     fetchAdInfo();
   }, []);
 
-  const validateField = (field, value) => {
-    const newErrors = { ...errors };
+  const initializeExtensions = () => {
+    const config = adExtensionConfig[adInfo.adGoal as keyof typeof adExtensionConfig];
+    if (!config) return;
 
-    switch (field) {
-      case 'phone':
-        const phoneRegex = /^\+1-\d{3}-\d{3}-\d{4}$/;
-        if (value && !phoneRegex.test(value)) {
-          newErrors.phone = 'Phone must be in +1-xxx-xxx-xxxx format';
-        } else {
-          delete newErrors.phone;
-        }
-        break;
-      case 'url':
-        const urlRegex = /^https?:\/\/.+\..+/;
-        if (value && !urlRegex.test(value)) {
-          newErrors.url = 'URL must start with http:// or https://';
-        } else {
-          delete newErrors.url;
-        }
-        break;
-      case 'price':
-        const priceRegex = /^\$\d+(\.\d{2})?$/;
-        if (value && !priceRegex.test(value)) {
-          newErrors.price = 'Price must be in $XX.XX format';
-        } else {
-          delete newErrors.price;
-        }
-        break;
-      default:
-        if (value && (value.includes('<script') || /[^\w\s$.,!?-]/.test(value))) {
-          newErrors[field] = 'Invalid characters detected';
-        } else {
-          delete newErrors[field];
-        }
+    const initialExtensions: Record<string, any> = {};
+    Object.entries(config.supported_extensions).forEach(([key, ext]) => {
+      if (ext.multiple) {
+        initialExtensions[key] = [{}];
+      } else {
+        initialExtensions[key] = {};
+      }
+    });
+    setExtensions(initialExtensions);
+  };
+
+  const validateField = (fieldConfig: any, value: string) => {
+    const newErrors = { ...errors };
+    const fieldKey = `${fieldConfig.name}_${Date.now()}`;
+
+    if (fieldConfig.required && !value) {
+      newErrors[fieldKey] = `${fieldConfig.name} is required`;
+      setErrors(newErrors);
+      return false;
+    }
+
+    if (value) {
+      switch (fieldConfig.type) {
+        case 'url':
+          const urlRegex = /^https?:\/\/.+\..+/;
+          if (!urlRegex.test(value)) {
+            newErrors[fieldKey] = 'URL must start with http:// or https://';
+          } else {
+            delete newErrors[fieldKey];
+          }
+          break;
+        case 'tel':
+          if (fieldConfig.pattern) {
+            const phoneRegex = new RegExp(fieldConfig.pattern);
+            if (!phoneRegex.test(value)) {
+              newErrors[fieldKey] = 'Invalid phone number format';
+            } else {
+              delete newErrors[fieldKey];
+            }
+          }
+          break;
+        case 'text':
+          if (fieldConfig.pattern) {
+            const regex = new RegExp(fieldConfig.pattern);
+            if (!regex.test(value)) {
+              newErrors[fieldKey] = `Invalid format for ${fieldConfig.name}`;
+            } else {
+              delete newErrors[fieldKey];
+            }
+          }
+          if (fieldConfig.maxLength && value.length > fieldConfig.maxLength) {
+            newErrors[fieldKey] = `${fieldConfig.name} cannot exceed ${fieldConfig.maxLength} characters`;
+          } else if (!fieldConfig.pattern) {
+            delete newErrors[fieldKey];
+          }
+          break;
+        case 'number':
+          const num = parseFloat(value);
+          if (isNaN(num)) {
+            newErrors[fieldKey] = 'Must be a valid number';
+          } else if (fieldConfig.min !== undefined && num < fieldConfig.min) {
+            newErrors[fieldKey] = `Must be at least ${fieldConfig.min}`;
+          } else if (fieldConfig.max !== undefined && num > fieldConfig.max) {
+            newErrors[fieldKey] = `Must be at most ${fieldConfig.max}`;
+          } else {
+            delete newErrors[fieldKey];
+          }
+          break;
+        default:
+          if (value.includes('<script') || /[^\w\s$.,!?-]/.test(value)) {
+            newErrors[fieldKey] = 'Invalid characters detected';
+          } else {
+            delete newErrors[fieldKey];
+          }
+      }
+    } else {
+      delete newErrors[fieldKey];
     }
 
     setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (field, value, index = null) => {
-    if (field === 'sitelinks') {
-      const newSitelinks = [...extensions.sitelinks];
-      newSitelinks[index] = { ...newSitelinks[index], ...value };
-      setExtensions({ ...extensions, sitelinks: newSitelinks });
-    } else if (field === 'callout' && index !== null) {
-      const newCallouts = [...extensions.callout];
-      newCallouts[index] = value;
-      setExtensions({ ...extensions, callout: newCallouts });
+  const handleAdTypeChange = (newAdType: string) => {
+    setAdInfo({ ...adInfo, adGoal: newAdType });
+    initializeExtensions();
+  };
+
+  const handleExtensionFieldChange = (extensionKey: string, fieldName: string, value: string, index?: number) => {
+    const config = adExtensionConfig[adInfo.adGoal as keyof typeof adExtensionConfig];
+    if (!config) return;
+
+    const extensionConfig = config.supported_extensions[extensionKey as keyof typeof config.supported_extensions];
+    
+    if (extensionConfig.multiple && index !== undefined) {
+      const newExtensions = { ...extensions };
+      if (!newExtensions[extensionKey]) newExtensions[extensionKey] = [{}];
+      newExtensions[extensionKey][index] = {
+        ...newExtensions[extensionKey][index],
+        [fieldName]: value
+      };
+      setExtensions(newExtensions);
     } else {
-      setExtensions({ ...extensions, [field]: value });
+      setExtensions({
+        ...extensions,
+        [extensionKey]: {
+          ...extensions[extensionKey],
+          [fieldName]: value
+        }
+      });
     }
-
-    validateField(field, typeof value === 'string' ? value : value.url || value.title);
   };
 
-  const addSitelink = () => {
+  const addMultipleExtension = (extensionKey: string) => {
     setExtensions({
       ...extensions,
-      sitelinks: [...extensions.sitelinks, { title: '', url: '' }]
+      [extensionKey]: [...(extensions[extensionKey] || []), {}]
     });
   };
 
-  const removeSitelink = (index) => {
-    const newSitelinks = extensions.sitelinks.filter((_, i) => i !== index);
-    setExtensions({ ...extensions, sitelinks: newSitelinks });
+  const removeMultipleExtension = (extensionKey: string, index: number) => {
+    const newExtensions = { ...extensions };
+    newExtensions[extensionKey] = newExtensions[extensionKey].filter((_: any, i: number) => i !== index);
+    setExtensions(newExtensions);
   };
 
-  const addCallout = () => {
-    setExtensions({
-      ...extensions,
-      callout: [...extensions.callout, '']
-    });
-  };
-
-  const removeCallout = (index) => {
-    const newCallouts = extensions.callout.filter((_, i) => i !== index);
-    setExtensions({ ...extensions, callout: newCallouts });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
@@ -138,34 +291,29 @@ const GoogleAdExtensions = () => {
 
     try {
       // Filter out empty extensions
-      const cleanExtensions = {};
+      const cleanExtensions: Record<string, any> = {};
       
-          if (extensions.sitelinks.some(sl => sl.title && sl.url)) {
-            (cleanExtensions as any).sitelinks = extensions.sitelinks.filter(sl => sl.title && sl.url);
+      Object.entries(extensions).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          const filtered = value.filter((item: any) => 
+            Object.values(item).some(val => val && String(val).trim())
+          );
+          if (filtered.length > 0) {
+            cleanExtensions[key] = filtered;
           }
-          
-          if (extensions.callout.some(c => c.trim())) {
-            (cleanExtensions as any).callout = extensions.callout.filter(c => c.trim());
+        } else if (value && typeof value === 'object') {
+          const hasValues = Object.values(value).some(val => val && String(val).trim());
+          if (hasValues) {
+            cleanExtensions[key] = value;
           }
-      
-          ['price', 'promotion', 'phone'].forEach(field => {
-            if ((extensions as any)[field]) {
-              (cleanExtensions as any)[field] = (extensions as any)[field];
-            }
-          });
+        }
+      });
 
       const payload = {
         adId: adInfo.adId,
         adGoal: adInfo.adGoal,
         extensions: cleanExtensions
       };
-
-      // In real implementation:
-      // const response = await fetch('/api/ad-extensions', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(payload)
-      // });
 
       console.log('Submitting extensions:', payload);
       
@@ -181,8 +329,69 @@ const GoogleAdExtensions = () => {
     }
   };
 
-  const getRelevantExtensions = () => {
-    return extensionMapping[adInfo.adGoal.toLowerCase()] || [];
+  const getAvailableExtensions = () => {
+    const config = adExtensionConfig[adInfo.adGoal as keyof typeof adExtensionConfig];
+    if (!config) return {};
+
+    const availableExtensions: Record<string, any> = {};
+    
+    Object.entries(config.supported_extensions).forEach(([key, ext]) => {
+      // Filter based on mobile/desktop
+      if ((ext as any).mobile_only && !isMobile) return;
+      if ((ext as any).desktop_only && isMobile) return;
+      
+      availableExtensions[key] = ext;
+    });
+
+    return availableExtensions;
+  };
+
+  const renderField = (fieldConfig: any, extensionKey: string, value: string, index?: number) => {
+    const fieldKey = `${extensionKey}_${fieldConfig.name}_${index || 0}`;
+    
+    switch (fieldConfig.type) {
+      case 'select':
+        return (
+          <select
+            value={value}
+            onChange={(e) => handleExtensionFieldChange(extensionKey, fieldConfig.name, e.target.value, index)}
+            style={styles.input}
+            required={fieldConfig.required}
+          >
+            <option value="">Select {fieldConfig.name}</option>
+            {fieldConfig.options?.map((option: string) => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        );
+      case 'number':
+        return (
+          <input
+            type="number"
+            min={fieldConfig.min}
+            max={fieldConfig.max}
+            step={fieldConfig.step}
+            value={value}
+            onChange={(e) => handleExtensionFieldChange(extensionKey, fieldConfig.name, e.target.value, index)}
+            style={styles.input}
+            required={fieldConfig.required}
+            placeholder={`Enter ${fieldConfig.name}`}
+          />
+        );
+      default:
+        return (
+          <input
+            type={fieldConfig.type}
+            value={value}
+            onChange={(e) => handleExtensionFieldChange(extensionKey, fieldConfig.name, e.target.value, index)}
+            style={styles.input}
+            required={fieldConfig.required}
+            maxLength={fieldConfig.maxLength}
+            placeholder={fieldConfig.example || `Enter ${fieldConfig.name}`}
+            pattern={fieldConfig.pattern}
+          />
+        );
+    }
   };
 
   if (loading) {
@@ -198,7 +407,7 @@ const GoogleAdExtensions = () => {
     );
   }
 
-  const relevantExtensions = getRelevantExtensions();
+  const relevantExtensions = getAvailableExtensions();
 
   return (
     <div style={styles.container}>
@@ -206,144 +415,103 @@ const GoogleAdExtensions = () => {
       <main style={styles.main}>
         <div style={styles.content}>
           <div style={styles.header}>
-            <h1 style={styles.title}>Add Google Ad Extensions</h1>
+            <h1 style={styles.title}>Google Ad Extensions Manager</h1>
             <p style={styles.subtitle}>
-              Enhance your ad with additional information based on your goal: <strong>{adInfo.adGoal}</strong>
+              Configure and customize ad extensions for enhanced ad performance
             </p>
           </div>
 
+          {/* Ad Type Selector */}
+          <div style={styles.extensionSection}>
+            <h3 style={styles.extensionTitle}>🎯 Select Ad Type</h3>
+            <select
+              value={adInfo.adGoal}
+              onChange={(e) => handleAdTypeChange(e.target.value)}
+              style={styles.select}
+            >
+              {Object.keys(adExtensionConfig).map((adType) => (
+                <option key={adType} value={adType}>{adType}</option>
+              ))}
+            </select>
+          </div>
+
           <form onSubmit={handleSubmit} style={styles.form}>
-            {/* Phone Extension */}
-            {relevantExtensions.includes('phone') && (
-              <div style={styles.extensionSection}>
-                <h3 style={styles.extensionTitle}>📞 Phone Extension</h3>
-                <p style={styles.helper}>Add a phone number for direct contact</p>
-                <input
-                  type="text"
-                  placeholder="+1-555-123-4567"
-                  value={extensions.phone}
-                  onChange={(e) => handleInputChange('phone', e.target.value)}
-                  style={{...styles.input, ...(errors.phone ? styles.inputError : {})}}
-                />
-                {errors.phone && <span style={styles.error}>{errors.phone}</span>}
-              </div>
-            )}
+            {Object.entries(relevantExtensions).map(([extensionKey, extensionConfig]) => (
+              <div key={extensionKey} style={styles.extensionSection}>
+                <h3 style={styles.extensionTitle}>
+                  {(extensionConfig as any).label}
+                  {(extensionConfig as any).mobile_only && ' (Mobile Only)'}
+                  {(extensionConfig as any).desktop_only && ' (Desktop Only)'}
+                </h3>
+                <p style={styles.helper}>{extensionConfig.description}</p>
 
-            {/* Price Extension */}
-            {relevantExtensions.includes('price') && (
-              <div style={styles.extensionSection}>
-                <h3 style={styles.extensionTitle}>💰 Price Extension</h3>
-                <p style={styles.helper}>Show your starting price</p>
-                <input
-                  type="text"
-                  placeholder="$99.99"
-                  value={extensions.price}
-                  onChange={(e) => handleInputChange('price', e.target.value)}
-                  style={{...styles.input, ...(errors.price ? styles.inputError : {})}}
-                />
-                {errors.price && <span style={styles.error}>{errors.price}</span>}
-              </div>
-            )}
-
-            {/* Promotion Extension */}
-            {relevantExtensions.includes('promotion') && (
-              <div style={styles.extensionSection}>
-                <h3 style={styles.extensionTitle}>🎯 Promotion Extension</h3>
-                <p style={styles.helper}>Highlight special offers</p>
-                <input
-                  type="text"
-                  placeholder="20% Off All Items"
-                  value={extensions.promotion}
-                  onChange={(e) => handleInputChange('promotion', e.target.value)}
-                  style={styles.input}
-                />
-              </div>
-            )}
-
-            {/* Sitelinks Extension */}
-            {relevantExtensions.includes('sitelinks') && (
-              <div style={styles.extensionSection}>
-                <h3 style={styles.extensionTitle}>🔗 Sitelinks Extension</h3>
-                <p style={styles.helper}>Add links to specific pages on your website</p>
-                {extensions.sitelinks.map((sitelink, index) => (
-                  <div key={index} style={styles.sitelinkGroup}>
-                    <input
-                      type="text"
-                      placeholder="Link Title"
-                      value={sitelink.title}
-                      onChange={(e) => handleInputChange('sitelinks', { title: e.target.value }, index)}
-                      style={styles.input}
-                    />
-                    <input
-                      type="text"
-                      placeholder="https://example.com/page"
-                      value={sitelink.url}
-                      onChange={(e) => handleInputChange('sitelinks', { url: e.target.value }, index)}
-                      style={{...styles.input, ...(errors.url ? styles.inputError : {})}}
-                    />
-                    {extensions.sitelinks.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeSitelink(index)}
-                        style={styles.removeButton}
-                      >
-                        Remove
-                      </button>
-                    )}
+                {extensionConfig.multiple ? (
+                  // Multiple instances
+                  <div>
+                    {(extensions[extensionKey] || [{}]).map((instance: any, index: number) => (
+                      <div key={index} style={styles.multipleInstanceGroup}>
+                        <div style={styles.fieldGroup}>
+                          {extensionConfig.fields.map((fieldConfig: any) => (
+                            <div key={fieldConfig.name} style={styles.fieldContainer}>
+                              <label style={styles.fieldLabel}>
+                                {fieldConfig.name.replace('_', ' ').toUpperCase()}
+                                {fieldConfig.required && <span style={styles.required}>*</span>}
+                              </label>
+                              {renderField(
+                                fieldConfig,
+                                extensionKey,
+                                instance[fieldConfig.name] || '',
+                                index
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                        {(extensions[extensionKey]?.length || 0) > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeMultipleExtension(extensionKey, index)}
+                            style={styles.removeButton}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => addMultipleExtension(extensionKey)}
+                      style={styles.addButton}
+                    >
+                      + Add Another {extensionConfig.label}
+                    </button>
                   </div>
-                ))}
-                {errors.url && <span style={styles.error}>{errors.url}</span>}
-                <button
-                  type="button"
-                  onClick={addSitelink}
-                  style={styles.addButton}
-                >
-                  + Add Another Sitelink
-                </button>
-              </div>
-            )}
-
-            {/* Callout Extension */}
-            {relevantExtensions.includes('callout') && (
-              <div style={styles.extensionSection}>
-                <h3 style={styles.extensionTitle}>📢 Callout Extension</h3>
-                <p style={styles.helper}>Add short phrases highlighting key features</p>
-                {extensions.callout.map((callout, index) => (
-                  <div key={index} style={styles.calloutGroup}>
-                    <input
-                      type="text"
-                      placeholder="Free Shipping, 24/7 Support, etc."
-                      value={callout}
-                      onChange={(e) => handleInputChange('callout', e.target.value, index)}
-                      style={styles.input}
-                    />
-                    {extensions.callout.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeCallout(index)}
-                        style={styles.removeButton}
-                      >
-                        Remove
-                      </button>
-                    )}
+                ) : (
+                  // Single instance
+                  <div style={styles.fieldGroup}>
+                    {extensionConfig.fields.map((fieldConfig: any) => (
+                      <div key={fieldConfig.name} style={styles.fieldContainer}>
+                        <label style={styles.fieldLabel}>
+                          {fieldConfig.name.replace('_', ' ').toUpperCase()}
+                          {fieldConfig.required && <span style={styles.required}>*</span>}
+                        </label>
+                        {renderField(
+                          fieldConfig,
+                          extensionKey,
+                          extensions[extensionKey]?.[fieldConfig.name] || ''
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={addCallout}
-                  style={styles.addButton}
-                >
-                  + Add Another Callout
-                </button>
+                )}
               </div>
-            )}
+            ))}
 
             <button
               type="submit"
               disabled={submitting}
               style={{...styles.submitButton, ...(submitting ? styles.submitButtonDisabled : {})}}
             >
-              {submitting ? 'Saving...' : 'Save Ad Extensions'}
+              {submitting ? 'Saving Extensions...' : 'Save Ad Extensions'}
             </button>
           </form>
         </div>
@@ -472,6 +640,43 @@ const styles = {
     gap: '10px',
     marginBottom: '12px',
     alignItems: 'center',
+  },
+  select: {
+    width: '100%',
+    padding: '12px 16px',
+    border: '2px solid #e2e8f0',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    backgroundColor: 'white',
+    color: '#2d3748',
+    boxSizing: 'border-box' as const,
+  },
+  fieldGroup: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '16px',
+  },
+  fieldContainer: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '8px',
+  },
+  fieldLabel: {
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    color: '#4a5568',
+    textTransform: 'capitalize' as const,
+  },
+  required: {
+    color: '#e53e3e',
+    marginLeft: '4px',
+  },
+  multipleInstanceGroup: {
+    border: '1px solid #e2e8f0',
+    borderRadius: '8px',
+    padding: '16px',
+    marginBottom: '12px',
+    backgroundColor: '#f8fafc',
   },
   removeButton: {
     padding: '8px 16px',
