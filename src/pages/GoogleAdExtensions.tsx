@@ -3,60 +3,27 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 const GoogleAdExtensions = () => {
-  const [adInfo, setAdInfo] = useState({ adGoal: 'Google Text Ad', adId: '' });
+  const [adInfo, setAdInfo] = useState({ adGoal: 'Sales', adId: '' });
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [extensions, setExtensions] = useState<Record<string, any>>({});
   const [isMobile, setIsMobile] = useState(false);
 
-  // Ad extension configurations
+  // Extension configurations based on ad goal
   const adExtensionConfig = {
-    "Google Text Ad": {
-      "supported_extensions": {
+    "Sales": {
+      "extensions": {
         "sitelink": {
-          "label": "Sitelink",
-          "description": "Displays additional links to content on your site.",
+          "description": "Link to specific product or deal pages.",
           "fields": [
             { "name": "title", "type": "text", "maxLength": 25, "required": true },
             { "name": "url", "type": "url", "required": true }
           ],
           "multiple": true
-        },
-        "enhanced_sitelink": {
-          "label": "Enhanced Sitelink",
-          "description": "Adds descriptions under sitelinks for more context.",
-          "fields": [
-            { "name": "title", "type": "text", "maxLength": 25, "required": true },
-            { "name": "description", "type": "text", "maxLength": 90, "required": true },
-            { "name": "url", "type": "url", "required": true }
-          ],
-          "multiple": true
-        },
-        "rating": {
-          "label": "Seller Rating",
-          "description": "Displays user-submitted ratings for your business.",
-          "fields": [
-            { "name": "rating", "type": "number", "min": 0, "max": 5, "step": 0.1, "required": true },
-            { "name": "total_reviews", "type": "number", "min": 1, "required": true },
-            { "name": "source_url", "type": "url", "required": false }
-          ],
-          "multiple": false
-        },
-        "app": {
-          "label": "App Download (Mobile Only)",
-          "description": "Promotes app installs from Google Play or Apple Store.",
-          "fields": [
-            { "name": "app_name", "type": "text", "required": true },
-            { "name": "store_url", "type": "url", "required": true },
-            { "name": "platform", "type": "select", "options": ["Android", "iOS"], "required": true }
-          ],
-          "mobile_only": true,
-          "multiple": false
         },
         "price": {
-          "label": "Price Extension",
-          "description": "Shows prices for specific services or products.",
+          "description": "Show price of specific offerings.",
           "fields": [
             { "name": "label", "type": "text", "required": true },
             { "name": "price", "type": "text", "pattern": "^\\$\\d+(\\.\\d{2})?$", "required": true },
@@ -65,61 +32,207 @@ const GoogleAdExtensions = () => {
           "multiple": true
         },
         "promotion": {
-          "label": "Promotion Extension",
-          "description": "Displays discounts, promo codes or offers.",
+          "description": "Highlight discounts or seasonal offers.",
           "fields": [
             { "name": "promotion_text", "type": "text", "maxLength": 60, "required": true },
-            { "name": "discount", "type": "text", "example": "20% Off", "required": true },
+            { "name": "discount", "type": "text", "required": true },
             { "name": "final_url", "type": "url", "required": true }
           ],
           "multiple": true
         },
         "click_to_call": {
-          "label": "Click-to-Call (Mobile Only)",
-          "description": "Lets users tap to call you directly.",
+          "description": "Click-to-call feature (mobile only).",
           "fields": [
             { "name": "phone_number", "type": "tel", "pattern": "^\\+?[0-9\\-\\s]{10,20}$", "required": true },
-            { "name": "call_hours", "type": "text", "example": "9AM–6PM EST", "required": false }
+            { "name": "call_hours", "type": "text", "required": false }
           ],
-          "mobile_only": true,
-          "multiple": false
+          "mobile_only": true
         },
-        "location": {
-          "label": "Location Extension",
-          "description": "Displays your business address and distance.",
+        "call_to_action": {
+          "description": "Adds a CTA like 'Buy Now'.",
           "fields": [
-            { "name": "business_name", "type": "text", "required": true },
-            { "name": "address", "type": "text", "required": true },
-            { "name": "city", "type": "text", "required": true },
-            { "name": "zip_code", "type": "text", "pattern": "^[0-9]{4,10}$", "required": true }
-          ],
-          "multiple": false
-        },
+            { "name": "cta_text", "type": "text", "maxLength": 20, "required": true }
+          ]
+        }
+      }
+    },
+    "Leads": {
+      "extensions": {
         "phone_number": {
-          "label": "Phone Number (Desktop Only)",
-          "description": "Displays a static phone number (non-clickable).",
+          "description": "Static phone number (desktop only).",
           "fields": [
             { "name": "phone_number", "type": "tel", "pattern": "^\\+?[0-9\\-\\s]{10,20}$", "required": true }
           ],
-          "desktop_only": true,
-          "multiple": false
+          "desktop_only": true
+        },
+        "click_to_call": {
+          "description": "Let users call directly (mobile).",
+          "fields": [
+            { "name": "phone_number", "type": "tel", "required": true }
+          ],
+          "mobile_only": true
+        },
+        "sitelink": {
+          "description": "Link to lead-gen content: demo, contact, etc.",
+          "fields": [
+            { "name": "title", "type": "text", "required": true },
+            { "name": "url", "type": "url", "required": true }
+          ],
+          "multiple": true
         },
         "call_to_action": {
-          "label": "Call-to-Action",
-          "description": "Adds a button with a strong call-to-action.",
+          "description": "Prompt users to take an action like 'Get Quote'.",
           "fields": [
-            { "name": "cta_text", "type": "text", "maxLength": 20, "required": true }
+            { "name": "cta_text", "type": "text", "required": true }
+          ]
+        },
+        "rating": {
+          "description": "Show user trust scores.",
+          "fields": [
+            { "name": "rating", "type": "number", "min": 0, "max": 5, "required": true },
+            { "name": "total_reviews", "type": "number", "min": 1, "required": true }
+          ]
+        }
+      }
+    },
+    "Website Traffic": {
+      "extensions": {
+        "sitelink": {
+          "description": "Drive traffic to various parts of the site.",
+          "fields": [
+            { "name": "title", "type": "text", "required": true },
+            { "name": "url", "type": "url", "required": true }
           ],
-          "multiple": false
+          "multiple": true
+        },
+        "callout": {
+          "description": "Add short supporting claims or features.",
+          "fields": [
+            { "name": "callouts", "type": "list", "itemType": "text", "maxLength": 25, "required": true }
+          ]
+        },
+        "rating": {
+          "description": "Show reputation to increase trust.",
+          "fields": [
+            { "name": "rating", "type": "number", "required": true },
+            { "name": "total_reviews", "type": "number", "required": true }
+          ]
+        },
+        "call_to_action": {
+          "description": "Encourage users to explore the site.",
+          "fields": [
+            { "name": "cta_text", "type": "text", "required": true }
+          ]
+        }
+      }
+    },
+    "App Promotion": {
+      "extensions": {
+        "app": {
+          "description": "Download the app from store.",
+          "fields": [
+            { "name": "app_name", "type": "text", "required": true },
+            { "name": "store_url", "type": "url", "required": true },
+            { "name": "platform", "type": "select", "options": ["iOS", "Android"], "required": true }
+          ],
+          "mobile_only": true
+        },
+        "promotion": {
+          "description": "Promotional offer for app users.",
+          "fields": [
+            { "name": "promotion_text", "type": "text", "required": true },
+            { "name": "discount", "type": "text", "required": true }
+          ]
+        },
+        "call_to_action": {
+          "description": "Encourage app installs.",
+          "fields": [
+            { "name": "cta_text", "type": "text", "required": true }
+          ]
+        },
+        "sitelink": {
+          "description": "Link to app feature or support pages.",
+          "fields": [
+            { "name": "title", "type": "text", "required": true },
+            { "name": "url", "type": "url", "required": true }
+          ],
+          "multiple": true
+        }
+      }
+    },
+    "Awareness & Consideration": {
+      "extensions": {
+        "sitelink": {
+          "description": "Link to brand or story pages.",
+          "fields": [
+            { "name": "title", "type": "text", "required": true },
+            { "name": "url", "type": "url", "required": true }
+          ]
+        },
+        "rating": {
+          "description": "Social proof for brand.",
+          "fields": [
+            { "name": "rating", "type": "number", "required": true },
+            { "name": "total_reviews", "type": "number", "required": true }
+          ]
+        },
+        "callout": {
+          "description": "Add brand values or USP.",
+          "fields": [
+            { "name": "callouts", "type": "list", "itemType": "text", "required": true }
+          ]
+        },
+        "call_to_action": {
+          "description": "Encourage people to learn more.",
+          "fields": [
+            { "name": "cta_text", "type": "text", "required": true }
+          ]
         },
         "ad_disclosure": {
-          "label": "Ad Disclosure",
-          "description": "Displays required disclosure statements (e.g. political ads).",
+          "description": "Required for political or advocacy ads.",
           "fields": [
-            { "name": "disclosure_text", "type": "text", "required": true },
-            { "name": "disclosure_url", "type": "url", "required": false }
+            { "name": "disclosure_text", "type": "text", "required": true }
+          ]
+        }
+      }
+    },
+    "Engagement": {
+      "extensions": {
+        "callout": {
+          "description": "Prompt participation or sharing.",
+          "fields": [
+            { "name": "callouts", "type": "list", "itemType": "text", "required": true }
+          ]
+        },
+        "sitelink": {
+          "description": "Link to polls, contests, or blogs.",
+          "fields": [
+            { "name": "title", "type": "text", "required": true },
+            { "name": "url", "type": "url", "required": true }
           ],
-          "multiple": false
+          "multiple": true
+        },
+        "click_to_call": {
+          "description": "Quick call to engage (mobile only).",
+          "fields": [
+            { "name": "phone_number", "type": "tel", "required": true }
+          ],
+          "mobile_only": true
+        },
+        "app": {
+          "description": "Engage via app download.",
+          "fields": [
+            { "name": "app_name", "type": "text", "required": true },
+            { "name": "store_url", "type": "url", "required": true },
+            { "name": "platform", "type": "select", "options": ["Android", "iOS"], "required": true }
+          ],
+          "mobile_only": true
+        },
+        "call_to_action": {
+          "description": "Encourage engagement: 'Join Us', 'Chat Now'.",
+          "fields": [
+            { "name": "cta_text", "type": "text", "required": true }
+          ]
         }
       }
     }
@@ -136,7 +249,7 @@ const GoogleAdExtensions = () => {
     const fetchAdInfo = async () => {
       try {
         setTimeout(() => {
-          setAdInfo({ adGoal: 'Google Text Ad', adId: 'ad_123456' });
+          setAdInfo({ adGoal: 'Sales', adId: 'ad_123456' });
           setLoading(false);
         }, 1000);
       } catch (error) {
@@ -153,8 +266,8 @@ const GoogleAdExtensions = () => {
     if (!config) return;
 
     const initialExtensions: Record<string, any> = {};
-    Object.entries(config.supported_extensions).forEach(([key, ext]) => {
-      if (ext.multiple) {
+    Object.entries(config.extensions).forEach(([key, ext]) => {
+      if ((ext as any).multiple) {
         initialExtensions[key] = [{}];
       } else {
         initialExtensions[key] = {};
@@ -244,9 +357,9 @@ const GoogleAdExtensions = () => {
     const config = adExtensionConfig[adInfo.adGoal as keyof typeof adExtensionConfig];
     if (!config) return;
 
-    const extensionConfig = config.supported_extensions[extensionKey as keyof typeof config.supported_extensions];
+    const extensionConfig = config.extensions[extensionKey as keyof typeof config.extensions];
     
-    if (extensionConfig.multiple && index !== undefined) {
+    if ((extensionConfig as any).multiple && index !== undefined) {
       const newExtensions = { ...extensions };
       if (!newExtensions[extensionKey]) newExtensions[extensionKey] = [{}];
       newExtensions[extensionKey][index] = {
@@ -335,7 +448,7 @@ const GoogleAdExtensions = () => {
 
     const availableExtensions: Record<string, any> = {};
     
-    Object.entries(config.supported_extensions).forEach(([key, ext]) => {
+    Object.entries(config.extensions).forEach(([key, ext]) => {
       // Filter based on mobile/desktop
       if ((ext as any).mobile_only && !isMobile) return;
       if ((ext as any).desktop_only && isMobile) return;
@@ -423,7 +536,7 @@ const GoogleAdExtensions = () => {
 
           {/* Ad Type Selector */}
           <div style={styles.extensionSection}>
-            <h3 style={styles.extensionTitle}>🎯 Select Ad Type</h3>
+            <h3 style={styles.extensionTitle}>🎯 Select Ad Goal</h3>
             <select
               value={adInfo.adGoal}
               onChange={(e) => handleAdTypeChange(e.target.value)}
