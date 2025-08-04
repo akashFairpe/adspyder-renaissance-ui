@@ -10,19 +10,51 @@ const GoogleAdExtensions = () => {
     alert('Ad extensions saved successfully!');
   };
 
+  const pageStyle = {
+    minHeight: '100vh',
+    backgroundColor: '#F8F9FA',
+    fontFamily: 'Inter, system-ui, sans-serif'
+  };
+
+  const headerSpacingStyle = {
+    paddingTop: '80px',
+    paddingBottom: '40px'
+  };
+
+  const containerStyle = {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 16px'
+  };
+
+  const titleStyle = {
+    fontSize: '24px',
+    fontWeight: '600',
+    color: '#2C3E50',
+    textAlign: 'center' as const,
+    marginBottom: '16px',
+    lineHeight: '1.5'
+  };
+
+  const subtitleStyle = {
+    fontSize: '16px',
+    color: '#6C757D',
+    textAlign: 'center' as const,
+    marginBottom: '32px',
+    lineHeight: '1.6'
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div style={pageStyle}>
       <Header />
-      <main className="pt-20 pb-10">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-foreground mb-4">
-              Google Ad Extensions Manager
-            </h1>
-            <p className="text-xl text-muted-foreground">
-              Configure and customize ad extensions for enhanced ad performance
-            </p>
-          </div>
+      <main style={headerSpacingStyle}>
+        <div style={containerStyle}>
+          <h1 style={titleStyle}>
+            Google Ad Extensions Manager
+          </h1>
+          <p style={subtitleStyle}>
+            Configure and customize ad extensions for enhanced ad performance
+          </p>
           
           <AdExtensionsForm onSubmit={handleExtensionSubmit} />
         </div>

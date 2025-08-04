@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Trash2, Plus } from 'lucide-react';
 
 interface AdExtensionsFormProps {
@@ -16,7 +11,7 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
   initialAdGoal = 'Sales' 
 }) => {
   const [adGoal, setAdGoal] = useState(initialAdGoal);
-  const [selectedExtensions, setSelectedExtensions] = useState<string[]>([]);
+  const [selectedExtension, setSelectedExtension] = useState<string>('');
   const [extensions, setExtensions] = useState<Record<string, any>>({});
   const [isMobile, setIsMobile] = useState(false);
 
@@ -249,7 +244,7 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 768);
-    setSelectedExtensions([]);
+    setSelectedExtension('');
     setExtensions({});
   }, [adGoal]);
 
@@ -322,34 +317,23 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
     setExtensions(newExtensions);
   };
 
-  const addExtension = (extensionKey: string) => {
-    if (!selectedExtensions.includes(extensionKey)) {
-      setSelectedExtensions([...selectedExtensions, extensionKey]);
-      
-      const config = adExtensionConfig[adGoal as keyof typeof adExtensionConfig];
-      if (!config) return;
-      
-      const extensionConfig = config.extensions[extensionKey as keyof typeof config.extensions];
-      
-      if ((extensionConfig as any).multiple) {
-        setExtensions({
-          ...extensions,
-          [extensionKey]: [{}]
-        });
-      } else {
-        setExtensions({
-          ...extensions,
-          [extensionKey]: {}
-        });
-      }
+  const selectExtension = (extensionKey: string) => {
+    setSelectedExtension(extensionKey);
+    
+    const config = adExtensionConfig[adGoal as keyof typeof adExtensionConfig];
+    if (!config) return;
+    
+    const extensionConfig = config.extensions[extensionKey as keyof typeof config.extensions];
+    
+    if ((extensionConfig as any).multiple) {
+      setExtensions({
+        [extensionKey]: [{}]
+      });
+    } else {
+      setExtensions({
+        [extensionKey]: {}
+      });
     }
-  };
-
-  const removeExtension = (extensionKey: string) => {
-    setSelectedExtensions(selectedExtensions.filter(ext => ext !== extensionKey));
-    const newExtensions = { ...extensions };
-    delete newExtensions[extensionKey];
-    setExtensions(newExtensions);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -383,26 +367,50 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
   };
 
   const renderField = (fieldConfig: any, extensionKey: string, value: string, index?: number) => {
+    const baseInputStyle = {
+      width: '100%',
+      height: '40px',
+      padding: '8px 12px',
+      border: '1px solid #E5E7EB',
+      borderRadius: '4px',
+      fontSize: '14px',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      backgroundColor: '#FFFFFF',
+      color: '#1A1A1A',
+      outline: 'none',
+      transition: 'border-color 0.2s ease'
+    };
+
+    const baseSelectStyle = {
+      ...baseInputStyle,
+      cursor: 'pointer',
+      paddingRight: '32px',
+      backgroundImage: 'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xIDEuNUw2IDYuNUwxMSAxLjUiIHN0cm9rZT0iIzZDNzU3RCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+")',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'right 12px center',
+      appearance: 'none' as const
+    };
+
     switch (fieldConfig.type) {
       case 'select':
         return (
-          <Select
+          <select
             value={value}
-            onValueChange={(val) => handleExtensionFieldChange(extensionKey, fieldConfig.name, val, index)}
+            onChange={(e) => handleExtensionFieldChange(extensionKey, fieldConfig.name, e.target.value, index)}
+            style={baseSelectStyle}
+            required={fieldConfig.required}
+            onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
           >
-            <SelectTrigger>
-              <SelectValue placeholder={`Select ${fieldConfig.name}`} />
-            </SelectTrigger>
-            <SelectContent>
-              {fieldConfig.options?.map((option: string) => (
-                <SelectItem key={option} value={option}>{option}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            <option value="">{`Select ${fieldConfig.name}`}</option>
+            {fieldConfig.options?.map((option: string) => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
         );
       case 'number':
         return (
-          <Input
+          <input
             type="number"
             min={fieldConfig.min}
             max={fieldConfig.max}
@@ -411,17 +419,23 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
             onChange={(e) => handleExtensionFieldChange(extensionKey, fieldConfig.name, e.target.value, index)}
             required={fieldConfig.required}
             placeholder={`Enter ${fieldConfig.name}`}
+            style={baseInputStyle}
+            onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
           />
         );
       default:
         return (
-          <Input
+          <input
             type={fieldConfig.type}
             value={value}
             onChange={(e) => handleExtensionFieldChange(extensionKey, fieldConfig.name, e.target.value, index)}
             required={fieldConfig.required}
             maxLength={fieldConfig.maxLength}
             placeholder={fieldConfig.example || `Enter ${fieldConfig.name}`}
+            style={baseInputStyle}
+            onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
           />
         );
     }
@@ -429,164 +443,367 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
 
   const relevantExtensions = getAvailableExtensions();
 
+  const containerStyle = {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    backgroundColor: '#FFFFFF',
+    borderRadius: '8px',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
+    fontFamily: 'Inter, system-ui, sans-serif'
+  };
+
+  const headerStyle = {
+    padding: '24px',
+    borderBottom: '1px solid #E5E7EB'
+  };
+
+  const titleStyle = {
+    fontSize: '24px',
+    fontWeight: '600',
+    color: '#2C3E50',
+    margin: '0 0 8px 0',
+    lineHeight: '1.5'
+  };
+
+  const subtitleStyle = {
+    fontSize: '14px',
+    color: '#6C757D',
+    margin: '0',
+    lineHeight: '1.6'
+  };
+
+  const contentStyle = {
+    padding: '24px'
+  };
+
+  const sectionStyle = {
+    marginBottom: '24px'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#2C3E50',
+    marginBottom: '8px'
+  };
+
+  const selectStyle = {
+    width: '100%',
+    height: '40px',
+    padding: '8px 12px',
+    border: '1px solid #E5E7EB',
+    borderRadius: '4px',
+    fontSize: '14px',
+    fontFamily: 'Inter, system-ui, sans-serif',
+    backgroundColor: '#FFFFFF',
+    color: '#1A1A1A',
+    outline: 'none',
+    cursor: 'pointer',
+    paddingRight: '32px',
+    backgroundImage: 'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xIDEuNUw2IDYuNUwxMSAxLjUiIHN0cm9rZT0iIzZDNzU3RCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+")',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 12px center',
+    appearance: 'none' as const,
+    transition: 'border-color 0.2s ease'
+  };
+
+  const gridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '16px'
+  };
+
+  const extensionButtonStyle = {
+    padding: '16px',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    backgroundColor: '#FFFFFF',
+    cursor: 'pointer',
+    textAlign: 'left' as const,
+    transition: 'all 0.2s ease',
+    minHeight: '80px',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    justifyContent: 'flex-start'
+  };
+
+  const selectedExtensionButtonStyle = {
+    ...extensionButtonStyle,
+    backgroundColor: '#3B82F6',
+    borderColor: '#3B82F6',
+    color: '#FFFFFF'
+  };
+
+  const extensionTitleStyle = {
+    fontSize: '14px',
+    fontWeight: '600',
+    marginBottom: '4px',
+    lineHeight: '1.4'
+  };
+
+  const extensionDescStyle = {
+    fontSize: '12px',
+    lineHeight: '1.4',
+    opacity: 0.8
+  };
+
+  const badgeStyle = {
+    fontSize: '10px',
+    padding: '2px 8px',
+    borderRadius: '12px',
+    marginTop: '8px',
+    alignSelf: 'flex-start'
+  };
+
+  const mobileBadgeStyle = {
+    ...badgeStyle,
+    backgroundColor: '#DBEAFE',
+    color: '#1E40AF'
+  };
+
+  const desktopBadgeStyle = {
+    ...badgeStyle,
+    backgroundColor: '#D1FAE5',
+    color: '#065F46'
+  };
+
+  const configCardStyle = {
+    backgroundColor: '#F8F9FA',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    padding: '16px',
+    marginTop: '16px'
+  };
+
+  const formGridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '16px'
+  };
+
+  const fieldGroupStyle = {
+    marginBottom: '16px'
+  };
+
+  const submitButtonStyle = {
+    width: '100%',
+    height: '44px',
+    backgroundColor: '#3B82F6',
+    color: '#FFFFFF',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '16px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    marginTop: '24px',
+    transition: 'background-color 0.2s ease'
+  };
+
+  const removeButtonStyle = {
+    padding: '8px',
+    backgroundColor: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    color: '#6C757D',
+    transition: 'background-color 0.2s ease'
+  };
+
+  const addButtonStyle = {
+    width: '100%',
+    height: '36px',
+    backgroundColor: 'transparent',
+    color: '#3B82F6',
+    border: '1px solid #3B82F6',
+    borderRadius: '4px',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    marginTop: '12px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    transition: 'all 0.2s ease'
+  };
+
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Ad Extensions Configuration</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
+    <div style={containerStyle}>
+      <div style={headerStyle}>
+        <h2 style={titleStyle}>Ad Extensions Configuration</h2>
+        <p style={subtitleStyle}>Configure and customize ad extensions for enhanced ad performance</p>
+      </div>
+      
+      <div style={contentStyle}>
         {/* Ad Goal Selector */}
-        <div className="space-y-2">
-          <Label htmlFor="ad-goal">Ad Goal</Label>
-          <Select value={adGoal} onValueChange={setAdGoal}>
-            <SelectTrigger id="ad-goal">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {Object.keys(adExtensionConfig).map((goal) => (
-                <SelectItem key={goal} value={goal}>{goal}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div style={sectionStyle}>
+          <label style={labelStyle} htmlFor="ad-goal">Ad Goal</label>
+          <select 
+            id="ad-goal"
+            value={adGoal} 
+            onChange={(e) => setAdGoal(e.target.value)}
+            style={selectStyle}
+            onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+            onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
+          >
+            {Object.keys(adExtensionConfig).map((goal) => (
+              <option key={goal} value={goal}>{goal}</option>
+            ))}
+          </select>
         </div>
 
         {/* Extension Selector */}
-        <div className="space-y-4">
-          <Label>Available Ad Extensions</Label>
-          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+        <div style={sectionStyle}>
+          <label style={labelStyle}>Available Ad Extensions</label>
+          <div style={gridStyle}>
             {Object.entries(relevantExtensions).map(([extensionKey, extensionConfig]) => (
-              <Button
+              <div
                 key={extensionKey}
-                type="button"
-                variant={selectedExtensions.includes(extensionKey) ? "default" : "outline"}
-                onClick={() => selectedExtensions.includes(extensionKey) 
-                  ? removeExtension(extensionKey) 
-                  : addExtension(extensionKey)
-                }
-                className="h-auto p-3 text-left flex flex-col items-start"
+                style={selectedExtension === extensionKey ? selectedExtensionButtonStyle : extensionButtonStyle}
+                onClick={() => selectExtension(extensionKey)}
+                onMouseEnter={(e) => {
+                  if (selectedExtension !== extensionKey) {
+                    e.currentTarget.style.borderColor = '#3B82F6';
+                    e.currentTarget.style.backgroundColor = '#F8F9FA';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedExtension !== extensionKey) {
+                    e.currentTarget.style.borderColor = '#E5E7EB';
+                    e.currentTarget.style.backgroundColor = '#FFFFFF';
+                  }
+                }}
               >
-                <span className="font-medium text-sm">
+                <div style={extensionTitleStyle}>
                   {extensionKey.replace('_', ' ').toUpperCase()}
-                </span>
-                <span className="text-xs text-muted-foreground mt-1">
+                </div>
+                <div style={extensionDescStyle}>
                   {extensionConfig.description}
-                </span>
+                </div>
                 {(extensionConfig as any).mobile_only && (
-                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded mt-2">Mobile Only</span>
+                  <span style={mobileBadgeStyle}>Mobile Only</span>
                 )}
                 {(extensionConfig as any).desktop_only && (
-                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded mt-2">Desktop Only</span>
+                  <span style={desktopBadgeStyle}>Desktop Only</span>
                 )}
-              </Button>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Selected Extensions Configuration */}
-        {selectedExtensions.length > 0 && (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {selectedExtensions.map((extensionKey) => {
-              const extensionConfig = relevantExtensions[extensionKey];
-              if (!extensionConfig) return null;
-              
-              return (
-                <Card key={extensionKey} className="border-muted">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {extensionKey.replace('_', ' ').toUpperCase()}
-                        {(extensionConfig as any).mobile_only && (
-                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Mobile Only</span>
-                        )}
-                        {(extensionConfig as any).desktop_only && (
-                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Desktop Only</span>
-                        )}
-                      </div>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeExtension(extensionKey)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </CardTitle>
-                    <p className="text-sm text-muted-foreground">{extensionConfig.description}</p>
-                  </CardHeader>
-                  <CardContent>
-                    {extensionConfig.multiple ? (
-                      <div className="space-y-4">
-                        {(extensions[extensionKey] || [{}]).map((instance: any, index: number) => (
-                          <div key={index} className="border rounded-lg p-4 bg-muted/30">
-                            <div className="grid gap-4 md:grid-cols-2">
-                              {extensionConfig.fields.map((fieldConfig: any) => (
-                                <div key={fieldConfig.name} className="space-y-2">
-                                  <Label className="text-sm font-medium">
-                                    {fieldConfig.name.replace('_', ' ').toUpperCase()}
-                                    {fieldConfig.required && <span className="text-destructive ml-1">*</span>}
-                                  </Label>
-                                  {renderField(
-                                    fieldConfig,
-                                    extensionKey,
-                                    instance[fieldConfig.name] || '',
-                                    index
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                            {(extensions[extensionKey]?.length || 0) > 1 && (
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                onClick={() => removeMultipleExtension(extensionKey, index)}
-                                className="mt-3"
-                              >
-                                <Trash2 className="h-4 w-4 mr-2" />
-                                Remove
-                              </Button>
-                            )}
-                          </div>
-                        ))}
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => addMultipleExtension(extensionKey)}
-                          className="w-full"
-                        >
-                          <Plus className="h-4 w-4 mr-2" />
-                          Add Another {extensionKey.replace('_', ' ')}
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="grid gap-4 md:grid-cols-2">
-                        {extensionConfig.fields.map((fieldConfig: any) => (
-                          <div key={fieldConfig.name} className="space-y-2">
-                            <Label className="text-sm font-medium">
+        {/* Selected Extension Configuration */}
+        {selectedExtension && (
+          <form onSubmit={handleSubmit}>
+            <div style={configCardStyle}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <div>
+                  <h3 style={{ ...extensionTitleStyle, fontSize: '18px', margin: '0 0 4px 0', color: '#2C3E50' }}>
+                    {selectedExtension.replace('_', ' ').toUpperCase()}
+                  </h3>
+                  <p style={{ ...extensionDescStyle, fontSize: '14px', color: '#6C757D', margin: 0 }}>
+                    {relevantExtensions[selectedExtension]?.description}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  style={removeButtonStyle}
+                  onClick={() => setSelectedExtension('')}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F3F4F6'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+
+              {relevantExtensions[selectedExtension]?.multiple ? (
+                <div>
+                  {(extensions[selectedExtension] || [{}]).map((instance: any, index: number) => (
+                    <div key={index} style={{ 
+                      backgroundColor: '#FFFFFF', 
+                      border: '1px solid #E5E7EB', 
+                      borderRadius: '4px', 
+                      padding: '16px', 
+                      marginBottom: '12px' 
+                    }}>
+                      <div style={formGridStyle}>
+                        {relevantExtensions[selectedExtension]?.fields.map((fieldConfig: any) => (
+                          <div key={fieldConfig.name} style={fieldGroupStyle}>
+                            <label style={labelStyle}>
                               {fieldConfig.name.replace('_', ' ').toUpperCase()}
-                              {fieldConfig.required && <span className="text-destructive ml-1">*</span>}
-                            </Label>
+                              {fieldConfig.required && <span style={{ color: '#EF4444', marginLeft: '4px' }}>*</span>}
+                            </label>
                             {renderField(
                               fieldConfig,
-                              extensionKey,
-                              extensions[extensionKey]?.[fieldConfig.name] || ''
+                              selectedExtension,
+                              instance[fieldConfig.name] || '',
+                              index
                             )}
                           </div>
                         ))}
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })}
+                      {(extensions[selectedExtension]?.length || 0) > 1 && (
+                        <button
+                          type="button"
+                          style={{ ...removeButtonStyle, marginTop: '8px' }}
+                          onClick={() => removeMultipleExtension(selectedExtension, index)}
+                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#FEE2E2'}
+                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                        >
+                          <Trash2 size={14} style={{ marginRight: '4px' }} />
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    style={addButtonStyle}
+                    onClick={() => addMultipleExtension(selectedExtension)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#3B82F6';
+                      e.currentTarget.style.color = '#FFFFFF';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = '#3B82F6';
+                    }}
+                  >
+                    <Plus size={16} />
+                    Add Another {selectedExtension.replace('_', ' ')}
+                  </button>
+                </div>
+              ) : (
+                <div style={formGridStyle}>
+                  {relevantExtensions[selectedExtension]?.fields.map((fieldConfig: any) => (
+                    <div key={fieldConfig.name} style={fieldGroupStyle}>
+                      <label style={labelStyle}>
+                        {fieldConfig.name.replace('_', ' ').toUpperCase()}
+                        {fieldConfig.required && <span style={{ color: '#EF4444', marginLeft: '4px' }}>*</span>}
+                      </label>
+                      {renderField(
+                        fieldConfig,
+                        selectedExtension,
+                        extensions[selectedExtension]?.[fieldConfig.name] || ''
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
 
-            <Button type="submit" className="w-full">
+            <button 
+              type="submit" 
+              style={submitButtonStyle}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
+            >
               Save Ad Extensions
-            </Button>
+            </button>
           </form>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
