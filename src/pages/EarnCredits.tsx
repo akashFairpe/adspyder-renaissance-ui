@@ -12,6 +12,14 @@ interface Task {
 const EarnCredits = () => {
   const [tasks, setTasks] = useState<Task[]>([
     {
+      id: 'generate',
+      title: 'Generate Ads Using AI',
+      description: 'Create 2 ads using our AI Ad Generator this week',
+      credits: 75,
+      completed: false,
+      type: 'generate'
+    },
+    {
       id: 'review',
       title: 'Leave a Review or Testimonial',
       description: 'Share your experience with AdSpyder on review platforms',
@@ -42,14 +50,6 @@ const EarnCredits = () => {
       credits: 125,
       completed: false,
       type: 'connect'
-    },
-    {
-      id: 'generate',
-      title: 'Generate Ads Using AI',
-      description: 'Create 2 ads using our AI Ad Generator this week',
-      credits: 75,
-      completed: false,
-      type: 'generate'
     }
   ]);
 
@@ -166,16 +166,16 @@ const EarnCredits = () => {
 
         {/* Tasks Grid */}
         <div style={styles.tasksGrid}>
-          {/* Review Task */}
-          <div style={tasks[0].completed ? styles.taskCardCompleted : styles.taskCardReview}>
+          {/* Generate Ads Task */}
+          <div style={{...((tasks[0].completed ? styles.taskCardCompleted : styles.taskCardGenerate)), gridColumn: '1 / -1'}}>
             <div style={styles.taskHeader}>
               <div style={styles.taskTitleRow}>
-                <div style={tasks[0].completed ? styles.taskIconCompleted : styles.taskIconReview}>
-                  💬
+                <div style={tasks[0].completed ? styles.taskIconCompleted : styles.taskIconGenerate}>
+                  ✨
                 </div>
                 <h3 style={styles.taskTitle}>{tasks[0].title}</h3>
               </div>
-              <div style={tasks[0].completed ? styles.badgeCompleted : styles.badgeReview}>
+              <div style={tasks[0].completed ? styles.badgeCompleted : styles.badgeGenerate}>
                 +{tasks[0].credits} Credits
               </div>
             </div>
@@ -183,6 +183,43 @@ const EarnCredits = () => {
             
             <div style={styles.taskContent}>
               {tasks[0].completed ? (
+                <div style={styles.completedBadge}>
+                  <span style={styles.checkmark}>✅</span>
+                  <span>Task Completed ✅</span>
+                </div>
+              ) : (
+                <div style={styles.taskActions}>
+                  <div style={styles.progressBox}>
+                    <span style={styles.progressText}>Progress: {generateCount}/2 ads generated</span>
+                    <div style={styles.miniProgressBar}>
+                      <div style={{...styles.miniProgressFill, width: `${(generateCount / 2) * 100}%`}}></div>
+                    </div>
+                  </div>
+                  <button style={styles.generateButton} onClick={handleGenerateAds}>
+                    ✨ Generate Ads with AI
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Review Task */}
+          <div style={tasks[1].completed ? styles.taskCardCompleted : styles.taskCardReview}>
+            <div style={styles.taskHeader}>
+              <div style={styles.taskTitleRow}>
+                <div style={tasks[1].completed ? styles.taskIconCompleted : styles.taskIconReview}>
+                  💬
+                </div>
+                <h3 style={styles.taskTitle}>{tasks[1].title}</h3>
+              </div>
+              <div style={tasks[1].completed ? styles.badgeCompleted : styles.badgeReview}>
+                +{tasks[1].credits} Credits
+              </div>
+            </div>
+            <p style={styles.taskDescription}>{tasks[1].description}</p>
+            
+            <div style={styles.taskContent}>
+              {tasks[1].completed ? (
                 <div style={styles.completedBadge}>
                   <span style={styles.checkmark}>✅</span>
                   <span>Task Completed ✅</span>
@@ -229,22 +266,22 @@ const EarnCredits = () => {
           </div>
 
           {/* Social Media Task */}
-          <div style={tasks[1].completed ? styles.taskCardCompleted : styles.taskCardSocial}>
+          <div style={tasks[2].completed ? styles.taskCardCompleted : styles.taskCardSocial}>
             <div style={styles.taskHeader}>
               <div style={styles.taskTitleRow}>
-                <div style={tasks[1].completed ? styles.taskIconCompleted : styles.taskIconSocial}>
+                <div style={tasks[2].completed ? styles.taskIconCompleted : styles.taskIconSocial}>
                   📤
                 </div>
-                <h3 style={styles.taskTitle}>{tasks[1].title}</h3>
+                <h3 style={styles.taskTitle}>{tasks[2].title}</h3>
               </div>
-              <div style={tasks[1].completed ? styles.badgeCompleted : styles.badgeSocial}>
-                +{tasks[1].credits} Credits
+              <div style={tasks[2].completed ? styles.badgeCompleted : styles.badgeSocial}>
+                +{tasks[2].credits} Credits
               </div>
             </div>
-            <p style={styles.taskDescription}>{tasks[1].description}</p>
+            <p style={styles.taskDescription}>{tasks[2].description}</p>
             
             <div style={styles.taskContent}>
-              {tasks[1].completed ? (
+              {tasks[2].completed ? (
                 <div style={styles.completedBadge}>
                   <span style={styles.checkmark}>✅</span>
                   <span>Task Completed ✅</span>
@@ -311,22 +348,22 @@ const EarnCredits = () => {
           </div>
 
           {/* Referral Task */}
-          <div style={tasks[2].completed ? styles.taskCardCompleted : styles.taskCardReferral}>
+          <div style={tasks[3].completed ? styles.taskCardCompleted : styles.taskCardReferral}>
             <div style={styles.taskHeader}>
               <div style={styles.taskTitleRow}>
-                <div style={tasks[2].completed ? styles.taskIconCompleted : styles.taskIconReferral}>
+                <div style={tasks[3].completed ? styles.taskIconCompleted : styles.taskIconReferral}>
                   👥
                 </div>
-                <h3 style={styles.taskTitle}>{tasks[2].title}</h3>
+                <h3 style={styles.taskTitle}>{tasks[3].title}</h3>
               </div>
-              <div style={tasks[2].completed ? styles.badgeCompleted : styles.badgeReferral}>
-                +{tasks[2].credits} Credits
+              <div style={tasks[3].completed ? styles.badgeCompleted : styles.badgeReferral}>
+                +{tasks[3].credits} Credits
               </div>
             </div>
-            <p style={styles.taskDescription}>{tasks[2].description}</p>
+            <p style={styles.taskDescription}>{tasks[3].description}</p>
             
             <div style={styles.taskContent}>
-              {tasks[2].completed ? (
+              {tasks[3].completed ? (
                 <div style={styles.completedBadge}>
                   <span style={styles.checkmark}>✅</span>
                   <span>Task Completed ✅</span>
@@ -351,22 +388,22 @@ const EarnCredits = () => {
           </div>
 
           {/* Connect Account Task */}
-          <div style={tasks[3].completed ? styles.taskCardCompleted : styles.taskCardConnect}>
+          <div style={tasks[4].completed ? styles.taskCardCompleted : styles.taskCardConnect}>
             <div style={styles.taskHeader}>
               <div style={styles.taskTitleRow}>
-                <div style={tasks[3].completed ? styles.taskIconCompleted : styles.taskIconConnect}>
+                <div style={tasks[4].completed ? styles.taskIconCompleted : styles.taskIconConnect}>
                   💳
                 </div>
-                <h3 style={styles.taskTitle}>{tasks[3].title}</h3>
+                <h3 style={styles.taskTitle}>{tasks[4].title}</h3>
               </div>
-              <div style={tasks[3].completed ? styles.badgeCompleted : styles.badgeConnect}>
-                +{tasks[3].credits} Credits
+              <div style={tasks[4].completed ? styles.badgeCompleted : styles.badgeConnect}>
+                +{tasks[4].credits} Credits
               </div>
             </div>
-            <p style={styles.taskDescription}>{tasks[3].description}</p>
+            <p style={styles.taskDescription}>{tasks[4].description}</p>
             
             <div style={styles.taskContent}>
-              {tasks[3].completed ? (
+              {tasks[4].completed ? (
                 <div style={styles.completedBadge}>
                   <span style={styles.checkmark}>✅</span>
                   <span>Task Completed ✅</span>
@@ -384,42 +421,6 @@ const EarnCredits = () => {
             </div>
           </div>
 
-          {/* Generate Ads Task */}
-          <div style={{...((tasks[4].completed ? styles.taskCardCompleted : styles.taskCardGenerate)), gridColumn: '1 / -1'}}>
-            <div style={styles.taskHeader}>
-              <div style={styles.taskTitleRow}>
-                <div style={tasks[4].completed ? styles.taskIconCompleted : styles.taskIconGenerate}>
-                  ✨
-                </div>
-                <h3 style={styles.taskTitle}>{tasks[4].title}</h3>
-              </div>
-              <div style={tasks[4].completed ? styles.badgeCompleted : styles.badgeGenerate}>
-                +{tasks[4].credits} Credits
-              </div>
-            </div>
-            <p style={styles.taskDescription}>{tasks[4].description}</p>
-            
-            <div style={styles.taskContent}>
-              {tasks[4].completed ? (
-                <div style={styles.completedBadge}>
-                  <span style={styles.checkmark}>✅</span>
-                  <span>Task Completed ✅</span>
-                </div>
-              ) : (
-                <div style={styles.taskActions}>
-                  <div style={styles.progressBox}>
-                    <span style={styles.progressText}>Progress: {generateCount}/2 ads generated</span>
-                    <div style={styles.miniProgressBar}>
-                      <div style={{...styles.miniProgressFill, width: `${(generateCount / 2) * 100}%`}}></div>
-                    </div>
-                  </div>
-                  <button style={styles.generateButton} onClick={handleGenerateAds}>
-                    ✨ Generate Ads with AI
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
 
         {/* FAQ Section */}
