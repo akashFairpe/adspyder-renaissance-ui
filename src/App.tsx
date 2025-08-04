@@ -29,6 +29,7 @@ const DomainPaidAdAnalysis = lazy(() => import("./pages/DomainPaidAdAnalysis"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const AIAgentGoogleAds = lazy(() => import("./pages/AIAgentGoogleAds"));
 const AIAgentRealEstate = lazy(() => import("./pages/AIAgentRealEstate"));
+const EarnCredits = lazy(() => import("./pages/EarnCredits"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -62,6 +63,7 @@ const App = () => (
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/ai-agent-for-google-ads" element={<AIAgentGoogleAds />} />
             <Route path="/ai-agent-for-real-estate" element={<AIAgentRealEstate />} />
+            <Route path="/earn-credits" element={<EarnCredits />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
