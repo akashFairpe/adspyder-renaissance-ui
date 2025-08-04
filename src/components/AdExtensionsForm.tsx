@@ -16,6 +16,7 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
   initialAdGoal = 'Sales' 
 }) => {
   const [adGoal, setAdGoal] = useState(initialAdGoal);
+  const [selectedExtensions, setSelectedExtensions] = useState<string[]>([]);
   const [extensions, setExtensions] = useState<Record<string, any>>({});
   const [isMobile, setIsMobile] = useState(false);
 
@@ -248,7 +249,8 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
 
   useEffect(() => {
     setIsMobile(window.innerWidth <= 768);
-    initializeExtensions();
+    setSelectedExtensions([]);
+    setExtensions({});
   }, [adGoal]);
 
   const initializeExtensions = () => {
@@ -317,6 +319,36 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
   const removeMultipleExtension = (extensionKey: string, index: number) => {
     const newExtensions = { ...extensions };
     newExtensions[extensionKey] = newExtensions[extensionKey].filter((_: any, i: number) => i !== index);
+    setExtensions(newExtensions);
+  };
+
+  const addExtension = (extensionKey: string) => {
+    if (!selectedExtensions.includes(extensionKey)) {
+      setSelectedExtensions([...selectedExtensions, extensionKey]);
+      
+      const config = adExtensionConfig[adGoal as keyof typeof adExtensionConfig];
+      if (!config) return;
+      
+      const extensionConfig = config.extensions[extensionKey as keyof typeof config.extensions];
+      
+      if ((extensionConfig as any).multiple) {
+        setExtensions({
+          ...extensions,
+          [extensionKey]: [{}]
+        });
+      } else {
+        setExtensions({
+          ...extensions,
+          [extensionKey]: {}
+        });
+      }
+    }
+  };
+
+  const removeExtension = (extensionKey: string) => {
+    setSelectedExtensions(selectedExtensions.filter(ext => ext !== extensionKey));
+    const newExtensions = { ...extensions };
+    delete newExtensions[extensionKey];
     setExtensions(newExtensions);
   };
 
@@ -418,91 +450,141 @@ const AdExtensionsForm: React.FC<AdExtensionsFormProps> = ({
           </Select>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {Object.entries(relevantExtensions).map(([extensionKey, extensionConfig]) => (
-            <Card key={extensionKey} className="border-muted">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center gap-2">
+        {/* Extension Selector */}
+        <div className="space-y-4">
+          <Label>Available Ad Extensions</Label>
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+            {Object.entries(relevantExtensions).map(([extensionKey, extensionConfig]) => (
+              <Button
+                key={extensionKey}
+                type="button"
+                variant={selectedExtensions.includes(extensionKey) ? "default" : "outline"}
+                onClick={() => selectedExtensions.includes(extensionKey) 
+                  ? removeExtension(extensionKey) 
+                  : addExtension(extensionKey)
+                }
+                className="h-auto p-3 text-left flex flex-col items-start"
+              >
+                <span className="font-medium text-sm">
                   {extensionKey.replace('_', ' ').toUpperCase()}
-                  {(extensionConfig as any).mobile_only && (
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Mobile Only</span>
-                  )}
-                  {(extensionConfig as any).desktop_only && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Desktop Only</span>
-                  )}
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">{extensionConfig.description}</p>
-              </CardHeader>
-              <CardContent>
-                {extensionConfig.multiple ? (
-                  <div className="space-y-4">
-                    {(extensions[extensionKey] || [{}]).map((instance: any, index: number) => (
-                      <div key={index} className="border rounded-lg p-4 bg-muted/30">
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {extensionConfig.fields.map((fieldConfig: any) => (
-                            <div key={fieldConfig.name} className="space-y-2">
-                              <Label className="text-sm font-medium">
-                                {fieldConfig.name.replace('_', ' ').toUpperCase()}
-                                {fieldConfig.required && <span className="text-destructive ml-1">*</span>}
-                              </Label>
-                              {renderField(
-                                fieldConfig,
-                                extensionKey,
-                                instance[fieldConfig.name] || '',
-                                index
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                        {(extensions[extensionKey]?.length || 0) > 1 && (
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => removeMultipleExtension(extensionKey, index)}
-                            className="mt-3"
-                          >
-                            <Trash2 className="h-4 w-4 mr-2" />
-                            Remove
-                          </Button>
-                        )}
-                      </div>
-                    ))}
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => addMultipleExtension(extensionKey)}
-                      className="w-full"
-                    >
-                      <Plus className="h-4 w-4 mr-2" />
-                      Add Another {extensionKey.replace('_', ' ')}
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {extensionConfig.fields.map((fieldConfig: any) => (
-                      <div key={fieldConfig.name} className="space-y-2">
-                        <Label className="text-sm font-medium">
-                          {fieldConfig.name.replace('_', ' ').toUpperCase()}
-                          {fieldConfig.required && <span className="text-destructive ml-1">*</span>}
-                        </Label>
-                        {renderField(
-                          fieldConfig,
-                          extensionKey,
-                          extensions[extensionKey]?.[fieldConfig.name] || ''
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                </span>
+                <span className="text-xs text-muted-foreground mt-1">
+                  {extensionConfig.description}
+                </span>
+                {(extensionConfig as any).mobile_only && (
+                  <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded mt-2">Mobile Only</span>
                 )}
-              </CardContent>
-            </Card>
-          ))}
+                {(extensionConfig as any).desktop_only && (
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded mt-2">Desktop Only</span>
+                )}
+              </Button>
+            ))}
+          </div>
+        </div>
 
-          <Button type="submit" className="w-full">
-            Save Ad Extensions
-          </Button>
-        </form>
+        {/* Selected Extensions Configuration */}
+        {selectedExtensions.length > 0 && (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {selectedExtensions.map((extensionKey) => {
+              const extensionConfig = relevantExtensions[extensionKey];
+              if (!extensionConfig) return null;
+              
+              return (
+                <Card key={extensionKey} className="border-muted">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        {extensionKey.replace('_', ' ').toUpperCase()}
+                        {(extensionConfig as any).mobile_only && (
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Mobile Only</span>
+                        )}
+                        {(extensionConfig as any).desktop_only && (
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Desktop Only</span>
+                        )}
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeExtension(extensionKey)}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground">{extensionConfig.description}</p>
+                  </CardHeader>
+                  <CardContent>
+                    {extensionConfig.multiple ? (
+                      <div className="space-y-4">
+                        {(extensions[extensionKey] || [{}]).map((instance: any, index: number) => (
+                          <div key={index} className="border rounded-lg p-4 bg-muted/30">
+                            <div className="grid gap-4 md:grid-cols-2">
+                              {extensionConfig.fields.map((fieldConfig: any) => (
+                                <div key={fieldConfig.name} className="space-y-2">
+                                  <Label className="text-sm font-medium">
+                                    {fieldConfig.name.replace('_', ' ').toUpperCase()}
+                                    {fieldConfig.required && <span className="text-destructive ml-1">*</span>}
+                                  </Label>
+                                  {renderField(
+                                    fieldConfig,
+                                    extensionKey,
+                                    instance[fieldConfig.name] || '',
+                                    index
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                            {(extensions[extensionKey]?.length || 0) > 1 && (
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => removeMultipleExtension(extensionKey, index)}
+                                className="mt-3"
+                              >
+                                <Trash2 className="h-4 w-4 mr-2" />
+                                Remove
+                              </Button>
+                            )}
+                          </div>
+                        ))}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => addMultipleExtension(extensionKey)}
+                          className="w-full"
+                        >
+                          <Plus className="h-4 w-4 mr-2" />
+                          Add Another {extensionKey.replace('_', ' ')}
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {extensionConfig.fields.map((fieldConfig: any) => (
+                          <div key={fieldConfig.name} className="space-y-2">
+                            <Label className="text-sm font-medium">
+                              {fieldConfig.name.replace('_', ' ').toUpperCase()}
+                              {fieldConfig.required && <span className="text-destructive ml-1">*</span>}
+                            </Label>
+                            {renderField(
+                              fieldConfig,
+                              extensionKey,
+                              extensions[extensionKey]?.[fieldConfig.name] || ''
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+
+            <Button type="submit" className="w-full">
+              Save Ad Extensions
+            </Button>
+          </form>
+        )}
       </CardContent>
     </Card>
   );
