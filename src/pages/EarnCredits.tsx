@@ -1,22 +1,4 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
-import { 
-  Check, 
-  Copy, 
-  ExternalLink, 
-  Share2, 
-  Users, 
-  CreditCard, 
-  Sparkles,
-  Star,
-  MessageSquare,
-  Link
-} from 'lucide-react';
 
 interface Task {
   id: string;
@@ -110,7 +92,6 @@ const EarnCredits = () => {
   };
 
   const handleConnectAccount = () => {
-    // Simulate redirect to ad optimization page
     completeTask('connect');
     window.open('/ad-optimization', '_blank');
   };
@@ -140,376 +121,892 @@ const EarnCredits = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div style={styles.container}>
+      <style>{cssStyles}</style>
+      
+      <div style={styles.maxWidth}>
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="p-3 bg-gradient-primary rounded-full shadow-lg">
-              <Sparkles className="h-8 w-8 text-primary-foreground" />
-            </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent-blue bg-clip-text text-transparent">
-              Earn More Credits
-            </h1>
+        <div style={styles.header}>
+          <div style={styles.headerIcon}>
+            <div style={styles.sparkleIcon}>✨</div>
+            <h1 style={styles.title}>Earn More Credits</h1>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p style={styles.subtitle}>
             Help us grow AdSpyder and boost your account! Complete simple tasks to unlock free credits 
             and get more value from our platform.
           </p>
         </div>
 
         {/* Progress Section */}
-        <Card className="mb-8 bg-gradient-to-r from-primary/10 via-accent-blue/10 to-accent-purple/10 border-primary/30 shadow-lg">
-          <CardHeader className="bg-gradient-primary text-primary-foreground rounded-t-lg">
-            <CardTitle className="flex items-center gap-2 text-white">
-              <CreditCard className="h-5 w-5" />
-              Your Progress
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="pt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-4 bg-accent-blue/10 rounded-lg border border-accent-blue/20">
-                <div className="text-3xl font-bold text-accent-blue">{completedTasks}/5</div>
-                <div className="text-sm text-muted-foreground">Tasks Completed</div>
+        <div style={styles.progressCard}>
+          <div style={styles.progressHeader}>
+            <h3 style={styles.progressTitle}>
+              💳 Your Progress
+            </h3>
+          </div>
+          <div style={styles.progressContent}>
+            <div style={styles.progressGrid}>
+              <div style={styles.progressItemBlue}>
+                <div style={styles.progressNumber}>{completedTasks}/5</div>
+                <div style={styles.progressLabel}>Tasks Completed</div>
               </div>
-              <div className="text-center p-4 bg-accent-green/10 rounded-lg border border-accent-green/20">
-                <div className="text-3xl font-bold text-accent-green">+{totalCredits}</div>
-                <div className="text-sm text-muted-foreground">Credits Earned</div>
+              <div style={styles.progressItemGreen}>
+                <div style={styles.progressNumber}>+{totalCredits}</div>
+                <div style={styles.progressLabel}>Credits Earned</div>
               </div>
-              <div className="text-center p-4 bg-accent-purple/10 rounded-lg border border-accent-purple/20">
-                <Progress value={progressPercentage} className="w-full mb-2 h-3" />
-                <div className="text-sm text-muted-foreground">{Math.round(progressPercentage)}% Complete</div>
+              <div style={styles.progressItemPurple}>
+                <div style={styles.progressBar}>
+                  <div style={{...styles.progressFill, width: `${progressPercentage}%`}}></div>
+                </div>
+                <div style={styles.progressLabel}>{Math.round(progressPercentage)}% Complete</div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Tasks Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div style={styles.tasksGrid}>
           {/* Review Task */}
-          <Card className={`transition-all duration-300 border-2 ${
-            tasks[0].completed 
-              ? 'bg-gradient-to-br from-accent-green/5 to-accent-green/10 border-accent-green/40 shadow-lg' 
-              : 'hover:shadow-xl hover:shadow-primary/10 border-primary/20 hover:border-primary/40 bg-gradient-to-br from-card to-card/50'
-          }`}>
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${tasks[0].completed ? 'bg-accent-green/20' : 'bg-primary/10'}`}>
-                    <MessageSquare className={`h-5 w-5 ${tasks[0].completed ? 'text-accent-green' : 'text-primary'}`} />
-                  </div>
-                  <CardTitle className="text-lg">{tasks[0].title}</CardTitle>
+          <div style={tasks[0].completed ? styles.taskCardCompleted : styles.taskCardReview}>
+            <div style={styles.taskHeader}>
+              <div style={styles.taskTitleRow}>
+                <div style={tasks[0].completed ? styles.taskIconCompleted : styles.taskIconReview}>
+                  💬
                 </div>
-                <Badge 
-                  variant="secondary" 
-                  className={`${tasks[0].completed ? 'bg-accent-green/20 text-accent-green border-accent-green/40' : 'bg-primary/10 text-primary border-primary/40'} font-semibold`}
-                >
-                  +{tasks[0].credits} Credits
-                </Badge>
+                <h3 style={styles.taskTitle}>{tasks[0].title}</h3>
               </div>
-              <CardDescription>{tasks[0].description}</CardDescription>
-            </CardHeader>
-            <CardContent>
+              <div style={tasks[0].completed ? styles.badgeCompleted : styles.badgeReview}>
+                +{tasks[0].credits} Credits
+              </div>
+            </div>
+            <p style={styles.taskDescription}>{tasks[0].description}</p>
+            
+            <div style={styles.taskContent}>
               {tasks[0].completed ? (
-                <div className="flex items-center gap-3 p-4 bg-accent-green/10 rounded-lg border border-accent-green/30">
-                  <Check className="h-6 w-6 text-accent-green" />
-                  <span className="font-semibold text-accent-green text-lg">Task Completed ✅</span>
+                <div style={styles.completedBadge}>
+                  <span style={styles.checkmark}>✅</span>
+                  <span>Task Completed ✅</span>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 gap-2">
+                <div style={styles.taskActions}>
+                  <div style={styles.buttonGroup}>
                     {reviewPlatforms.map((platform) => (
-                      <Button
+                      <button
                         key={platform.name}
-                        variant="outline"
-                        className="justify-start hover:bg-primary/5 hover:border-primary/40 transition-all duration-200"
+                        style={styles.platformButton}
                         onClick={() => {
                           setReviewPlatform(platform.name);
                           window.open(platform.url, '_blank');
                         }}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f0f9ff'}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'white'}
                       >
-                        <Star className="h-4 w-4 mr-2" />
-                        Review on {platform.name}
-                        <ExternalLink className="h-4 w-4 ml-auto" />
-                      </Button>
+                        ⭐ Review on {platform.name} 🔗
+                      </button>
                     ))}
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="review-link">Submit review link or screenshot</Label>
-                    <div className="flex gap-2">
-                      <Input
-                        id="review-link"
+                  <div style={styles.inputGroup}>
+                    <label style={styles.label}>Submit review link or screenshot</label>
+                    <div style={styles.inputRow}>
+                      <input
+                        style={styles.input}
                         placeholder="Paste your review link here..."
                         value={reviewLink}
                         onChange={(e) => setReviewLink(e.target.value)}
                       />
-                      <Button 
+                      <button 
+                        style={reviewLink.trim() ? styles.submitButton : styles.submitButtonDisabled}
                         onClick={handleReviewSubmit} 
                         disabled={!reviewLink.trim()}
-                        className="bg-primary hover:bg-primary/90 disabled:bg-muted"
                       >
                         Submit
-                      </Button>
+                      </button>
                     </div>
                   </div>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Social Media Task */}
-          <Card className={`transition-all duration-300 border-2 ${
-            tasks[1].completed 
-              ? 'bg-gradient-to-br from-accent-green/5 to-accent-green/10 border-accent-green/40 shadow-lg' 
-              : 'hover:shadow-xl hover:shadow-accent-blue/10 border-accent-blue/20 hover:border-accent-blue/40 bg-gradient-to-br from-card to-card/50'
-          }`}>
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${tasks[1].completed ? 'bg-accent-green/20' : 'bg-accent-blue/10'}`}>
-                    <Share2 className={`h-5 w-5 ${tasks[1].completed ? 'text-accent-green' : 'text-accent-blue'}`} />
-                  </div>
-                  <CardTitle className="text-lg">{tasks[1].title}</CardTitle>
+          <div style={tasks[1].completed ? styles.taskCardCompleted : styles.taskCardSocial}>
+            <div style={styles.taskHeader}>
+              <div style={styles.taskTitleRow}>
+                <div style={tasks[1].completed ? styles.taskIconCompleted : styles.taskIconSocial}>
+                  📤
                 </div>
-                <Badge 
-                  variant="secondary" 
-                  className={`${tasks[1].completed ? 'bg-accent-green/20 text-accent-green border-accent-green/40' : 'bg-accent-blue/10 text-accent-blue border-accent-blue/40'} font-semibold`}
-                >
-                  +{tasks[1].credits} Credits
-                </Badge>
+                <h3 style={styles.taskTitle}>{tasks[1].title}</h3>
               </div>
-              <CardDescription>{tasks[1].description}</CardDescription>
-            </CardHeader>
-            <CardContent>
+              <div style={tasks[1].completed ? styles.badgeCompleted : styles.badgeSocial}>
+                +{tasks[1].credits} Credits
+              </div>
+            </div>
+            <p style={styles.taskDescription}>{tasks[1].description}</p>
+            
+            <div style={styles.taskContent}>
               {tasks[1].completed ? (
-                <div className="flex items-center gap-3 p-4 bg-accent-green/10 rounded-lg border border-accent-green/30">
-                  <Check className="h-6 w-6 text-accent-green" />
-                  <span className="font-semibold text-accent-green text-lg">Task Completed ✅</span>
+                <div style={styles.completedBadge}>
+                  <span style={styles.checkmark}>✅</span>
+                  <span>Task Completed ✅</span>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <Label>Select Platform</Label>
-                    <div className="grid grid-cols-3 gap-2">
+                <div style={styles.taskActions}>
+                  <div style={styles.inputGroup}>
+                    <label style={styles.label}>Select Platform</label>
+                    <div style={styles.platformGrid}>
                       {['twitter', 'linkedin', 'facebook'].map((platform) => (
-                        <Button
+                        <button
                           key={platform}
-                          variant={socialPlatform === platform ? "default" : "outline"}
-                          size="sm"
+                          style={socialPlatform === platform ? styles.platformButtonSelected : styles.platformButtonOutline}
                           onClick={() => {
                             setSocialPlatform(platform);
                             generateSocialPost(platform);
                           }}
                         >
                           {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                        </Button>
+                        </button>
                       ))}
                     </div>
                   </div>
                   
                   {socialPost && (
-                    <div className="space-y-2">
-                      <Label>Copy this post:</Label>
+                    <div style={styles.inputGroup}>
+                      <label style={styles.label}>Copy this post:</label>
                       <textarea
-                        className="w-full p-3 border border-input rounded-md bg-background text-sm"
+                        style={styles.textarea}
                         rows={4}
                         value={socialPost}
                         readOnly
                       />
-                      <Button
-                        variant="outline"
-                        size="sm"
+                      <button
+                        style={styles.copyButton}
                         onClick={() => navigator.clipboard.writeText(socialPost)}
                       >
-                        <Copy className="h-4 w-4 mr-2" />
-                        Copy Post
-                      </Button>
+                        📋 Copy Post
+                      </button>
                     </div>
                   )}
                   
-                  <div className="space-y-2">
-                    <Label htmlFor="social-link">Submit post link</Label>
-                    <div className="flex gap-2">
-                      <Input
-                        id="social-link"
+                  <div style={styles.inputGroup}>
+                    <label style={styles.label}>Submit post link</label>
+                    <div style={styles.inputRow}>
+                      <input
+                        style={styles.input}
                         placeholder="Paste your post link here..."
                         value={socialLink}
                         onChange={(e) => setSocialLink(e.target.value)}
                       />
-                      <Button onClick={handleSocialSubmit} disabled={!socialLink.trim()}>
+                      <button 
+                        style={socialLink.trim() ? styles.submitButton : styles.submitButtonDisabled}
+                        onClick={handleSocialSubmit} 
+                        disabled={!socialLink.trim()}
+                      >
                         Submit
-                      </Button>
+                      </button>
                     </div>
                   </div>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Referral Task */}
-          <Card className={`transition-all duration-300 border-2 ${
-            tasks[2].completed 
-              ? 'bg-gradient-to-br from-accent-green/5 to-accent-green/10 border-accent-green/40 shadow-lg' 
-              : 'hover:shadow-xl hover:shadow-accent-purple/10 border-accent-purple/20 hover:border-accent-purple/40 bg-gradient-to-br from-card to-card/50'
-          }`}>
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${tasks[2].completed ? 'bg-accent-green/20' : 'bg-accent-purple/10'}`}>
-                    <Users className={`h-5 w-5 ${tasks[2].completed ? 'text-accent-green' : 'text-accent-purple'}`} />
-                  </div>
-                  <CardTitle className="text-lg">{tasks[2].title}</CardTitle>
+          <div style={tasks[2].completed ? styles.taskCardCompleted : styles.taskCardReferral}>
+            <div style={styles.taskHeader}>
+              <div style={styles.taskTitleRow}>
+                <div style={tasks[2].completed ? styles.taskIconCompleted : styles.taskIconReferral}>
+                  👥
                 </div>
-                <Badge 
-                  variant="secondary" 
-                  className={`${tasks[2].completed ? 'bg-accent-green/20 text-accent-green border-accent-green/40' : 'bg-accent-purple/10 text-accent-purple border-accent-purple/40'} font-semibold`}
-                >
-                  +{tasks[2].credits} Credits
-                </Badge>
+                <h3 style={styles.taskTitle}>{tasks[2].title}</h3>
               </div>
-              <CardDescription>{tasks[2].description}</CardDescription>
-            </CardHeader>
-            <CardContent>
+              <div style={tasks[2].completed ? styles.badgeCompleted : styles.badgeReferral}>
+                +{tasks[2].credits} Credits
+              </div>
+            </div>
+            <p style={styles.taskDescription}>{tasks[2].description}</p>
+            
+            <div style={styles.taskContent}>
               {tasks[2].completed ? (
-                <div className="flex items-center gap-3 p-4 bg-accent-green/10 rounded-lg border border-accent-green/30">
-                  <Check className="h-6 w-6 text-accent-green" />
-                  <span className="font-semibold text-accent-green text-lg">Task Completed ✅</span>
+                <div style={styles.completedBadge}>
+                  <span style={styles.checkmark}>✅</span>
+                  <span>Task Completed ✅</span>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="p-3 bg-accent-purple/5 rounded-lg border border-accent-purple/20">
-                    <div className="text-sm font-medium mb-1 text-accent-purple">Your Referral Link:</div>
-                    <div className="text-sm text-muted-foreground break-all font-mono">
+                <div style={styles.taskActions}>
+                  <div style={styles.referralBox}>
+                    <div style={styles.referralLabel}>Your Referral Link:</div>
+                    <div style={styles.referralLink}>
                       https://adspyder.com/referral/USER123
                     </div>
                   </div>
-                  <Button onClick={copyReferralLink} className="w-full bg-accent-purple hover:bg-accent-purple/90 text-white">
-                    <Link className="h-4 w-4 mr-2" />
-                    {referralCopied ? 'Copied!' : 'Copy Referral Link'}
-                  </Button>
-                  <div className="text-sm text-muted-foreground text-center">
+                  <button style={styles.referralButton} onClick={copyReferralLink}>
+                    🔗 {referralCopied ? 'Copied!' : 'Copy Referral Link'}
+                  </button>
+                  <div style={styles.helpText}>
                     Share this link with friends and colleagues. Get credits when they sign up!
                   </div>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Connect Account Task */}
-          <Card className={`transition-all duration-300 border-2 ${
-            tasks[3].completed 
-              ? 'bg-gradient-to-br from-accent-green/5 to-accent-green/10 border-accent-green/40 shadow-lg' 
-              : 'hover:shadow-xl hover:shadow-primary/10 border-primary/30 hover:border-primary/50 bg-gradient-to-br from-card to-card/50'
-          }`}>
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${tasks[3].completed ? 'bg-accent-green/20' : 'bg-primary/10'}`}>
-                    <CreditCard className={`h-5 w-5 ${tasks[3].completed ? 'text-accent-green' : 'text-primary'}`} />
-                  </div>
-                  <CardTitle className="text-lg">{tasks[3].title}</CardTitle>
+          <div style={tasks[3].completed ? styles.taskCardCompleted : styles.taskCardConnect}>
+            <div style={styles.taskHeader}>
+              <div style={styles.taskTitleRow}>
+                <div style={tasks[3].completed ? styles.taskIconCompleted : styles.taskIconConnect}>
+                  💳
                 </div>
-                <Badge 
-                  variant="secondary" 
-                  className={`${tasks[3].completed ? 'bg-accent-green/20 text-accent-green border-accent-green/40' : 'bg-primary/10 text-primary border-primary/40'} font-semibold`}
-                >
-                  +{tasks[3].credits} Credits
-                </Badge>
+                <h3 style={styles.taskTitle}>{tasks[3].title}</h3>
               </div>
-              <CardDescription>{tasks[3].description}</CardDescription>
-            </CardHeader>
-            <CardContent>
+              <div style={tasks[3].completed ? styles.badgeCompleted : styles.badgeConnect}>
+                +{tasks[3].credits} Credits
+              </div>
+            </div>
+            <p style={styles.taskDescription}>{tasks[3].description}</p>
+            
+            <div style={styles.taskContent}>
               {tasks[3].completed ? (
-                <div className="flex items-center gap-3 p-4 bg-accent-green/10 rounded-lg border border-accent-green/30">
-                  <Check className="h-6 w-6 text-accent-green" />
-                  <span className="font-semibold text-accent-green text-lg">Task Completed ✅</span>
+                <div style={styles.completedBadge}>
+                  <span style={styles.checkmark}>✅</span>
+                  <span>Task Completed ✅</span>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="text-sm text-muted-foreground p-3 bg-primary/5 rounded-lg border border-primary/20">
+                <div style={styles.taskActions}>
+                  <div style={styles.infoBox}>
                     Connect your Google Ads, Meta Ads, or LinkedIn ad account to get personalized insights.
                   </div>
-                  <Button onClick={handleConnectAccount} className="w-full bg-primary hover:bg-primary/90">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Connect Account
-                  </Button>
+                  <button style={styles.connectButton} onClick={handleConnectAccount}>
+                    🔗 Connect Account
+                  </button>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Generate Ads Task */}
-          <Card className={`lg:col-span-2 transition-all duration-300 border-2 ${
-            tasks[4].completed 
-              ? 'bg-gradient-to-br from-accent-green/5 to-accent-green/10 border-accent-green/40 shadow-lg' 
-              : 'hover:shadow-xl hover:shadow-accent-blue/10 border-accent-blue/30 hover:border-accent-blue/50 bg-gradient-to-br from-card to-accent-blue/5'
-          }`}>
-            <CardHeader className="pb-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${tasks[4].completed ? 'bg-accent-green/20' : 'bg-accent-blue/10'}`}>
-                    <Sparkles className={`h-5 w-5 ${tasks[4].completed ? 'text-accent-green' : 'text-accent-blue'}`} />
-                  </div>
-                  <CardTitle className="text-lg">{tasks[4].title}</CardTitle>
+          <div style={{...((tasks[4].completed ? styles.taskCardCompleted : styles.taskCardGenerate)), gridColumn: '1 / -1'}}>
+            <div style={styles.taskHeader}>
+              <div style={styles.taskTitleRow}>
+                <div style={tasks[4].completed ? styles.taskIconCompleted : styles.taskIconGenerate}>
+                  ✨
                 </div>
-                <Badge 
-                  variant="secondary" 
-                  className={`${tasks[4].completed ? 'bg-accent-green/20 text-accent-green border-accent-green/40' : 'bg-accent-blue/10 text-accent-blue border-accent-blue/40'} font-semibold`}
-                >
-                  +{tasks[4].credits} Credits
-                </Badge>
+                <h3 style={styles.taskTitle}>{tasks[4].title}</h3>
               </div>
-              <CardDescription>{tasks[4].description}</CardDescription>
-            </CardHeader>
-            <CardContent>
+              <div style={tasks[4].completed ? styles.badgeCompleted : styles.badgeGenerate}>
+                +{tasks[4].credits} Credits
+              </div>
+            </div>
+            <p style={styles.taskDescription}>{tasks[4].description}</p>
+            
+            <div style={styles.taskContent}>
               {tasks[4].completed ? (
-                <div className="flex items-center gap-3 p-4 bg-accent-green/10 rounded-lg border border-accent-green/30">
-                  <Check className="h-6 w-6 text-accent-green" />
-                  <span className="font-semibold text-accent-green text-lg">Task Completed ✅</span>
+                <div style={styles.completedBadge}>
+                  <span style={styles.checkmark}>✅</span>
+                  <span>Task Completed ✅</span>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-accent-blue/5 rounded-lg border border-accent-blue/20">
-                    <span className="text-sm font-medium text-accent-blue">Progress: {generateCount}/2 ads generated</span>
-                    <Progress value={(generateCount / 2) * 100} className="w-32 h-2" />
+                <div style={styles.taskActions}>
+                  <div style={styles.progressBox}>
+                    <span style={styles.progressText}>Progress: {generateCount}/2 ads generated</span>
+                    <div style={styles.miniProgressBar}>
+                      <div style={{...styles.miniProgressFill, width: `${(generateCount / 2) * 100}%`}}></div>
+                    </div>
                   </div>
-                  <Button onClick={handleGenerateAds} className="w-full bg-accent-blue hover:bg-accent-blue/90 text-white">
-                    <Sparkles className="h-4 w-4 mr-2" />
-                    Generate Ads with AI
-                  </Button>
+                  <button style={styles.generateButton} onClick={handleGenerateAds}>
+                    ✨ Generate Ads with AI
+                  </button>
                 </div>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* FAQ Section */}
-        <Card className="mt-8 bg-gradient-to-r from-secondary/50 to-secondary/30 border-secondary/40">
-          <CardHeader className="bg-gradient-secondary rounded-t-lg">
-            <CardTitle className="text-primary">How It Works</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div style={styles.faqCard}>
+          <div style={styles.faqHeader}>
+            <h3 style={styles.faqTitle}>How It Works</h3>
+          </div>
+          <div style={styles.faqContent}>
+            <div style={styles.faqGrid}>
               <div>
-                <h4 className="font-medium mb-2">Why do we offer credits?</h4>
-                <p className="text-muted-foreground">
+                <h4 style={styles.faqQuestion}>Why do we offer credits?</h4>
+                <p style={styles.faqAnswer}>
                   Your participation helps us grow AdSpyder and reach more marketers. In return, 
                   we reward you with credits to unlock premium features.
                 </p>
               </div>
               <div>
-                <h4 className="font-medium mb-2">When do I receive my credits?</h4>
-                <p className="text-muted-foreground">
+                <h4 style={styles.faqQuestion}>When do I receive my credits?</h4>
+                <p style={styles.faqAnswer}>
                   Credits are added to your account immediately after task completion. 
                   You can use them right away for premium features and data exports.
                 </p>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+
+const styles = {
+  container: {
+    minHeight: '100vh',
+    background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+    padding: '48px 16px',
+    fontFamily: 'system-ui, -apple-system, sans-serif'
+  },
+  maxWidth: {
+    maxWidth: '1024px',
+    margin: '0 auto'
+  },
+  header: {
+    textAlign: 'center' as const,
+    marginBottom: '48px'
+  },
+  headerIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    marginBottom: '16px'
+  },
+  sparkleIcon: {
+    padding: '12px',
+    background: 'linear-gradient(135deg, #1e293b, #334155)',
+    borderRadius: '50%',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    fontSize: '32px'
+  },
+  title: {
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    background: 'linear-gradient(135deg, #1e293b, #3b82f6)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    margin: 0
+  },
+  subtitle: {
+    fontSize: '1.25rem',
+    color: '#64748b',
+    maxWidth: '512px',
+    margin: '0 auto',
+    lineHeight: 1.6
+  },
+  progressCard: {
+    background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.1), rgba(59, 130, 246, 0.1))',
+    border: '2px solid rgba(30, 41, 59, 0.3)',
+    borderRadius: '12px',
+    marginBottom: '32px',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden'
+  },
+  progressHeader: {
+    background: 'linear-gradient(135deg, #1e293b, #334155)',
+    color: 'white',
+    padding: '16px 24px'
+  },
+  progressTitle: {
+    margin: 0,
+    fontSize: '1.125rem',
+    fontWeight: '600'
+  },
+  progressContent: {
+    padding: '24px'
+  },
+  progressGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '24px'
+  },
+  progressItemBlue: {
+    textAlign: 'center' as const,
+    padding: '16px',
+    background: 'rgba(59, 130, 246, 0.1)',
+    borderRadius: '8px',
+    border: '1px solid rgba(59, 130, 246, 0.2)'
+  },
+  progressItemGreen: {
+    textAlign: 'center' as const,
+    padding: '16px',
+    background: 'rgba(34, 197, 94, 0.1)',
+    borderRadius: '8px',
+    border: '1px solid rgba(34, 197, 94, 0.2)'
+  },
+  progressItemPurple: {
+    textAlign: 'center' as const,
+    padding: '16px',
+    background: 'rgba(147, 51, 234, 0.1)',
+    borderRadius: '8px',
+    border: '1px solid rgba(147, 51, 234, 0.2)'
+  },
+  progressNumber: {
+    fontSize: '1.875rem',
+    fontWeight: 'bold',
+    color: '#1e293b'
+  },
+  progressLabel: {
+    fontSize: '0.875rem',
+    color: '#64748b',
+    marginTop: '4px'
+  },
+  progressBar: {
+    width: '100%',
+    height: '12px',
+    backgroundColor: '#e2e8f0',
+    borderRadius: '6px',
+    overflow: 'hidden',
+    marginBottom: '8px'
+  },
+  progressFill: {
+    height: '100%',
+    background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
+    borderRadius: '6px',
+    transition: 'width 0.3s ease'
+  },
+  tasksGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+    gap: '24px'
+  },
+  taskCardReview: {
+    background: 'linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.5))',
+    border: '2px solid rgba(59, 130, 246, 0.2)',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 16px rgba(59, 130, 246, 0.1)',
+    transition: 'all 0.3s ease'
+  },
+  taskCardSocial: {
+    background: 'linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.5))',
+    border: '2px solid rgba(147, 51, 234, 0.2)',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 16px rgba(147, 51, 234, 0.1)',
+    transition: 'all 0.3s ease'
+  },
+  taskCardReferral: {
+    background: 'linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.5))',
+    border: '2px solid rgba(168, 85, 247, 0.2)',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 16px rgba(168, 85, 247, 0.1)',
+    transition: 'all 0.3s ease'
+  },
+  taskCardConnect: {
+    background: 'linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.5))',
+    border: '2px solid rgba(30, 41, 59, 0.3)',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 16px rgba(30, 41, 59, 0.1)',
+    transition: 'all 0.3s ease'
+  },
+  taskCardGenerate: {
+    background: 'linear-gradient(135deg, #ffffff, rgba(59, 130, 246, 0.05))',
+    border: '2px solid rgba(59, 130, 246, 0.3)',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 4px 16px rgba(59, 130, 246, 0.1)',
+    transition: 'all 0.3s ease'
+  },
+  taskCardCompleted: {
+    background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(34, 197, 94, 0.1))',
+    border: '2px solid rgba(34, 197, 94, 0.4)',
+    borderRadius: '12px',
+    padding: '24px',
+    boxShadow: '0 8px 32px rgba(34, 197, 94, 0.15)',
+    transition: 'all 0.3s ease'
+  },
+  taskHeader: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginBottom: '16px'
+  },
+  taskTitleRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px'
+  },
+  taskIconReview: {
+    padding: '8px',
+    borderRadius: '8px',
+    background: 'rgba(59, 130, 246, 0.1)',
+    fontSize: '20px'
+  },
+  taskIconSocial: {
+    padding: '8px',
+    borderRadius: '8px',
+    background: 'rgba(147, 51, 234, 0.1)',
+    fontSize: '20px'
+  },
+  taskIconReferral: {
+    padding: '8px',
+    borderRadius: '8px',
+    background: 'rgba(168, 85, 247, 0.1)',
+    fontSize: '20px'
+  },
+  taskIconConnect: {
+    padding: '8px',
+    borderRadius: '8px',
+    background: 'rgba(30, 41, 59, 0.1)',
+    fontSize: '20px'
+  },
+  taskIconGenerate: {
+    padding: '8px',
+    borderRadius: '8px',
+    background: 'rgba(59, 130, 246, 0.1)',
+    fontSize: '20px'
+  },
+  taskIconCompleted: {
+    padding: '8px',
+    borderRadius: '8px',
+    background: 'rgba(34, 197, 94, 0.2)',
+    fontSize: '20px'
+  },
+  taskTitle: {
+    fontSize: '1.125rem',
+    fontWeight: '600',
+    margin: 0,
+    color: '#1e293b'
+  },
+  badgeReview: {
+    padding: '4px 12px',
+    borderRadius: '16px',
+    background: 'rgba(59, 130, 246, 0.1)',
+    color: '#3b82f6',
+    border: '1px solid rgba(59, 130, 246, 0.4)',
+    fontSize: '0.875rem',
+    fontWeight: '600'
+  },
+  badgeSocial: {
+    padding: '4px 12px',
+    borderRadius: '16px',
+    background: 'rgba(147, 51, 234, 0.1)',
+    color: '#9333ea',
+    border: '1px solid rgba(147, 51, 234, 0.4)',
+    fontSize: '0.875rem',
+    fontWeight: '600'
+  },
+  badgeReferral: {
+    padding: '4px 12px',
+    borderRadius: '16px',
+    background: 'rgba(168, 85, 247, 0.1)',
+    color: '#a855f7',
+    border: '1px solid rgba(168, 85, 247, 0.4)',
+    fontSize: '0.875rem',
+    fontWeight: '600'
+  },
+  badgeConnect: {
+    padding: '4px 12px',
+    borderRadius: '16px',
+    background: 'rgba(30, 41, 59, 0.1)',
+    color: '#1e293b',
+    border: '1px solid rgba(30, 41, 59, 0.4)',
+    fontSize: '0.875rem',
+    fontWeight: '600'
+  },
+  badgeGenerate: {
+    padding: '4px 12px',
+    borderRadius: '16px',
+    background: 'rgba(59, 130, 246, 0.1)',
+    color: '#3b82f6',
+    border: '1px solid rgba(59, 130, 246, 0.4)',
+    fontSize: '0.875rem',
+    fontWeight: '600'
+  },
+  badgeCompleted: {
+    padding: '4px 12px',
+    borderRadius: '16px',
+    background: 'rgba(34, 197, 94, 0.2)',
+    color: '#22c55e',
+    border: '1px solid rgba(34, 197, 94, 0.4)',
+    fontSize: '0.875rem',
+    fontWeight: '600'
+  },
+  taskDescription: {
+    color: '#64748b',
+    marginBottom: '16px',
+    lineHeight: 1.5
+  },
+  taskContent: {
+    marginTop: '16px'
+  },
+  completedBadge: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    padding: '16px',
+    background: 'rgba(34, 197, 94, 0.1)',
+    borderRadius: '8px',
+    border: '1px solid rgba(34, 197, 94, 0.3)',
+    color: '#22c55e',
+    fontSize: '1.125rem',
+    fontWeight: '600'
+  },
+  checkmark: {
+    fontSize: '24px'
+  },
+  taskActions: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '16px'
+  },
+  buttonGroup: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '8px'
+  },
+  platformButton: {
+    padding: '12px 16px',
+    borderRadius: '8px',
+    border: '1px solid #d1d5db',
+    background: 'white',
+    cursor: 'pointer',
+    fontSize: '0.875rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    transition: 'all 0.2s ease'
+  },
+  inputGroup: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '8px'
+  },
+  label: {
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: '#374151'
+  },
+  inputRow: {
+    display: 'flex',
+    gap: '8px'
+  },
+  input: {
+    flex: 1,
+    padding: '8px 12px',
+    borderRadius: '6px',
+    border: '1px solid #d1d5db',
+    fontSize: '0.875rem'
+  },
+  submitButton: {
+    padding: '8px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    background: '#1e293b',
+    color: 'white',
+    cursor: 'pointer',
+    fontSize: '0.875rem'
+  },
+  submitButtonDisabled: {
+    padding: '8px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    background: '#e5e7eb',
+    color: '#9ca3af',
+    cursor: 'not-allowed',
+    fontSize: '0.875rem'
+  },
+  platformGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '8px'
+  },
+  platformButtonSelected: {
+    padding: '8px 12px',
+    borderRadius: '6px',
+    border: 'none',
+    background: '#1e293b',
+    color: 'white',
+    cursor: 'pointer',
+    fontSize: '0.75rem'
+  },
+  platformButtonOutline: {
+    padding: '8px 12px',
+    borderRadius: '6px',
+    border: '1px solid #d1d5db',
+    background: 'white',
+    color: '#374151',
+    cursor: 'pointer',
+    fontSize: '0.75rem'
+  },
+  textarea: {
+    width: '100%',
+    padding: '12px',
+    borderRadius: '6px',
+    border: '1px solid #d1d5db',
+    fontSize: '0.875rem',
+    fontFamily: 'inherit',
+    resize: 'vertical' as const
+  },
+  copyButton: {
+    padding: '8px 12px',
+    borderRadius: '6px',
+    border: '1px solid #d1d5db',
+    background: 'white',
+    cursor: 'pointer',
+    fontSize: '0.75rem',
+    alignSelf: 'flex-start'
+  },
+  referralBox: {
+    padding: '12px',
+    background: 'rgba(168, 85, 247, 0.05)',
+    borderRadius: '8px',
+    border: '1px solid rgba(168, 85, 247, 0.2)'
+  },
+  referralLabel: {
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: '#a855f7',
+    marginBottom: '4px'
+  },
+  referralLink: {
+    fontSize: '0.875rem',
+    color: '#64748b',
+    fontFamily: 'monospace',
+    wordBreak: 'break-all' as const
+  },
+  referralButton: {
+    padding: '12px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    background: '#a855f7',
+    color: 'white',
+    cursor: 'pointer',
+    fontSize: '0.875rem',
+    width: '100%'
+  },
+  helpText: {
+    fontSize: '0.875rem',
+    color: '#64748b',
+    textAlign: 'center' as const
+  },
+  infoBox: {
+    padding: '12px',
+    background: 'rgba(30, 41, 59, 0.05)',
+    borderRadius: '8px',
+    border: '1px solid rgba(30, 41, 59, 0.2)',
+    fontSize: '0.875rem',
+    color: '#64748b'
+  },
+  connectButton: {
+    padding: '12px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    background: '#1e293b',
+    color: 'white',
+    cursor: 'pointer',
+    fontSize: '0.875rem',
+    width: '100%'
+  },
+  progressBox: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '16px',
+    background: 'rgba(59, 130, 246, 0.05)',
+    borderRadius: '8px',
+    border: '1px solid rgba(59, 130, 246, 0.2)'
+  },
+  progressText: {
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    color: '#3b82f6'
+  },
+  miniProgressBar: {
+    width: '128px',
+    height: '8px',
+    backgroundColor: '#e2e8f0',
+    borderRadius: '4px',
+    overflow: 'hidden'
+  },
+  miniProgressFill: {
+    height: '100%',
+    background: '#3b82f6',
+    borderRadius: '4px',
+    transition: 'width 0.3s ease'
+  },
+  generateButton: {
+    padding: '12px 16px',
+    borderRadius: '6px',
+    border: 'none',
+    background: '#3b82f6',
+    color: 'white',
+    cursor: 'pointer',
+    fontSize: '0.875rem',
+    width: '100%'
+  },
+  faqCard: {
+    marginTop: '32px',
+    background: 'linear-gradient(135deg, rgba(241, 245, 249, 0.5), rgba(226, 232, 240, 0.3))',
+    border: '1px solid rgba(203, 213, 225, 0.4)',
+    borderRadius: '12px',
+    overflow: 'hidden'
+  },
+  faqHeader: {
+    background: 'linear-gradient(135deg, #e2e8f0, #cbd5e1)',
+    padding: '16px 24px'
+  },
+  faqTitle: {
+    margin: 0,
+    fontSize: '1.125rem',
+    fontWeight: '600',
+    color: '#1e293b'
+  },
+  faqContent: {
+    padding: '24px'
+  },
+  faqGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '24px'
+  },
+  faqQuestion: {
+    fontSize: '1rem',
+    fontWeight: '500',
+    marginBottom: '8px',
+    color: '#1e293b'
+  },
+  faqAnswer: {
+    fontSize: '0.875rem',
+    color: '#64748b',
+    lineHeight: 1.6,
+    margin: 0
+  }
+};
+
+const cssStyles = `
+  @media (max-width: 768px) {
+    .tasks-grid {
+      grid-template-columns: 1fr;
+    }
+    .progress-grid {
+      grid-template-columns: 1fr;
+    }
+    .platform-grid {
+      grid-template-columns: 1fr;
+    }
+    .input-row {
+      flex-direction: column;
+    }
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+`;
 
 export default EarnCredits;
