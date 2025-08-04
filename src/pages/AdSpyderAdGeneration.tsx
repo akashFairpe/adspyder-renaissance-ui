@@ -113,9 +113,7 @@ const AdSpyderAdGeneration = () => {
   const validateForm = (): boolean => {
     if (!formData.budget || formData.budget <= 0) return false;
     if (!formData.location?.trim()) return false;
-    if (!formData.website?.trim()) return false;
     if (!formData.description?.trim()) return false;
-    if (!formData.brandName?.trim()) return false;
     return true;
   };
 
@@ -224,17 +222,6 @@ const AdSpyderAdGeneration = () => {
                 </div>
 
                 <div style={styles.formGroup}>
-                  <label style={styles.label}>Website</label>
-                  <input
-                    type="url"
-                    value={formData.website}
-                    onChange={(e) => handleInputChange('website', e.target.value)}
-                    style={styles.input}
-                    placeholder="https://yourwebsite.com"
-                  />
-                </div>
-
-                <div style={styles.formGroup}>
                   <label style={styles.label}>Ad Goal</label>
                   <select
                     value={formData.adGoal}
@@ -245,17 +232,6 @@ const AdSpyderAdGeneration = () => {
                       <option key={goal} value={goal}>{goal}</option>
                     ))}
                   </select>
-                </div>
-
-                <div style={styles.formGroup}>
-                  <label style={styles.label}>Brand Name</label>
-                  <input
-                    type="text"
-                    value={formData.brandName}
-                    onChange={(e) => handleInputChange('brandName', e.target.value)}
-                    style={styles.input}
-                    placeholder="Your brand name"
-                  />
                 </div>
 
                 <div style={styles.formGroupFull}>
