@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { 
   BarChart3, 
   Target, 
@@ -81,8 +83,10 @@ export default function AudiencePerformanceReport() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-[#fcfdff]">
+      <Header />
+      <main>
+        {/* Hero Section */}
       <section className="bg-gradient-to-br from-secondary to-background py-20 lg:py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -422,6 +426,8 @@ export default function AudiencePerformanceReport() {
           </div>
         </div>
       </section>
+      </main>
+      <Footer />
     </div>
   );
 }
