@@ -17,6 +17,7 @@ const FacebookAdSpy = lazy(() => import("./pages/FacebookAdSpy"));
 const TestPage = lazy(() => import("./pages/TestPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const VsPowerAdSpy = lazy(() => import("./pages/VsPowerAdSpy"));
+const AudiencePerformanceReport = lazy(() => import("./pages/AudiencePerformanceReport"));
 const VsBigSpy = lazy(() => import("./pages/VsBigSpy"));
 const VsAdSpy = lazy(() => import("./pages/VsAdSpy"));
 const VsAdplexity = lazy(() => import("./pages/VsAdplexity"));
@@ -68,6 +69,7 @@ const App = () => (
             <Route path="/earn-credits" element={<EarnCredits />} />
             <Route path="/google-ad-extensions" element={<GoogleAdExtensions />} />
             <Route path="/adspyder-ad-generation" element={<AdSpyderAdGeneration />} />
+            <Route path="/google-ppc-reporting/audience-performance-report" element={<AudiencePerformanceReport />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
