@@ -146,9 +146,6 @@ export default function FreeTrialLanding() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div className="space-y-8">
                   <div className="space-y-6">
-                    <Badge variant="secondary" className="bg-orange-50 text-orange-700 border-orange-200">
-                      Ad Research, Made Lovable
-                    </Badge>
                     <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
                       Free Trial—No Card Needed
                     </h1>
