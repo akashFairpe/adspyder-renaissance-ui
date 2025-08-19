@@ -71,7 +71,7 @@ const App = () => (
             <Route path="/google-ad-extensions" element={<GoogleAdExtensions />} />
             <Route path="/adspyder-ad-generation" element={<AdSpyderAdGeneration />} />
             <Route path="/google-ppc-reporting/audience-performance-report" element={<AudiencePerformanceReport />} />
-            <Route path="/ad-research/free-trial" element={<FreeTrialLanding />} />
+            <Route path="/free-trial" element={<FreeTrialLanding />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

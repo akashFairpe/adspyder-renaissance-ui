@@ -30,7 +30,7 @@ export default function FreeTrialLanding() {
     title: "Free Trial—No Card | See More Ads Across More Platforms | AdSpyder",
     description: "Start a free trial with no credit card. Research more ads across more platforms. Transparent pricing and unlimited previews while you evaluate.",
     keywords: "free trial, ad research, no credit card, transparent pricing, ad library, competitive intelligence",
-    canonical: "/ad-research/free-trial",
+    canonical: "/free-trial",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
