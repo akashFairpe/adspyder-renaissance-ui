@@ -149,11 +149,11 @@ export default function FreeTrialLanding() {
               </Badge>
             </div>
             <Button 
-              variant="ghost" 
               size="sm"
-              onClick={handlePricingView}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => handleCTAClick('sticky')}
             >
-              View Pricing
+              Start Free Trial
             </Button>
           </div>
         </div>
@@ -189,11 +189,11 @@ export default function FreeTrialLanding() {
                     </Button>
                     <Button 
                       size="lg" 
-                      variant="outline"
-                      className="px-8 py-4 text-lg font-semibold border-2 hover:bg-gray-50 transition-all"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
+                      onClick={() => handleCTAClick('hero_secondary')}
                     >
-                      <BarChart3 className="h-5 w-5 mr-2" />
-                      Compare Coverage
+                      <Play className="h-5 w-5 mr-2" />
+                      Start Free Trial
                     </Button>
                   </div>
 
@@ -320,29 +320,27 @@ export default function FreeTrialLanding() {
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-2">X,XXX,XXX+</div>
+                  <div className="text-3xl font-bold text-primary mb-2">1 Billion+</div>
                   <div className="text-gray-600">Ads tracked</div>
-                  <div className="text-xs text-gray-500 mt-1">(placeholder)</div>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-2">Y,YY,YYY+</div>
+                  <div className="text-3xl font-bold text-primary mb-2">10 Million+</div>
                   <div className="text-gray-600">Advertisers monitored</div>
-                  <div className="text-xs text-gray-500 mt-1">(placeholder)</div>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-3xl font-bold text-primary mb-2">6+</div>
-                  <div className="text-gray-600">Major platforms</div>
+                  <div className="text-3xl font-bold text-primary mb-2">15+</div>
+                  <div className="text-gray-600">Major Platforms</div>
                   <div className="text-xs text-gray-500 mt-1">Facebook, Google, Instagram, YouTube, TikTok, and more</div>
                 </div>
               </div>
               
-              <p className="text-sm text-gray-500 mb-8">
-                Replace placeholders with real-time dashboard metrics.
-              </p>
-              
-              <Button variant="ghost" size="lg">
-                <Globe className="h-5 w-5 mr-2" />
-                See Full Coverage
+              <Button 
+                size="lg" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
+                onClick={() => handleCTAClick('coverage')}
+              >
+                <Play className="h-5 w-5 mr-2" />
+                Start Free Trial
               </Button>
             </div>
           </div>
@@ -468,22 +466,14 @@ export default function FreeTrialLanding() {
                 </div>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex justify-center">
                 <Button 
                   size="lg" 
                   className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
-                  onClick={handlePricingView}
+                  onClick={() => handleCTAClick('pricing')}
                 >
-                  <DollarSign className="h-5 w-5 mr-2" />
-                  View Pricing
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="px-8 py-4 text-lg font-semibold border-2 hover:bg-gray-50"
-                >
-                  <Calendar className="h-5 w-5 mr-2" />
-                  Talk to Sales
+                  <Play className="h-5 w-5 mr-2" />
+                  Start Free Trial
                 </Button>
               </div>
             </div>
@@ -575,7 +565,7 @@ export default function FreeTrialLanding() {
                 No card required. Explore a larger ad library across more platforms.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex justify-center">
                 <Button 
                   size="lg" 
                   className="bg-white text-orange-600 hover:bg-orange-50 px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
@@ -583,14 +573,6 @@ export default function FreeTrialLanding() {
                 >
                   <Play className="h-5 w-5 mr-2" />
                   Start Free Trial
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-12 py-4 text-lg font-semibold transition-all"
-                >
-                  <BarChart3 className="h-5 w-5 mr-2" />
-                  Compare Coverage
                 </Button>
               </div>
             </div>
