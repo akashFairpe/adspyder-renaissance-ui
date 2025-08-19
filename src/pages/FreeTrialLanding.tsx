@@ -49,6 +49,7 @@ export default function FreeTrialLanding() {
   const handleCTAClick = (location: string) => {
     // Analytics event tracking
     console.log('CTA clicked:', location);
+    window.open('https://dashboard.adspyder.io', '_blank');
   };
 
   const handlePricingView = () => {
@@ -152,8 +153,11 @@ export default function FreeTrialLanding() {
               size="sm"
               className="bg-primary text-primary-foreground hover:bg-primary/90"
               onClick={() => handleCTAClick('sticky')}
+              asChild
             >
-              Start Free Trial
+              <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
+                Start Free Trial
+              </a>
             </Button>
           </div>
         </div>
@@ -182,9 +186,12 @@ export default function FreeTrialLanding() {
                      size="lg" 
                      className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
                      onClick={() => handleCTAClick('hero')}
+                     asChild
                    >
-                     <Play className="h-5 w-5 mr-2" />
-                     Start Free Trial
+                     <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
+                       <Play className="h-5 w-5 mr-2" />
+                       Start Free Trial
+                     </a>
                    </Button>
 
                   <div className="flex flex-wrap gap-6">
@@ -328,9 +335,12 @@ export default function FreeTrialLanding() {
                 size="lg" 
                 className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
                 onClick={() => handleCTAClick('coverage')}
+                asChild
               >
-                <Play className="h-5 w-5 mr-2" />
-                Start Free Trial
+                <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
+                  <Play className="h-5 w-5 mr-2" />
+                  Start Free Trial
+                </a>
               </Button>
             </div>
           </div>
@@ -369,9 +379,12 @@ export default function FreeTrialLanding() {
                   size="lg" 
                   className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
                   onClick={() => handleCTAClick('value_highlights')}
+                  asChild
                 >
-                  <CreditCard className="h-5 w-5 mr-2" />
-                  Start Free—No Card Needed
+                  <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
+                    <CreditCard className="h-5 w-5 mr-2" />
+                    Start Free—No Card Needed
+                  </a>
                 </Button>
               </div>
             </div>
@@ -461,9 +474,12 @@ export default function FreeTrialLanding() {
                   size="lg" 
                   className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
                   onClick={() => handleCTAClick('pricing')}
+                  asChild
                 >
-                  <Play className="h-5 w-5 mr-2" />
-                  Start Free Trial
+                  <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
+                    <Play className="h-5 w-5 mr-2" />
+                    Start Free Trial
+                  </a>
                 </Button>
               </div>
             </div>
@@ -550,9 +566,12 @@ export default function FreeTrialLanding() {
                   size="lg" 
                   className="bg-white text-orange-600 hover:bg-orange-50 px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
                   onClick={() => handleCTAClick('final')}
+                  asChild
                 >
-                  <Play className="h-5 w-5 mr-2" />
-                  Start Free Trial
+                  <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
+                    <Play className="h-5 w-5 mr-2" />
+                    Start Free Trial
+                  </a>
                 </Button>
               </div>
             </div>
