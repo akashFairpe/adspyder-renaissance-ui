@@ -137,31 +137,6 @@ export default function FreeTrialLanding() {
     <div className="min-h-screen bg-[#fcfdff]">
       <Header />
       
-      {/* Sticky Top Bar */}
-      <div className="sticky top-[72px] z-40 bg-white border-b border-border/40 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-2">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Badge variant="secondary" className="bg-green-50 text-green-700 border-green-200">
-                Free Trial • No Card Needed
-              </Badge>
-              <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
-                Transparent Pricing
-              </Badge>
-            </div>
-            <Button 
-              size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-              onClick={() => handleCTAClick('sticky')}
-              asChild
-            >
-              <a href="https://dashboard.adspyder.io" target="_blank" rel="noopener noreferrer">
-                Start Free Trial
-              </a>
-            </Button>
-          </div>
-        </div>
-      </div>
 
       <main>
         {/* Hero Section */}
