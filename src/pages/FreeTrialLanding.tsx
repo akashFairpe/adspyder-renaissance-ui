@@ -177,25 +177,15 @@ export default function FreeTrialLanding() {
                       See more ads across more platforms. Start free today and explore creative and competitive insights without a paywall.
                     </p>
                   </div>
-                  
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button 
-                      size="lg" 
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
-                      onClick={() => handleCTAClick('hero')}
-                    >
-                      <Play className="h-5 w-5 mr-2" />
-                      Start Free Trial
-                    </Button>
-                    <Button 
-                      size="lg" 
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold"
-                      onClick={() => handleCTAClick('hero_secondary')}
-                    >
-                      <Play className="h-5 w-5 mr-2" />
-                      Start Free Trial
-                    </Button>
-                  </div>
+                   
+                   <Button 
+                     size="lg" 
+                     className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                     onClick={() => handleCTAClick('hero')}
+                   >
+                     <Play className="h-5 w-5 mr-2" />
+                     Start Free Trial
+                   </Button>
 
                   <div className="flex flex-wrap gap-6">
                     <div className="flex items-center gap-2">
@@ -510,16 +500,6 @@ export default function FreeTrialLanding() {
                 ))}
               </div>
               
-              <div className="text-center">
-                <p className="text-sm text-gray-500 mb-4">Trusted by leading brands</p>
-                <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-                  {[...Array(6)].map((_, i) => (
-                    <div key={i} className="w-24 h-12 bg-gray-200 rounded flex items-center justify-center">
-                      <span className="text-xs text-gray-400">Logo {i + 1}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </section>
